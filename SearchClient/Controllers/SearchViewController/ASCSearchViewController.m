@@ -72,7 +72,6 @@
     ASCTableViewSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewSearchCellIdentifier];
     if (!cell) {
         cell = [[ASCTableViewSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchCellIdentifier];
-        
     }
     
     cell.textLabel.text = [self.tableData objectAtIndex:indexPath.row];
@@ -90,9 +89,10 @@
     
     [self.searchView expandToKeyboardHeight:keyboardSize.height];
     
+    __weak ASCSearchViewController *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.2 animations:^{
-            [self setNeedsStatusBarAppearanceUpdate];
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
         }];
     });
 }
@@ -100,8 +100,9 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     [self.searchView contract];
 
+    __weak ASCSearchViewController *weakSelf = self;
     [UIView animateWithDuration:0.2 animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
+        [weakSelf setNeedsStatusBarAppearanceUpdate];
     }];
 }
 
