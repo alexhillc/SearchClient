@@ -11,6 +11,8 @@
 #import "ASCTableView.h"
 #import "ASCTableViewSearchCell.h"
 
+#import "ASCNetworkManager.h"
+
 @interface ASCSearchViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tableData;
@@ -36,8 +38,7 @@
     [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:@"ASCTableViewSearchCellIdentifier"];
     
     // Sample data
-    self.tableData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];
-    
+    self.tableData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

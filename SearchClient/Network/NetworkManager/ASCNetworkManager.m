@@ -7,7 +7,7 @@
 //
 
 #import "ASCNetworkManager.h"
-#import "SRWebSocket.h"
+#import "AFNetworking.h"
 
 @implementation ASCNetworkManager
 
