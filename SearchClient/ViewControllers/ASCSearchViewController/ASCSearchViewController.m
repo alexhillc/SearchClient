@@ -11,7 +11,7 @@
 #import "ASCTableView.h"
 #import "ASCTableViewSearchCell.h"
 
-#import "ASCNetworkManager.h"
+#import "ASCLoader.h"
 
 @interface ASCSearchViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -35,10 +35,10 @@
     self.searchView.searchTableView.delegate = self;
     self.searchView.searchTableView.dataSource = self;
     
-    [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:@"ASCTableViewSearchCellIdentifier"];
+    [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
     
     // Sample data
-    self.tableData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];    
+    self.tableData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,16 +60,8 @@
     return shouldHide;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self.view setNeedsUpdateConstraints];
-}
-
-#pragma mark - UITableView
+#pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier";
-    
     ASCTableViewSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewSearchCellIdentifier];
     if (!cell) {
         cell = [[ASCTableViewSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchCellIdentifier];

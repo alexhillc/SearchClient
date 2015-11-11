@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASCViewController.h"
 
-@interface ASCSearchViewController : UIViewController
+@interface ASCSearchViewController : ASCViewController
 
 @end

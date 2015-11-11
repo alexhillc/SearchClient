@@ -1,0 +1,16 @@
+//
+//  SearchClient-Prefix.pch
+//  SearchClient
+//
+//  Created by Alex Hill on 11/9/15.
+//  Copyright © 2015 Alex Hill. All rights reserved.
+//
+
+#ifndef SearchClient_Prefix_pch
+#define SearchClient_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UIView+NSLayoutConstraint.h"
+
+#endif /* SearchClient_Prefix_pch */

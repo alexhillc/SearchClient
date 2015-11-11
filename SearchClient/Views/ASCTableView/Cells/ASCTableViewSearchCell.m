@@ -8,6 +8,8 @@
 
 #import "ASCTableViewSearchCell.h"
 
+NSString *ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier";
+
 @implementation ASCTableViewSearchCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

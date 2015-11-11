@@ -91,68 +91,25 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
     
     if (self.isFirstLayout) {
         // searchTextField constraints
-        self.searchTextFieldConstraintTop = [NSLayoutConstraint constraintWithItem:self.searchTextField attribute:NSLayoutAttributeTop
-                                                                         relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop
-                                                                        multiplier:1.0 constant:self.bounds.size.height * ASCSearchTextFieldContractedMultiplierOffsetY];
-        [self addConstraint:self.searchTextFieldConstraintTop];
-        
-        self.searchTextFieldConstraintHeight = [NSLayoutConstraint constraintWithItem:self.searchTextField attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1.0 constant:ASCSearchTextFieldHeight];
-        [self addConstraint:self.searchTextFieldConstraintHeight];
-        
-        self.searchTextFieldConstraintWidth = [NSLayoutConstraint constraintWithItem:self.searchTextField attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0 constant:self.bounds.size.width * ASCSearchTextFieldContractedMultiplierWidth];
-        [self addConstraint:self.searchTextFieldConstraintWidth];
-        
-        self.searchTextFieldConstraintCenter = [NSLayoutConstraint constraintWithItem:self.searchTextField attribute:NSLayoutAttributeCenterX
-                                                                            relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX
-                                                                           multiplier:1.0 constant:0];
-        [self addConstraint:self.searchTextFieldConstraintCenter];
+        self.searchTextFieldConstraintTop = [self.searchTextField asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop
+                                 constant:self.bounds.size.height * ASCSearchTextFieldContractedMultiplierOffsetY];
+        self.searchTextFieldConstraintHeight = [self.searchTextField asc_setAttribute:NSLayoutAttributeHeight toConstant:ASCSearchTextFieldHeight];
+        self.searchTextFieldConstraintWidth = [self.searchTextField asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldContractedMultiplierWidth];
+        self.searchTextFieldConstraintCenter = [self.searchTextField asc_centerHorizontallyInParent];
         
         // searchTableView constraints
-        self.searchTableViewConstraintTop = [NSLayoutConstraint constraintWithItem:self.searchTableView attribute:NSLayoutAttributeTop
-                                                                         relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop
-                                                                        multiplier:1.0 constant:ASCSearchTableViewExpandedOffsetY];
-        [self addConstraint:self.searchTableViewConstraintTop];
-        
-        self.searchTableViewConstraintHeight = [NSLayoutConstraint constraintWithItem:self.searchTableView attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1.0 constant:self.bounds.size.height * 0.35];
-        [self addConstraint:self.searchTableViewConstraintHeight];
-        
-        self.searchTableViewConstraintWidth = [NSLayoutConstraint constraintWithItem:self.searchTableView attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0 constant:self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth];
-        [self addConstraint:self.searchTableViewConstraintWidth];
-        
-        self.searchTableViewConstraintCenter = [NSLayoutConstraint constraintWithItem:self.searchTableView attribute:NSLayoutAttributeCenterX
-                                                                            relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX
-                                                                           multiplier:1.0 constant:0];
-        [self addConstraint:self.searchTableViewConstraintCenter];
+        self.searchTableViewConstraintTop = [self.searchTableView asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop constant:ASCSearchTableViewExpandedOffsetY];
+        self.searchTableViewConstraintHeight = [self.searchTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:self.bounds.size.height * 0.35];
+        self.searchTableViewConstraintWidth = [self.searchTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth];
+        self.searchTableViewConstraintCenter = [self.searchTableView asc_centerHorizontallyInParent];
         
         // titleLabelSecondary constraints
-        self.titleLabelSecondaryConstraintTop = [NSLayoutConstraint constraintWithItem:self.titleLabelSecondary attribute:NSLayoutAttributeTop
-                                                                             relatedBy:NSLayoutRelationEqual toItem:self.searchTextField attribute:NSLayoutAttributeTop
-                                                                            multiplier:1.0 constant:-40.0];
-        [self addConstraint:self.titleLabelSecondaryConstraintTop];
-        
-        self.titleLabelSecondaryConstraintCenter = [NSLayoutConstraint constraintWithItem:self.titleLabelSecondary attribute:NSLayoutAttributeCenterX
-                                                                                relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX
-                                                                               multiplier:1.0 constant:0];
-        [self addConstraint:self.titleLabelSecondaryConstraintCenter];
+        self.titleLabelSecondaryConstraintTop = [self.titleLabelSecondary asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.searchTextField constant:-40.];
+        self.titleLabelSecondaryConstraintCenter = [self.titleLabelSecondary asc_centerHorizontallyInParent];
         
         // titleLabelPrimary constraints
-        self.titleLabelPrimaryConstraintTop = [NSLayoutConstraint constraintWithItem:self.titleLabelPrimary attribute:NSLayoutAttributeTop
-                                                                           relatedBy:NSLayoutRelationEqual toItem:self.titleLabelSecondary attribute:NSLayoutAttributeTop
-                                                                          multiplier:1.0 constant:-53.0];
-        [self addConstraint:self.titleLabelPrimaryConstraintTop];
-        
-        self.titleLabelPrimaryConstraintCenter = [NSLayoutConstraint constraintWithItem:self.titleLabelPrimary attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:1.0 constant:0];
-        [self addConstraint:self.titleLabelPrimaryConstraintCenter];
+        self.titleLabelPrimaryConstraintTop = [self.titleLabelPrimary asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.titleLabelSecondary constant:-53.];
+        self.titleLabelPrimaryConstraintCenter = [self.titleLabelPrimary asc_centerHorizontallyInParent];
         
         self.isFirstLayout = NO;
     } 
