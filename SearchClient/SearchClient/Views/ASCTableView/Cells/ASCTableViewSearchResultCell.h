@@ -15,7 +15,7 @@ extern NSString *ASCTableViewSearchResultCellIdentifier;
 @interface ASCTableViewSearchResultCell : UITableViewCell
 
 @property (strong) TTTAttributedLabel *titleLabel;
-@property (strong) TTTAttributedLabel *contentLabel;
+@property (strong) UILabel *contentLabel;
 @property (nonatomic) ASCSearchResultModel *cellModel;
 
 @end

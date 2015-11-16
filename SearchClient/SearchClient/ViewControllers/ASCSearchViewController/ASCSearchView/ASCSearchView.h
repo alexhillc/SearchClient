@@ -10,6 +10,8 @@
 
 @class ASCSearchView, ASCTableView, ASCTextField;
 
+extern const NSTimeInterval ASCSearchViewAnimationDuration;
+
 typedef NS_ENUM(NSInteger, ASCSearchViewSearchState) {
     ASCSearchViewSearchStateInactive,
     ASCSearchViewSearchStateActive

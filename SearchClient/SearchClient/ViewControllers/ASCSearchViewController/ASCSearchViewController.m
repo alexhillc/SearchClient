@@ -96,23 +96,25 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    [self.searchView expandToKeyboardHeight:keyboardSize.height];
-    
-    __weak ASCSearchViewController *weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.2 animations:^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.searchView expandToKeyboardHeight:keyboardSize.height];
+        
+        __weak ASCSearchViewController *weakSelf = self;
+        [UIView animateWithDuration:ASCSearchViewAnimationDuration delay:ASCSearchViewAnimationDuration options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [weakSelf setNeedsStatusBarAppearanceUpdate];
-        }];
+        } completion:nil];
     });
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [self.searchView contract];
-
-    __weak ASCSearchViewController *weakSelf = self;
-    [UIView animateWithDuration:0.2 animations:^{
-        [weakSelf setNeedsStatusBarAppearanceUpdate];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.searchView contract];
+        
+        __weak ASCSearchViewController *weakSelf = self;
+        [UIView animateWithDuration:ASCSearchViewAnimationDuration animations:^{
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        }];
+    });
 }
 
 

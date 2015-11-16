@@ -28,21 +28,28 @@ const CGFloat contentPadding = 10.;
     self.backgroundColor = [UIColor whiteColor];
     self.textLabel.hidden = YES;
     
+    NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTForegroundColorAttributeName,(id)kCTUnderlineStyleAttributeName, nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor blueColor],[NSNumber numberWithInt:kCTUnderlineStyleNone], nil];
+    NSDictionary *linkAttributes = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+    
     self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.titleLabel.font = [UIFont systemFontOfSize:16.];
     self.titleLabel.numberOfLines = 1;
     self.titleLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.titleLabel.linkAttributes = linkAttributes;
     
     [self addSubview:self.titleLabel];
     
-    self.contentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.contentLabel.font = [UIFont systemFontOfSize:14. weight:UIFontWeightLight];
     self.contentLabel.numberOfLines = 3;
     
     [self addSubview:self.contentLabel];
     
+    self.clipsToBounds = NO;
+    self.layer.cornerRadius = 1.5;
     self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(-5, 0);
+    self.layer.shadowOffset = CGSizeMake(0, 1.5);
     self.layer.shadowRadius = 1.;
     self.layer.shadowOpacity = 0.08;
 }
