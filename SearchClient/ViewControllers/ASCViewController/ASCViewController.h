@@ -10,4 +10,6 @@
 
 @interface ASCViewController : UIViewController
 
+- (CGFloat)offsetForStatusAndNavigationBar;
+
 @end

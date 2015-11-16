@@ -22,7 +22,8 @@ NSString *ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier"
 
 - (void)setup {
     self.backgroundColor = [UIColor whiteColor];
-    self.textLabel.font = [UIFont systemFontOfSize:14.0 weight:UIFontWeightLight];
+    self.textLabel.textColor = [UIColor darkGrayColor];
+    self.textLabel.font = [UIFont systemFontOfSize:13.];
 }
 
 @end

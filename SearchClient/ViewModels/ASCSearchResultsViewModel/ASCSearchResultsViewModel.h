@@ -8,10 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
+@class ASCSearchResultsViewModel;
+
+typedef NS_ENUM(NSInteger, ASCQueryType) {
+    ASCQueryTypeWeb,
+    ASCQueryypeImage
+};
+
+@protocol ASCSearchResultsViewModelDelegate <NSObject>
+
+- (void)viewModelDidReceiveNewDataSet:(ASCSearchResultsViewModel *)viewModel;
+
+@end
+
 @interface ASCSearchResultsViewModel : NSObject
 
+@property (nonatomic, weak) id<ASCSearchResultsViewModelDelegate> delegate;
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *query;
+@property (nonatomic) ASCQueryType queryType;
+@property (nonatomic, strong) NSArray *recentSearches;
 @property (nonatomic, strong) NSArray *resultsData;
 
-- (void)loadResultsForQuery:(NSString *)query;
+- (void)loadResultsWithQueryType:(ASCQueryType)queryType;
 
 @end

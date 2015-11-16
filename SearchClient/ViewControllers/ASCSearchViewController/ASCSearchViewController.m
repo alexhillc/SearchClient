@@ -8,12 +8,13 @@
 
 #import "ASCSearchViewController.h"
 #import "ASCSearchView.h"
+#import "ASCTextField.h"
 #import "ASCTableView.h"
 #import "ASCTableViewSearchCell.h"
+#import "ASCSearchResultsViewModel.h"
+#import "ASCSearchResultsViewController.h"
 
-#import "ASCLoader.h"
-
-@interface ASCSearchViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ASCSearchViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tableData;
 @property (weak) ASCSearchView *searchView;
@@ -32,10 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.searchView.searchTableView.delegate = self;
-    self.searchView.searchTableView.dataSource = self;
+    self.searchView.tableView.delegate = self;
+    self.searchView.tableView.dataSource = self;
+    self.searchView.searchTextField.delegate = self;
     
-    [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
+    [self.searchView.tableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
     
     // Sample data
     self.tableData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];
@@ -74,6 +76,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.tableData count];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    ASCSearchResultsViewModel *vm = [[ASCSearchResultsViewModel alloc] init];
+    vm.query = textField.text;
+    vm.title = @"Results";
+    
+    ASCSearchResultsViewController *vc = [[ASCSearchResultsViewController alloc] init];
+    vc.viewModel = vm;
+    
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    return YES;
 }
 
 #pragma mark - Notifications

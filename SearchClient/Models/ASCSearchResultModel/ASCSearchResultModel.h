@@ -11,11 +11,15 @@
 @interface ASCSearchResultModel : NSObject
 
 @property (nonatomic, strong) NSString *googleSearchResultClass;
-@property (nonatomic, strong) NSString *unescapedUrl;
-@property (nonatomic, strong) NSString *visibleUrl;
-@property (nonatomic, strong) NSString *cacheUrl;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *titleNoFormatting;
 @property (nonatomic, strong) NSString *content;
+
+@property (nonatomic) CGSize thumbSize;
+@property (nonatomic) CGSize size;
+@property (nonatomic, strong) NSURL *thumbUrl;
+@property (nonatomic, strong) NSURL *url;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dic;
 
 @end

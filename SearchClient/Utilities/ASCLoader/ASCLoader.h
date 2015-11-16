@@ -12,8 +12,7 @@
 
 typedef NS_ENUM(NSInteger, ASCLoaderType) {
     ASCLoaderTypeDefault,
-    ASCLoaderTypeWebSearch,
-    ASCLoaderTypeImageSearch,
+    ASCLoaderTypeSearch,
     ASCLoaderTypeLocalSearch
 };
 
@@ -30,9 +29,10 @@ typedef void (^ASCLoaderCompletion)(ASCLoader *loader, NSError *error);
 
 @property (nonatomic, weak) id<ASCLoaderDelegate> delegate;
 @property (nonatomic, copy) ASCLoaderCompletion completion;
-@property (nonatomic, copy) NSString *requestParameters;
+@property (nonatomic, copy) NSDictionary *requestParameters;
 @property (nonatomic, copy) NSString *request;
-@property (nonatomic, strong) NSObject *result;
+@property (nonatomic, strong) NSObject *responseObject;
+@property (nonatomic, strong) NSObject *parsedResult;
 @property (nonatomic, strong) AFHTTPRequestOperation *operation;
 @property (nonatomic, readonly) ASCLoaderType type;
 @property (nonatomic) NSInteger *timeout;
@@ -46,5 +46,8 @@ typedef void (^ASCLoaderCompletion)(ASCLoader *loader, NSError *error);
 - (void)processResponse;
 - (void)startLoad;
 - (void)cancelLoad;
+
+- (void)informDelegateLoadingFailed:(NSError *)error;
+- (void)informDelegateLoadingFinished;
 
 @end

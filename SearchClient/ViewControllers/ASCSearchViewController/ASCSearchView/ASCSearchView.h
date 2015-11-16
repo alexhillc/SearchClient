@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, ASCSearchViewSearchState) {
 @interface ASCSearchView : UIView
 
 @property ASCTextField *searchTextField;
-@property ASCTableView *searchTableView;
+@property ASCTableView *tableView;
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
 @property (nonatomic, readonly) ASCSearchViewSearchState state;

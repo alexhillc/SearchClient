@@ -10,6 +10,8 @@
 #import "AFNetworking.h"
 
 @interface ASCLoader ()
+
+@property (nonatomic, strong) ASCLoader *strongSelf;
     
 @end
 
@@ -60,16 +62,20 @@
         self.request = [self createRequest];
     }
     
+    if (!self.strongSelf) {
+        self.strongSelf = self;
+    }
+    
     __weak ASCLoader *weakSelf = self;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     self.operation = [manager GET:self.request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        weakSelf.result = responseObject;
+        weakSelf.responseObject = responseObject;
         [weakSelf processResponse];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         if ([weakSelf.delegate respondsToSelector:@selector(loader:didFinishWithFailure:)]) {
-            [weakSelf.delegate loader:weakSelf didFinishWithFailure:error];
+            [weakSelf informDelegateLoadingFailed:error];
         }
     }];
 }
@@ -83,6 +89,8 @@
             [obj cancel];
         }
     }];
+    
+    self.strongSelf = nil;
 }
 
 - (void)informDelegateLoadingFailed:(NSError *)error {
@@ -93,6 +101,8 @@
     if (self.completion) {
         self.completion(self, error);
     }
+    
+    self.strongSelf = nil;
 }
 
 - (void)informDelegateLoadingFinished {
@@ -103,6 +113,8 @@
     if (self.completion) {
         self.completion(self, nil);
     }
+    
+    self.strongSelf = nil;
 }
 
 @end

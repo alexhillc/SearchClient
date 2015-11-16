@@ -9,12 +9,17 @@
 #import "ASCSearchView.h"
 #import "ASCTextField.h"
 #import "ASCTableView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define GoogleBlue [UIColor colorWithRed:72.0/255.0 green:133.0/255.0 blue:237.0/255.0 alpha:1.0]
-#define ASCSearchViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0]
+#define GoogleGreen [UIColor colorWithRed:53.0/255.0 green:168.0/255.0 blue:83.0/255.0 alpha:1.0]
+#define GoogleYellow [UIColor colorWithRed:251.0/255.0 green:188.0/255.0 blue:5.0/255.0 alpha:1.0]
+#define GoogleRed [UIColor colorWithRed:254.0/255.0 green:67.0/255.0 blue:53.0/255.0 alpha:1.0]
+
+#define ASCSearchViewBackgroundColor [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
 
 const CGFloat ASCSearchTextFieldHeight = 40.0;
-const CGFloat ASCSearchTableViewExpandedOffsetY = 69.0;
+const CGFloat ASCTableViewExpandedOffsetY = 69.0;
 const CGFloat ASCSearchTextFieldExpandedOffsetY = 24.0;
 const CGFloat ASCSearchTextFieldContractedMultiplierOffsetY = 0.48;
 const CGFloat ASCSearchTextFieldContractedMultiplierWidth = 0.75;
@@ -25,15 +30,20 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
 
 @property (nonatomic, assign) ASCSearchViewSearchState state;
 @property (nonatomic, assign) BOOL isFirstLayout;
+@property UIView *shadowTableView;
 
 @property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintTop;
 @property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintHeight;
 @property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintWidth;
 @property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintCenter;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintTop;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintHeight;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintWidth;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintCenter;
+@property (nonatomic, weak) NSLayoutConstraint *tableViewConstraintTop;
+@property (nonatomic, weak) NSLayoutConstraint *tableViewConstraintHeight;
+@property (nonatomic, weak) NSLayoutConstraint *tableViewConstraintWidth;
+@property (nonatomic, weak) NSLayoutConstraint *tableViewConstraintCenter;
+@property (nonatomic, weak) NSLayoutConstraint *shadowTableViewConstraintTop;
+@property (nonatomic, weak) NSLayoutConstraint *shadowTableViewConstraintHeight;
+@property (nonatomic, weak) NSLayoutConstraint *shadowTableViewConstraintWidth;
+@property (nonatomic, weak) NSLayoutConstraint *shadowTableViewConstraintCenter;
 @property (nonatomic, weak) NSLayoutConstraint *titleLabelSecondaryConstraintTop;
 @property (nonatomic, weak) NSLayoutConstraint *titleLabelSecondaryConstraintCenter;
 @property (nonatomic, weak) NSLayoutConstraint *titleLabelPrimaryConstraintTop;
@@ -58,17 +68,32 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
     
     self.searchTextField = [[ASCTextField alloc] init];
     self.searchTextField.horizontalPadding = 10.0;
-    self.searchTextField.cancelButtonColor = GoogleBlue;
+    self.searchTextField.cancelButtonColor = [UIColor darkGrayColor];
     self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:self.searchTextField];
     
-    self.searchTableView = [[ASCTableView alloc] init];
-    self.searchTableView.alpha = 0;
-    self.searchTableView.hidden = YES;
-    self.searchTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView = [[ASCTableView alloc] init];
+    self.tableView.alpha = 0;
+    self.tableView.hidden = YES;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addSubview:self.searchTableView];
+    [self addSubview:self.tableView];
+    
+    self.shadowTableView = [[UIView alloc] init];
+    self.shadowTableView.backgroundColor = [UIColor whiteColor];
+    self.shadowTableView.alpha = 0;
+    self.shadowTableView.hidden = YES;
+    self.shadowTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.shadowTableView.clipsToBounds = NO;
+    self.shadowTableView.layer.cornerRadius = 1.5;
+    self.shadowTableView.layer.masksToBounds = NO;
+    self.shadowTableView.layer.shadowOffset = CGSizeMake(0, 1.5);
+    self.shadowTableView.layer.shadowRadius = 1.;
+    self.shadowTableView.layer.shadowOpacity = 0.08;
+    
+    [self insertSubview:self.shadowTableView belowSubview:self.tableView];
     
     self.titleLabelSecondary = [[UILabel alloc] init];
     self.titleLabelSecondary.font = [UIFont systemFontOfSize:12];
@@ -77,10 +102,18 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
     
     [self addSubview:self.titleLabelSecondary];
     
+    NSMutableAttributedString *titleLabelText = [[NSMutableAttributedString alloc] initWithString:@"Google"];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleBlue range:NSMakeRange(0, 1)];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleRed range:NSMakeRange(1, 1)];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleYellow range:NSMakeRange(2, 1)];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleBlue range:NSMakeRange(3, 1)];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleGreen range:NSMakeRange(4, 1)];
+    [titleLabelText addAttribute:NSForegroundColorAttributeName value:GoogleRed range:NSMakeRange(5, 1)];
+    
     self.titleLabelPrimary = [[UILabel alloc] init];
     self.titleLabelPrimary.font = [UIFont boldSystemFontOfSize:42];
-    self.titleLabelPrimary.textColor = GoogleBlue;
-    self.titleLabelPrimary.text = @"Google";
+    self.titleLabelPrimary.attributedText = [titleLabelText copy];
+    
     self.titleLabelPrimary.translatesAutoresizingMaskIntoConstraints = NO;
 
     [self addSubview:self.titleLabelPrimary];
@@ -97,11 +130,17 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
         self.searchTextFieldConstraintWidth = [self.searchTextField asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldContractedMultiplierWidth];
         self.searchTextFieldConstraintCenter = [self.searchTextField asc_centerHorizontallyInParent];
         
-        // searchTableView constraints
-        self.searchTableViewConstraintTop = [self.searchTableView asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop constant:ASCSearchTableViewExpandedOffsetY];
-        self.searchTableViewConstraintHeight = [self.searchTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:self.bounds.size.height * 0.35];
-        self.searchTableViewConstraintWidth = [self.searchTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth];
-        self.searchTableViewConstraintCenter = [self.searchTableView asc_centerHorizontallyInParent];
+        // tableView constraints
+        self.tableViewConstraintTop = [self.tableView asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop constant:ASCTableViewExpandedOffsetY];
+        self.tableViewConstraintHeight = [self.tableView asc_setAttribute:NSLayoutAttributeHeight toConstant:self.bounds.size.height * 0.35];
+        self.tableViewConstraintWidth = [self.tableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth];
+        self.tableViewConstraintCenter = [self.tableView asc_centerHorizontallyInParent];
+        
+        // shadowTableView constraints
+        self.shadowTableViewConstraintTop = [self.shadowTableView asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop constant:ASCTableViewExpandedOffsetY];
+        self.shadowTableViewConstraintHeight = [self.shadowTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:self.bounds.size.height * 0.35];
+        self.shadowTableViewConstraintWidth = [self.shadowTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth];
+        self.shadowTableViewConstraintCenter = [self.shadowTableView asc_centerHorizontallyInParent];
         
         // titleLabelSecondary constraints
         self.titleLabelSecondaryConstraintTop = [self.titleLabelSecondary asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.searchTextField constant:-40.];
@@ -122,10 +161,12 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
     if (self.state == ASCSearchViewSearchStateInactive) {
         self.searchTextFieldConstraintTop.constant = self.bounds.size.height * ASCSearchTextFieldContractedMultiplierOffsetY;
         self.searchTextFieldConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldContractedMultiplierWidth;
-        self.searchTableViewConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
+        self.tableViewConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
+        self.shadowTableViewConstraintWidth.constant = self.tableViewConstraintWidth.constant;
     } else {
         self.searchTextFieldConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
-        self.searchTableViewConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
+        self.tableViewConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
+        self.shadowTableViewConstraintWidth.constant = self.tableViewConstraintWidth.constant;
     }
 }
 
@@ -137,7 +178,8 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
 
     self.searchTextFieldConstraintTop.constant = ASCSearchTextFieldExpandedOffsetY;
     self.searchTextFieldConstraintWidth.constant = self.bounds.size.width * ASCSearchTextFieldExpandedMultiplierWidth;
-    self.searchTableViewConstraintHeight.constant = self.bounds.size.height - keyboardHeight - ASCSearchTableViewExpandedOffsetY - 10.0;
+    self.tableViewConstraintHeight.constant = self.bounds.size.height - keyboardHeight - ASCTableViewExpandedOffsetY - 10.0;
+    self.shadowTableViewConstraintHeight.constant = self.tableViewConstraintHeight.constant;
     
     __weak ASCSearchView *weakSelf = self;
     
@@ -148,8 +190,11 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
         weakSelf.titleLabelPrimary.hidden = YES;
         
         [UIView animateWithDuration:ASCSearchViewAnimationDuration animations:^{
-            weakSelf.searchTableView.hidden = NO;
-            weakSelf.searchTableView.alpha = 1;
+            weakSelf.tableView.hidden = NO;
+            weakSelf.tableView.alpha = 1;
+            
+            weakSelf.shadowTableView.hidden = NO;
+            weakSelf.shadowTableView.alpha = 1;
         }];
     }];
 }
@@ -159,9 +204,11 @@ const NSTimeInterval ASCSearchViewAnimationDuration = 0.2;
     
     __weak ASCSearchView *weakSelf = self;
     [UIView animateWithDuration:ASCSearchViewAnimationDuration animations:^{
-        weakSelf.searchTableView.alpha = 0;
+        weakSelf.tableView.alpha = 0;
+        weakSelf.shadowTableView.alpha = 0;
     } completion:^(BOOL finished) {
-        weakSelf.searchTableView.hidden = YES;
+        weakSelf.tableView.hidden = YES;
+        weakSelf.shadowTableView.hidden = YES;
         
         weakSelf.titleLabelSecondary.hidden = NO;
         weakSelf.titleLabelPrimary.hidden = NO;

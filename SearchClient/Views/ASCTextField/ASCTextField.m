@@ -7,8 +7,7 @@
 //
 
 #import "ASCTextField.h"
-
-#define ASCSearchTextFieldBorderColor [UIColor colorWithRed:232.0/255.0 green:232.0/255.0 blue:232.0/255.0 alpha:1].CGColor
+#import <QuartzCore/QuartzCore.h>
 
 @interface ASCTextField ()
 
@@ -29,17 +28,22 @@
 
 - (void)setup {
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.cancelButton.frame = CGRectMake(0, 0, 65.0, 40.0);
-    [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    self.cancelButton.frame = CGRectMake(0, 0, 75.0, 40.0);
+    [self.cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+    self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:12. weight:UIFontWeightMedium];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.borderStyle = UITextBorderStyleLine;
+    self.borderStyle = UITextBorderStyleNone;
     self.backgroundColor = [UIColor whiteColor];
     self.rightViewMode = UITextFieldViewModeWhileEditing;
     self.rightView = self.cancelButton;
-    self.layer.borderWidth = 2.0;
-    self.layer.borderColor = ASCSearchTextFieldBorderColor;
-    self.font = [UIFont systemFontOfSize:14.0];
+    self.font = [UIFont systemFontOfSize:13.0];
+    
+    self.layer.cornerRadius = 1.5;
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0, 1.5);
+    self.layer.shadowRadius = 1.;
+    self.layer.shadowOpacity = 0.08;
     
     self.isFirstLayout = YES;
 }
