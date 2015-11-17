@@ -45,8 +45,8 @@
             NSMutableArray *parsedResultsArray = [[NSMutableArray alloc] init];
             
             for (NSDictionary *dic in resultsArray) {
-                ASCSearchResultModel *model = [[ASCSearchResultModel alloc] initWithDictionary:dic];
-                [parsedResultsArray addObject: model];
+                ASCSearchResultModel *model = [ASCSearchResultModel modelForDictionary:dic];
+                [parsedResultsArray addObject:model];
             }
             
             self.parsedResult = [parsedResultsArray copy];

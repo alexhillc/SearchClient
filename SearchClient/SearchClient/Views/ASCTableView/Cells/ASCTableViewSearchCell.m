@@ -8,7 +8,7 @@
 
 #import "ASCTableViewSearchCell.h"
 
-NSString *ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier";
+NSString * const ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier";
 
 @implementation ASCTableViewSearchCell
 

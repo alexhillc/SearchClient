@@ -7,19 +7,32 @@
 //
 
 #import "ASCSearchResultModel.h"
+#import "ASCWebSearchResultModel.h"
+#import "ASCImageSearchResultModel.h"
+
+NSString * const GsearchResultClassWeb = @"GwebSearch";
+NSString * const GsearchResultClassImage = @"GimageSearch";
+NSString * const GsearchResultClassNews = @"GnewsSearch";
 
 @implementation ASCSearchResultModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic {
-    if (self = [super init]) {
-        self.googleSearchResultClass = [dic valueForKey:@"GsearchResultClass"];
-        self.title = [dic valueForKey:@"title"];
-        self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
-        self.content = [dic valueForKey:@"content"];
-        self.url = [NSURL URLWithString:[dic valueForKey:@"url"]];
++ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic {
+    NSString *resultClass = [dic valueForKey:@"GsearchResultClass"];
+
+    if ([resultClass isEqualToString:GsearchResultClassWeb]) {
+        return [[ASCWebSearchResultModel alloc] initWithDictionary:dic];
+    } else if ([resultClass isEqualToString:GsearchResultClassImage]) {
+        return [[ASCImageSearchResultModel alloc] initWithDictionary:dic];
     }
     
-    return self;
+    return nil;
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)dic {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    
+    return nil;
 }
 
 @end

@@ -10,22 +10,17 @@
 
 @class ASCSearchView, ASCTableView, ASCTextField;
 
-extern const NSTimeInterval ASCSearchViewAnimationDuration;
-
-typedef NS_ENUM(NSInteger, ASCSearchViewSearchState) {
-    ASCSearchViewSearchStateInactive,
-    ASCSearchViewSearchStateActive
-};
+extern NSTimeInterval const ASCSearchViewAnimationDuration;
 
 @interface ASCSearchView : UIView
 
 @property ASCTextField *searchTextField;
-@property ASCTableView *tableView;
+@property ASCTableView *searchTableView;
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
-@property (nonatomic, readonly) ASCSearchViewSearchState state;
 
 - (void)expandToKeyboardHeight:(CGFloat)keyboardHeight;
 - (void)contract;
+- (BOOL)isSearching;
 
 @end

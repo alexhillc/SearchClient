@@ -14,11 +14,9 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *titleNoFormatting;
 @property (nonatomic, strong) NSString *content;
-
-@property (nonatomic) CGSize thumbSize;
-@property (nonatomic) CGSize size;
-@property (nonatomic, strong) NSURL *thumbUrl;
 @property (nonatomic, strong) NSURL *url;
+
++ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 

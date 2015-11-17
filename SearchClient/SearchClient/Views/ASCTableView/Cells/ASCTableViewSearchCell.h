@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *ASCTableViewSearchCellIdentifier;
+extern NSString * const ASCTableViewSearchCellIdentifier;
 
 @interface ASCTableViewSearchCell : UITableViewCell
 

@@ -11,8 +11,8 @@
 #import "TTTAttributedLabel.h"
 #import <QuartzCore/QuartzCore.h>
 
-NSString *ASCTableViewSearchResultCellIdentifier = @"ASCTableViewSearchResultCellIdentifier";
-const CGFloat contentPadding = 10.;
+NSString * const ASCTableViewSearchResultCellIdentifier = @"ASCTableViewSearchResultCellIdentifier";
+CGFloat const contentPadding = 10.;
 
 @implementation ASCTableViewSearchResultCell
 

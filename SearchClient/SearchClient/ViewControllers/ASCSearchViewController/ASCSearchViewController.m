@@ -57,9 +57,23 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    BOOL shouldHide = self.searchView.state == ASCSearchViewSearchStateInactive;
+    BOOL shouldHide = ![self.searchView isSearching];
     
     return shouldHide;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    ASCSearchResultsViewModel *vm = [[ASCSearchResultsViewModel alloc] init];
+    vm.query = textField.text;
+    vm.title = @"Results";
+    
+    ASCSearchResultsViewController *vc = [[ASCSearchResultsViewController alloc] init];
+    vc.viewModel = vm;
+    
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    return YES;
 }
 
 #pragma mark - UITableViewDelegate
@@ -78,20 +92,6 @@
     return [self.tableData count];
 }
 
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    ASCSearchResultsViewModel *vm = [[ASCSearchResultsViewModel alloc] init];
-    vm.query = textField.text;
-    vm.title = @"Results";
-    
-    ASCSearchResultsViewController *vc = [[ASCSearchResultsViewController alloc] init];
-    vc.viewModel = vm;
-    
-    [self presentViewController:vc animated:YES completion:nil];
-    
-    return YES;
-}
-
 #pragma mark - Notifications
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
@@ -100,7 +100,8 @@
         [self.searchView expandToKeyboardHeight:keyboardSize.height];
         
         __weak ASCSearchViewController *weakSelf = self;
-        [UIView animateWithDuration:ASCSearchViewAnimationDuration delay:ASCSearchViewAnimationDuration options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:ASCSearchViewAnimationDuration delay:ASCSearchViewAnimationDuration
+                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [weakSelf setNeedsStatusBarAppearanceUpdate];
         } completion:nil];
     });
@@ -116,6 +117,5 @@
         }];
     });
 }
-
 
 @end

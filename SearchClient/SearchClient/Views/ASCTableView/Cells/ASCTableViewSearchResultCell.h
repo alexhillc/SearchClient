@@ -10,7 +10,7 @@
 
 @class TTTAttributedLabel, ASCSearchResultModel;
 
-extern NSString *ASCTableViewSearchResultCellIdentifier;
+extern NSString * const ASCTableViewSearchResultCellIdentifier;
 
 @interface ASCTableViewSearchResultCell : UITableViewCell
 

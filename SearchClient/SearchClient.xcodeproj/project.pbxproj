@@ -23,6 +23,8 @@
 		FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */; };
 		FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
+		FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */; };
+		FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */; };
 		FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */; };
 		FAF6C1591BD41DEF00F966A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C1581BD41DEF00F966A1 /* main.m */; };
 		FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C15B1BD41DEF00F966A1 /* ASCAppDelegate.m */; };
@@ -76,6 +78,10 @@
 		FA997EE31BF2F44100101806 /* ASCSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewModel.h; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.h; sourceTree = "<group>"; };
 		FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsViewModel.m; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.m; sourceTree = "<group>"; };
 		FA997EE61BF2F46300101806 /* ASCSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultModel.h; path = Models/ASCSearchResultModel/ASCSearchResultModel.h; sourceTree = "<group>"; };
+		FACBF8D71BFAA614000099B6 /* ASCWebSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCWebSearchResultModel.h; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.h; sourceTree = "<group>"; };
+		FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCWebSearchResultModel.m; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.m; sourceTree = "<group>"; };
+		FACBF8DB1BFAA6DD000099B6 /* ASCImageSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCImageSearchResultModel.h; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.h; sourceTree = "<group>"; };
+		FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCImageSearchResultModel.m; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.m; sourceTree = "<group>"; };
 		FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCDataStore.h; path = Utilities/DataStore/ASCDataStore.h; sourceTree = "<group>"; };
 		FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCDataStore.m; path = Utilities/DataStore/ASCDataStore.m; sourceTree = "<group>"; };
 		FAF6C1541BD41DEF00F966A1 /* SearchClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +182,8 @@
 		FA1944C01BF2E44A000A4712 /* ASCSearchResultModel */ = {
 			isa = PBXGroup;
 			children = (
+				FACBF8DA1BFAA6C6000099B6 /* ASCImageSearchResultModel */,
+				FACBF8D61BFAA5F5000099B6 /* ASCWebSearchResultModel */,
 				FA997EE61BF2F46300101806 /* ASCSearchResultModel.h */,
 				FA310C871BF7EFF900E386A5 /* ASCSearchResultModel.m */,
 			);
@@ -265,6 +273,24 @@
 				FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */,
 			);
 			name = ASCImageSearchLoader;
+			sourceTree = "<group>";
+		};
+		FACBF8D61BFAA5F5000099B6 /* ASCWebSearchResultModel */ = {
+			isa = PBXGroup;
+			children = (
+				FACBF8D71BFAA614000099B6 /* ASCWebSearchResultModel.h */,
+				FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */,
+			);
+			name = ASCWebSearchResultModel;
+			sourceTree = "<group>";
+		};
+		FACBF8DA1BFAA6C6000099B6 /* ASCImageSearchResultModel */ = {
+			isa = PBXGroup;
+			children = (
+				FACBF8DB1BFAA6DD000099B6 /* ASCImageSearchResultModel.h */,
+				FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */,
+			);
+			name = ASCImageSearchResultModel;
 			sourceTree = "<group>";
 		};
 		FAE46EB91BDC2B5300B55E00 /* ASCTableView */ = {
@@ -540,11 +566,13 @@
 				FA310C811BF7C87100E386A5 /* ASCSearchResultsViewController.m in Sources */,
 				FA1944A71BF2E279000A4712 /* ASCLoader.m in Sources */,
 				FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */,
+				FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */,
 				FA1944B31BF2E317000A4712 /* ASCTableView.m in Sources */,
 				FA1944B61BF2E324000A4712 /* ASCTableViewSearchCell.m in Sources */,
 				FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */,
 				FA310C851BF7CC6B00E386A5 /* ASCSearchResultsView.m in Sources */,
 				FA1944AD1BF2E2CD000A4712 /* ASCSearchViewController.m in Sources */,
+				FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */,
 				FA310C881BF7EFF900E386A5 /* ASCSearchResultModel.m in Sources */,
 				FA1944B91BF2E332000A4712 /* ASCTextField.m in Sources */,
 				FA1944B01BF2E2F4000A4712 /* ASCSearchView.m in Sources */,
