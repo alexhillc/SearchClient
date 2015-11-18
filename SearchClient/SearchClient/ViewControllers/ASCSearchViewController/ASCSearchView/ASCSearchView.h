@@ -16,11 +16,17 @@ extern NSTimeInterval const ASCSearchViewAnimationDuration;
 
 @property ASCTextField *searchTextField;
 @property ASCTableView *searchTableView;
+@property ASCTableView *searchResultsTableView;
+@property UIView *shadowSearchTableView;
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
 
 - (void)expandToKeyboardHeight:(CGFloat)keyboardHeight;
 - (void)contract;
-- (BOOL)isSearching;
+- (BOOL)isExpanded;
+- (BOOL)isDisplayingResults;
+
+- (void)startLoadingAnimation;
+- (void)stopLoadingAnimation;
 
 @end

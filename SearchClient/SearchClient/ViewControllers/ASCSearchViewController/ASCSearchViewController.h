@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ASCViewController.h"
 
+@class ASCSearchResultsViewModel;
+
 @interface ASCSearchViewController : ASCViewController
 
 @end
