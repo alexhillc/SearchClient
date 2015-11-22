@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ASCViewController.h"
 
-@class ASCSearchResultsViewModel;
+@class ASCSearchView, ASCSearchViewModel, ASCSearchTableViewDelegateAndDatasource;
 
 @interface ASCSearchViewController : ASCViewController
+
+@property (nonatomic, strong) ASCSearchViewModel *searchViewModel;
+@property (nonatomic) ASCSearchTableViewDelegateAndDatasource *searchTableViewDD;
+@property (weak) ASCSearchView *searchView;
+
+- (void)presentViewControllerWithQuery:(NSString *)query;
 
 @end

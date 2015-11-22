@@ -8,17 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class ASCSearchViewModel, ASCSearchTableViewDelegateAndDatasource;
-
-@protocol ASCSearchTableViewDDDelegate <NSObject>
-
-- (void)ddDelegate:(ASCSearchTableViewDelegateAndDatasource *)ddDelegate didSelectText:(NSString *)text;
-
-@end
+@class ASCViewController;
 
 @interface ASCSearchTableViewDelegateAndDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) ASCSearchViewModel *viewModel;
-@property (nonatomic, weak) id<ASCSearchTableViewDDDelegate> delegate;
+@property (nonatomic, weak) ASCViewController *vc;
 
 @end

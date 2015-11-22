@@ -8,19 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class ASCSearchResultsTableViewDelegateAndDatasource;
-
-@protocol ASCSearchResultsTableViewDDDelegate <NSObject>
-
-- (void)ddDelegate:(ASCSearchResultsTableViewDelegateAndDatasource *)ddDelegate didSelectUrl:(NSURL *)url;
-
-@end
-
-@class ASCSearchResultsViewModel;
+@class ASCSearchResultsViewController;
 
 @interface ASCSearchResultsTableViewDelegateAndDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) ASCSearchResultsViewModel *viewModel;
-@property (nonatomic, weak) id<ASCSearchResultsTableViewDDDelegate> delegate;
+@property (nonatomic, weak) ASCSearchResultsViewController *vc;
 
 @end

@@ -7,26 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import "ASCView.h"
 
-@class ASCSearchView, ASCTableView, ASCTextField;
+@interface ASCSearchView : ASCView
 
-extern NSTimeInterval const ASCSearchViewAnimationDuration;
-
-@interface ASCSearchView : UIView
-
-@property ASCTextField *searchTextField;
-@property ASCTableView *searchTableView;
-@property ASCTableView *searchResultsTableView;
-@property UIView *shadowSearchTableView;
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
 
-- (void)expandToKeyboardHeight:(CGFloat)keyboardHeight;
-- (void)contract;
-- (BOOL)isExpanded;
-- (BOOL)isDisplayingResults;
-
-- (void)startLoadingAnimation;
-- (void)stopLoadingAnimation;
+- (void)hideSearchTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
 
 @end

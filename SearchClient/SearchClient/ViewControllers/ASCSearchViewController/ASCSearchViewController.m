@@ -7,26 +7,17 @@
 //
 
 #import "ASCSearchViewController.h"
+#import "ASCSearchResultsViewController.h"
 #import "ASCSearchView.h"
 #import "ASCTextField.h"
-#import "ASCTableView.h"
+#import "ASCSearchTableViewDelegateAndDatasource.h"
 
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchViewModel.h"
 
 #import "ASCTableViewSearchCell.h"
-#import "ASCTableViewSearchResultCell.h"
 
-#import "ASCSearchTableViewDelegateAndDatasource.h"
-#import "ASCSearchResultsTableViewDelegateAndDatasource.h"
-
-#import <SafariServices/SafariServices.h>
-
-@interface ASCSearchViewController () <UITextFieldDelegate, ASCSearchResultsTableViewDDDelegate, ASCSearchTableViewDDDelegate, ASCViewModelDelegate>
-
-@property (nonatomic) ASCSearchTableViewDelegateAndDatasource *searchTableViewDD;
-@property (nonatomic) ASCSearchResultsTableViewDelegateAndDatasource *searchResultsTableViewDD;
-@property (weak) ASCSearchView *searchView;
+@interface ASCSearchViewController () <UITextFieldDelegate, ASCViewModelDelegate>
 
 @end
 
@@ -43,24 +34,17 @@
     [super viewDidLoad];
     
     self.searchTableViewDD = [[ASCSearchTableViewDelegateAndDatasource alloc] init];
-    self.searchTableViewDD.viewModel = [[ASCSearchViewModel alloc] init];
-    self.searchTableViewDD.viewModel.delegate = self;
-    self.searchTableViewDD.delegate = self;
+    self.searchTableViewDD.vc = self;
+    
     self.searchView.searchTableView.delegate = self.searchTableViewDD;
     self.searchView.searchTableView.dataSource = self.searchTableViewDD;
-    [self.searchTableViewDD.viewModel loadSearchHistory];
-    
-    self.searchResultsTableViewDD = [[ASCSearchResultsTableViewDelegateAndDatasource alloc] init];
-    self.searchResultsTableViewDD.viewModel = [[ASCSearchResultsViewModel alloc] init];
-    self.searchResultsTableViewDD.viewModel.delegate = self;
-    self.searchResultsTableViewDD.delegate = self;
-    self.searchView.searchResultsTableView.delegate = self.searchResultsTableViewDD;
-    self.searchView.searchResultsTableView.dataSource = self.searchResultsTableViewDD;
-    
     [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
-    [self.searchView.searchResultsTableView registerClass:[ASCTableViewSearchResultCell class] forCellReuseIdentifier:ASCTableViewSearchResultCellIdentifier];
     
     self.searchView.searchTextField.delegate = self;
+    
+    self.searchViewModel.delegate = self;
+    
+    [self.searchViewModel loadSearchHistory];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,75 +68,63 @@
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.searchResultsTableViewDD.viewModel.query = textField.text;
-    [self.searchResultsTableViewDD.viewModel loadResultsWithQueryType:ASCQueryTypeWeb];
-    self.searchView.searchTableView.hidden = YES;
-    self.searchView.shadowSearchTableView.hidden = YES;
-    [self.searchView startLoadingAnimation];
+    [self presentViewControllerWithQuery:textField.text];
     
     return YES;
 }
 
-#pragma mark - Delegate and datasource delegate
-- (void)ddDelegate:(ASCSearchTableViewDelegateAndDatasource *)ddDelegate didSelectText:(NSString *)text {
-    self.searchResultsTableViewDD.viewModel.query = text;
-    [self.searchResultsTableViewDD.viewModel loadResultsWithQueryType:ASCQueryTypeWeb];
-    
-    [self.searchView.searchTextField endEditing:YES];
-}
-
-- (void)ddDelegate:(ASCSearchResultsTableViewDelegateAndDatasource *)ddDelegate didSelectUrl:(NSURL *)url {
-    if (NSClassFromString(@"SFSafariViewController") != Nil) {
-        if ([url.scheme hasPrefix:@"http"]) {
-            SFSafariViewController *safari = [[SFSafariViewController alloc] initWithURL:url];
-            [self presentViewController:safari animated:YES completion:nil];
-            
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
-        
-    } else {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
-
+#pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
-    [self.searchView stopLoadingAnimation];
-    [self.searchView.searchResultsTableView reloadData];
+    [self.searchView.searchTableView reloadData];
 }
 
 - (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error {
-    [self.searchView stopLoadingAnimation];
+    // error here
 }
 
 #pragma mark - Notifications
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    if (![self.searchView isDisplayingResults]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.searchView expandToKeyboardHeight:keyboardSize.height];
-            
-            __weak ASCSearchViewController *weakSelf = self;
-            [UIView animateWithDuration:ASCSearchViewAnimationDuration delay:ASCSearchViewAnimationDuration
-                                options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                    [weakSelf setNeedsStatusBarAppearanceUpdate];
-                                } completion:nil];
-        });
-    }
+    __weak ASCSearchViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.searchView expandToKeyboardHeight:keyboardSize.height];
+        
+        [UIView animateWithDuration:ASCViewAnimationDuration delay:ASCViewAnimationDuration
+                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                [weakSelf setNeedsStatusBarAppearanceUpdate];
+                            } completion:nil];
+    });
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    if (![self.searchView isDisplayingResults]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.searchView contract];
-            
-            __weak ASCSearchViewController *weakSelf = self;
-            [UIView animateWithDuration:ASCSearchViewAnimationDuration animations:^{
-                [weakSelf setNeedsStatusBarAppearanceUpdate];
-            }];
-        });
-    }
+    __weak ASCSearchViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.searchView contract];
+        
+        [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        }];
+    });
+}
+
+- (void)presentViewControllerWithQuery:(NSString *)query {
+    ASCSearchViewModel *searchViewModel = [[ASCSearchViewModel alloc] init];
+    ASCSearchResultsViewModel *searchResultsViewModel = [[ASCSearchResultsViewModel alloc] init];
+    searchResultsViewModel.query = query;
+    
+    ASCSearchResultsViewController *searchResultsViewController = [[ASCSearchResultsViewController alloc] init];
+    searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
+    searchResultsViewController.searchViewModel = searchViewModel;
+    
+    self.searchView.searchTextField.text = query;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    __weak ASCSearchViewController *weakSelf = self;
+    [self.searchView hideSearchTableViewAnimated:YES completion:^{
+        [weakSelf presentViewController:searchResultsViewController animated:NO completion:nil];
+    }];
 }
 
 @end

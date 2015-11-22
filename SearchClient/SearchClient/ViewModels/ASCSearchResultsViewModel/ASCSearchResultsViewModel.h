@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASCViewModel.h"
+#import "ASCSearchViewModel.h"
 
 @class ASCSearchResultsViewModel;
 

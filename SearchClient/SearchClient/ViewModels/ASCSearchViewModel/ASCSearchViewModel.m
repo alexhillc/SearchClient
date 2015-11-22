@@ -13,6 +13,10 @@
 - (void)loadSearchHistory {
     self.searchHistoryData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five",
                               @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];
+    
+    if ([self.delegate respondsToSelector:@selector(viewModelDidReceiveNewDataSet:)]) {
+        [self.delegate viewModelDidReceiveNewDataSet:self];
+    }
 }
 
 @end

@@ -12,6 +12,7 @@
 
 @protocol ASCViewModelDelegate <NSObject>
 
+@optional
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel;
 - (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error;
 

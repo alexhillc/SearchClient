@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ASCViewModel;
+
 @interface ASCViewController : UIViewController
 
 - (CGFloat)offsetForStatusAndNavigationBar;

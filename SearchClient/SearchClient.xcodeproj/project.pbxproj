@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		88E4B68C704E0BF3AE2EA7C2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 829D015917BD0B9E7343DBAF /* libPods.a */; };
+		FA0FEED01C00F8E60046F849 /* ASCSearchResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0FEECF1C00F8E60046F849 /* ASCSearchResultsView.m */; };
 		FA1944A71BF2E279000A4712 /* ASCLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944A61BF2E279000A4712 /* ASCLoader.m */; };
 		FA1944AA1BF2E2C4000A4712 /* ASCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944A91BF2E2C4000A4712 /* ASCViewController.m */; };
 		FA1944AD1BF2E2CD000A4712 /* ASCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944AC1BF2E2CD000A4712 /* ASCSearchViewController.m */; };
@@ -23,10 +24,12 @@
 		FA41DFCC1BFC236300DB57C0 /* ASCSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCB1BFC236300DB57C0 /* ASCSearchViewModel.m */; };
 		FA41DFD01BFC23EA00DB57C0 /* ASCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCF1BFC23EA00DB57C0 /* ASCViewModel.m */; };
 		FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */; };
+		FA731FB31C011B2600B07E92 /* ASCView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA731FB21C011B2600B07E92 /* ASCView.m */; };
 		FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
 		FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */; };
 		FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */; };
+		FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */; };
 		FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */; };
 		FAF6C1591BD41DEF00F966A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C1581BD41DEF00F966A1 /* main.m */; };
 		FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C15B1BD41DEF00F966A1 /* ASCAppDelegate.m */; };
@@ -49,6 +52,8 @@
 		829D015917BD0B9E7343DBAF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8326D2F49571B16E25ABCB0F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DF6E98A51038CD8D690B11E2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FA0FEECE1C00F8E60046F849 /* ASCSearchResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsView.h; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsView/ASCSearchResultsView.h; sourceTree = "<group>"; };
+		FA0FEECF1C00F8E60046F849 /* ASCSearchResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsView.m; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsView/ASCSearchResultsView.m; sourceTree = "<group>"; };
 		FA1944A51BF2E279000A4712 /* ASCLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCLoader.h; path = Utilities/ASCLoader/ASCLoader.h; sourceTree = "<group>"; };
 		FA1944A61BF2E279000A4712 /* ASCLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCLoader.m; path = Utilities/ASCLoader/ASCLoader.m; sourceTree = "<group>"; };
 		FA1944A81BF2E2C4000A4712 /* ASCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCViewController.h; path = ViewControllers/ASCViewController/ASCViewController.h; sourceTree = "<group>"; };
@@ -79,6 +84,8 @@
 		FA4B2AA51BF1831100B78CF7 /* UIView+NSLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+NSLayoutConstraint.h"; path = "Utilities/Categories/UIView+NSLayoutConstraint.h"; sourceTree = "<group>"; };
 		FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+NSLayoutConstraint.m"; path = "Utilities/Categories/UIView+NSLayoutConstraint.m"; sourceTree = "<group>"; };
 		FA4B2AAA1BF185B700B78CF7 /* SearchClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SearchClient-Prefix.pch"; sourceTree = "<group>"; };
+		FA731FB11C011B2600B07E92 /* ASCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCView.h; path = ViewControllers/ASCViewController/ASCView/ASCView.h; sourceTree = "<group>"; };
+		FA731FB21C011B2600B07E92 /* ASCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCView.m; path = ViewControllers/ASCViewController/ASCView/ASCView.m; sourceTree = "<group>"; };
 		FA966CE31BF6B717006FC8DB /* ASCSearchLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchLoader.h; path = Utilities/ASCLoader/ASCImageSearchLoader/ASCSearchLoader.h; sourceTree = "<group>"; };
 		FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchLoader.m; path = Utilities/ASCLoader/ASCImageSearchLoader/ASCSearchLoader.m; sourceTree = "<group>"; };
 		FA997EE31BF2F44100101806 /* ASCSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewModel.h; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.h; sourceTree = "<group>"; };
@@ -88,6 +95,8 @@
 		FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCWebSearchResultModel.m; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.m; sourceTree = "<group>"; };
 		FACBF8DB1BFAA6DD000099B6 /* ASCImageSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCImageSearchResultModel.h; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.h; sourceTree = "<group>"; };
 		FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCImageSearchResultModel.m; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.m; sourceTree = "<group>"; };
+		FACE5ADE1C00047600B2C964 /* ASCSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewController.h; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsViewController.h; sourceTree = "<group>"; };
+		FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsViewController.m; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsViewController.m; sourceTree = "<group>"; };
 		FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCDataStore.h; path = Utilities/DataStore/ASCDataStore.h; sourceTree = "<group>"; };
 		FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCDataStore.m; path = Utilities/DataStore/ASCDataStore.m; sourceTree = "<group>"; };
 		FAF6C1541BD41DEF00F966A1 /* SearchClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +159,15 @@
 				FA1526E71BD566180077D5A2 /* ASCSearchView */,
 			);
 			name = ASCSearchViewController;
+			sourceTree = "<group>";
+		};
+		FA0FEECD1C00F8C40046F849 /* ASCSearchResultsView */ = {
+			isa = PBXGroup;
+			children = (
+				FA0FEECE1C00F8E60046F849 /* ASCSearchResultsView.h */,
+				FA0FEECF1C00F8E60046F849 /* ASCSearchResultsView.m */,
+			);
+			name = ASCSearchResultsView;
 			sourceTree = "<group>";
 		};
 		FA1526E71BD566180077D5A2 /* ASCSearchView */ = {
@@ -253,6 +271,7 @@
 			children = (
 				FA1944A81BF2E2C4000A4712 /* ASCViewController.h */,
 				FA1944A91BF2E2C4000A4712 /* ASCViewController.m */,
+				FA731FB01C011AF700B07E92 /* ASCView */,
 			);
 			name = ASCViewController;
 			sourceTree = "<group>";
@@ -264,6 +283,15 @@
 				FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */,
 			);
 			name = ASCSearchResultsViewModel;
+			sourceTree = "<group>";
+		};
+		FA731FB01C011AF700B07E92 /* ASCView */ = {
+			isa = PBXGroup;
+			children = (
+				FA731FB11C011B2600B07E92 /* ASCView.h */,
+				FA731FB21C011B2600B07E92 /* ASCView.m */,
+			);
+			name = ASCView;
 			sourceTree = "<group>";
 		};
 		FA966CE21BF6B6EC006FC8DB /* ASCImageSearchLoader */ = {
@@ -291,6 +319,16 @@
 				FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */,
 			);
 			name = ASCImageSearchResultModel;
+			sourceTree = "<group>";
+		};
+		FACE5ADD1C00044E00B2C964 /* ASCSearchResultsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FACE5ADE1C00047600B2C964 /* ASCSearchResultsViewController.h */,
+				FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */,
+				FA0FEECD1C00F8C40046F849 /* ASCSearchResultsView */,
+			);
+			name = ASCSearchResultsViewController;
 			sourceTree = "<group>";
 		};
 		FAE46EB91BDC2B5300B55E00 /* ASCTableView */ = {
@@ -399,6 +437,7 @@
 		FAF6C17E1BD41E3000F966A1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FACE5ADD1C00044E00B2C964 /* ASCSearchResultsViewController */,
 				FA6F57801BE0647E00C959B2 /* ASCViewController */,
 				FA0D1B761BD76590008ABE68 /* ASCSearchViewController */,
 			);
@@ -569,13 +608,16 @@
 				FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */,
 				FA22A4C21BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m in Sources */,
 				FA1944AD1BF2E2CD000A4712 /* ASCSearchViewController.m in Sources */,
+				FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */,
 				FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */,
 				FA310C881BF7EFF900E386A5 /* ASCSearchResultModel.m in Sources */,
 				FA1944B91BF2E332000A4712 /* ASCTextField.m in Sources */,
 				FA1944B01BF2E2F4000A4712 /* ASCSearchView.m in Sources */,
 				FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */,
+				FA731FB31C011B2600B07E92 /* ASCView.m in Sources */,
 				FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */,
 				FA22A4C51BFC1FCB003D05A7 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */,
+				FA0FEED01C00F8E60046F849 /* ASCSearchResultsView.m in Sources */,
 				FAF6C1591BD41DEF00F966A1 /* main.m in Sources */,
 				FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */,
 				FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */,

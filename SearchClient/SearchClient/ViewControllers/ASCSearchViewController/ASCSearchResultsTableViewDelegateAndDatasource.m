@@ -10,10 +10,9 @@
 #import "ASCTableViewSearchResultCell.h"
 #import "ASCSearchResultsViewModel.h"
 #import "TTTAttributedLabel.h"
+#import "ASCSearchResultsViewController.h"
 
-@interface ASCSearchResultsTableViewDelegateAndDatasource () <TTTAttributedLabelDelegate, ASCViewModelDelegate>
-
-@end
+#import <SafariServices/SafariServices.h>
 
 @implementation ASCSearchResultsTableViewDelegateAndDatasource
 
@@ -25,8 +24,8 @@
         cell = [[ASCTableViewSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchResultCellIdentifier];
     }
     
-    cell.titleLabel.delegate = self;
-    cell.cellModel = [self.viewModel.resultsData objectAtIndex:indexPath.section];
+    cell.titleLabel.delegate = self.vc;
+    cell.cellModel = [self.vc.searchResultsViewModel.resultsData objectAtIndex:indexPath.section];
     
     return cell;
 }
@@ -36,7 +35,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.viewModel.resultsData.count;
+    return self.vc.searchResultsViewModel.resultsData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -60,8 +59,17 @@
 
 #pragma mark - TTTAttributedLabelDelegate
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
-    if ([self.delegate respondsToSelector:@selector(ddDelegate:didSelectUrl:)]) {
-        [self.delegate ddDelegate:self didSelectUrl:url];
+    if (NSClassFromString(@"SFSafariViewController") != Nil) {
+        if ([url.scheme hasPrefix:@"http"]) {
+            SFSafariViewController *safari = [[SFSafariViewController alloc] initWithURL:url];
+            [self.vc presentViewController:safari animated:YES completion:nil];
+            
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        
+    } else {
+        [[UIApplication sharedApplication] openURL:url];
     }
 }
 
