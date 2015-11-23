@@ -38,6 +38,7 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
     self.searchTextField.cancelButtonColor = [UIColor darkGrayColor];
     self.searchTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.searchTableView.
     self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:self.searchTextField];

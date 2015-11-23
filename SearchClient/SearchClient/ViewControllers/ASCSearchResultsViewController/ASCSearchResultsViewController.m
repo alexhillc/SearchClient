@@ -11,10 +11,11 @@
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
 #import "ASCSearchTableViewDelegateAndDatasource.h"
 #import "ASCSearchResultsViewModel.h"
-
 #import "ASCTableViewSearchResultCell.h"
+#import "TTTAttributedLabel.h"
+#import <SafariServices/SafariServices.h>
 
-@interface ASCSearchResultsViewController () <UITextFieldDelegate, ASCViewModelDelegate>
+@interface ASCSearchResultsViewController () <UITextFieldDelegate, ASCViewModelDelegate, TTTAttributedLabelDelegate>
 
 @property (weak) ASCSearchResultsView *searchResultsView;
 
@@ -36,6 +37,7 @@
     self.searchTableViewDD.vc = self;
     self.searchResultsView.searchTableView.delegate = self.searchTableViewDD;
     self.searchResultsView.searchTableView.dataSource = self.searchTableViewDD;
+    self.searchResultsView.searchTextField.delegate = self;
     
     self.searchResultsTableViewDD = [[ASCSearchResultsTableViewDelegateAndDatasource alloc] init];
     self.searchResultsTableViewDD.vc = self;
@@ -80,6 +82,13 @@
     [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self presentResultsForQuery:textField.text];
+    
+    return YES;
+}
+
 #pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
     if ([viewModel isKindOfClass:[ASCSearchViewModel class]]) {
@@ -105,6 +114,22 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.searchResultsView contract];
     });
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if (NSClassFromString(@"SFSafariViewController") != Nil) {
+        if ([url.scheme hasPrefix:@"http"]) {
+            SFSafariViewController *safari = [[SFSafariViewController alloc] initWithURL:url];
+            [self presentViewController:safari animated:YES completion:nil];
+            
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        
+    } else {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end

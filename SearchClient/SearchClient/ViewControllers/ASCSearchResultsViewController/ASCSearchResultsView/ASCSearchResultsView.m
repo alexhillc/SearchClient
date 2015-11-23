@@ -54,7 +54,7 @@
         
         // searchTableView constraints
         self.searchTableViewConstraintTop = [self.searchTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
-                                                                    ofSibling:self.searchTextField constant:5.];
+                                                                    ofSibling:self.searchTextField constant:0.5];
         self.searchTableViewConstraintHeight = [self.searchTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:0.];
         self.searchTableViewConstraintWidth = [self.searchTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth];
         self.searchTableViewConstraintCenter = [self.searchTableView asc_centerHorizontallyInParent];
@@ -66,8 +66,8 @@
         [self.shadowSearchTableView asc_pinEdge:NSLayoutAttributeBottom toEdge:NSLayoutAttributeBottom ofSibling:self.searchTableView constant:0];
         
         // searchResultsTableView constraints
-        self.searchResultsTableViewConstraintTop = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop
-                                                                                   constant:ASCViewTextFieldExpandedOffsetY + ASCViewTextFieldHeight + 5.];
+        self.searchResultsTableViewConstraintTop = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
+                                                                                  ofSibling:self.searchTextField constant:7.];
         self.searchResultsTableViewConstraintBottom = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeBottom toParentEdge:NSLayoutAttributeBottom
                                                                                       constant:-5.];
         self.searchResultsTableViewConstraintWidth = [self.searchResultsTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];

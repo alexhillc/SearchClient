@@ -9,16 +9,13 @@
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
 #import "ASCTableViewSearchResultCell.h"
 #import "ASCSearchResultsViewModel.h"
-#import "TTTAttributedLabel.h"
 #import "ASCSearchResultsViewController.h"
 
-#import <SafariServices/SafariServices.h>
 
 @implementation ASCSearchResultsTableViewDelegateAndDatasource
 
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     ASCTableViewSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewSearchResultCellIdentifier];
     if (!cell) {
         cell = [[ASCTableViewSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchResultCellIdentifier];
@@ -39,7 +36,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5.;
+    return 7.;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -50,27 +47,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 88.;
+    ASCTableViewSearchResultCell *cell = [[ASCTableViewSearchResultCell alloc] init];
+    cell.cellModel = [self.vc.searchResultsViewModel.resultsData objectAtIndex:indexPath.section];
+    CGFloat cellWidth = tableView.frame.size.width;
+    
+    return [cell intrinsicHeightForWidth:cellWidth];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
-}
-
-#pragma mark - TTTAttributedLabelDelegate
-- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
-    if (NSClassFromString(@"SFSafariViewController") != Nil) {
-        if ([url.scheme hasPrefix:@"http"]) {
-            SFSafariViewController *safari = [[SFSafariViewController alloc] initWithURL:url];
-            [self.vc presentViewController:safari animated:YES completion:nil];
-            
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
-        
-    } else {
-        [[UIApplication sharedApplication] openURL:url];
-    }
 }
 
 @end

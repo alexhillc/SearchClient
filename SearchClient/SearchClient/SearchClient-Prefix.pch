@@ -17,5 +17,6 @@
 #endif
 
 #import "UIView+NSLayoutConstraint.h"
+#import "NSMutableAttributedString+Replacement.h"
 
 #endif /* SearchClient_Prefix_pch */

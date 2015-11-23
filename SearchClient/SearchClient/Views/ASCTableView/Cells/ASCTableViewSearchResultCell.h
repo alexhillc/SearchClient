@@ -16,6 +16,10 @@ extern NSString * const ASCTableViewSearchResultCellIdentifier;
 
 @property (strong) TTTAttributedLabel *titleLabel;
 @property (strong) UILabel *contentLabel;
+@property (strong) UILabel *urlLabel;
+@property (strong) UIView *dividerView;
 @property (nonatomic) ASCSearchResultModel *cellModel;
+
+- (CGFloat)intrinsicHeightForWidth:(CGFloat)width;
 
 @end

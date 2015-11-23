@@ -21,6 +21,7 @@
 		FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA310C6C1BF7BFDB00E386A5 /* ASCQueryModel.m */; };
 		FA310C881BF7EFF900E386A5 /* ASCSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA310C871BF7EFF900E386A5 /* ASCSearchResultModel.m */; };
 		FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA310C8A1BF8087500E386A5 /* ASCTableViewSearchResultCell.m */; };
+		FA400F4D1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m in Sources */ = {isa = PBXBuildFile; fileRef = FA400F4C1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m */; };
 		FA41DFCC1BFC236300DB57C0 /* ASCSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCB1BFC236300DB57C0 /* ASCSearchViewModel.m */; };
 		FA41DFD01BFC23EA00DB57C0 /* ASCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCF1BFC23EA00DB57C0 /* ASCViewModel.m */; };
 		FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */; };
@@ -77,6 +78,8 @@
 		FA310C871BF7EFF900E386A5 /* ASCSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultModel.m; path = Models/ASCSearchResultModel/ASCSearchResultModel.m; sourceTree = "<group>"; };
 		FA310C891BF8087500E386A5 /* ASCTableViewSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTableViewSearchResultCell.h; path = Views/ASCTableView/Cells/ASCTableViewSearchResultCell.h; sourceTree = "<group>"; };
 		FA310C8A1BF8087500E386A5 /* ASCTableViewSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTableViewSearchResultCell.m; path = Views/ASCTableView/Cells/ASCTableViewSearchResultCell.m; sourceTree = "<group>"; };
+		FA400F4B1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableAttributedString+Replacement.h"; path = "Utilities/Categories/NSMutableAttributedString+Replacement.h"; sourceTree = "<group>"; };
+		FA400F4C1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableAttributedString+Replacement.m"; path = "Utilities/Categories/NSMutableAttributedString+Replacement.m"; sourceTree = "<group>"; };
 		FA41DFCA1BFC236300DB57C0 /* ASCSearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchViewModel.h; path = ViewModels/ASCSearchViewModel/ASCSearchViewModel.h; sourceTree = "<group>"; };
 		FA41DFCB1BFC236300DB57C0 /* ASCSearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchViewModel.m; path = ViewModels/ASCSearchViewModel/ASCSearchViewModel.m; sourceTree = "<group>"; };
 		FA41DFCE1BFC23EA00DB57C0 /* ASCViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCViewModel.h; path = ViewModels/ASCViewModel/ASCViewModel.h; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 			children = (
 				FA4B2AA51BF1831100B78CF7 /* UIView+NSLayoutConstraint.h */,
 				FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */,
+				FA400F4B1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.h */,
+				FA400F4C1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */,
 				FA1944B31BF2E317000A4712 /* ASCTableView.m in Sources */,
 				FA1944B61BF2E324000A4712 /* ASCTableViewSearchCell.m in Sources */,
+				FA400F4D1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m in Sources */,
 				FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */,
 				FA22A4C21BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m in Sources */,
 				FA1944AD1BF2E2CD000A4712 /* ASCSearchViewController.m in Sources */,
