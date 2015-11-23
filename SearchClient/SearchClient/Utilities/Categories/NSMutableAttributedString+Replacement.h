@@ -10,6 +10,7 @@
 
 @interface NSMutableAttributedString (Replacement)
 
-- (void)replaceOccurancesOfHtmlTag:(NSString*)tagName withAttributes:(NSDictionary*)attributes;
+- (void)replaceOccurancesOfHtmlTag:(NSString*)tag withAttributes:(NSDictionary*)attributes;
+- (void)replaceHtmlSymbols;
 
 @end

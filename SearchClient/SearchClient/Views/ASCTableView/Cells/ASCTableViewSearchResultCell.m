@@ -99,20 +99,21 @@ CGFloat const contentPadding = 10.;
     
     [self parseCellAttributes];
     
-    self.titleLabel.text = cellModel.titleNoFormatting;
-    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, cellModel.titleNoFormatting.length)];
+    self.titleLabel.attributedText = self.titleLabelText;
+    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.titleLabelText.length)];
     self.contentLabel.attributedText = self.contentLabelText;
     self.urlLabel.text = [self.cellModel.url absoluteString];
 }
 
 - (void)parseCellAttributes {
+    self.titleLabelText = [[NSMutableAttributedString alloc] initWithString:self.cellModel.titleNoFormatting];
+    [self.titleLabelText replaceHtmlSymbols];
+    
+    self.contentLabelText = [[NSMutableAttributedString alloc] initWithString:self.cellModel.content];
+    [self.contentLabelText replaceHtmlSymbols];
+    
     NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTFontAttributeName, nil];
     NSArray *objects = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:12.], nil];
-
-    self.contentLabelText = [[NSMutableAttributedString alloc] initWithString:self.cellModel.content];
-    [self.contentLabelText.mutableString replaceOccurrencesOfString:@"&amp;" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.contentLabelText.string.length)];
-    [self.contentLabelText.mutableString replaceOccurrencesOfString:@"&#39;" withString:@"'" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.contentLabelText.string.length)];
-    [self.contentLabelText.mutableString replaceOccurrencesOfString:@"\n" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.contentLabelText.string.length)];
     [self.contentLabelText replaceOccurancesOfHtmlTag:@"b" withAttributes:[[NSDictionary alloc] initWithObjects:objects forKeys:keys]];
 }
 

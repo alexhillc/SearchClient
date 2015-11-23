@@ -10,12 +10,12 @@
 
 @implementation NSMutableAttributedString (Replacement)
 
-- (void)replaceOccurancesOfHtmlTag:(NSString*)tagName withAttributes:(NSDictionary*)attributes {
-    NSString *openTag = [NSString stringWithFormat:@"<%@>", tagName];
-    NSString *closeTag = [NSString stringWithFormat:@"</%@>", tagName];
+- (void)replaceOccurancesOfHtmlTag:(NSString*)tag withAttributes:(NSDictionary*)attributes {
+    NSString *openTag = [NSString stringWithFormat:@"<%@>", tag];
+    NSString *closeTag = [NSString stringWithFormat:@"</%@>", tag];
     
     while (YES)   {
-        NSString *plainString = [self string];
+        NSString *plainString = self.string;
         NSRange openTagRange = [plainString rangeOfString:openTag];
         if (openTagRange.length == 0) {
             break;
@@ -36,5 +36,11 @@
     }    
 }
 
+- (void)replaceHtmlSymbols {
+    [self.mutableString replaceOccurrencesOfString:@"&amp;" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.string.length)];
+    [self.mutableString replaceOccurrencesOfString:@"&#39;" withString:@"'" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.string.length)];
+    [self.mutableString replaceOccurrencesOfString:@"&quot;" withString:@"\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.string.length)];
+    [self.mutableString replaceOccurrencesOfString:@"\n" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.string.length)];
+}
 
 @end

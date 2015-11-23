@@ -47,11 +47,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ASCTableViewSearchResultCell *cell = [[ASCTableViewSearchResultCell alloc] init];
+    ASCTableViewSearchResultCell *cell = (ASCTableViewSearchResultCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     cell.cellModel = [self.vc.searchResultsViewModel.resultsData objectAtIndex:indexPath.section];
-    CGFloat cellWidth = tableView.frame.size.width;
     
-    return [cell intrinsicHeightForWidth:cellWidth];
+    return [cell intrinsicHeightForWidth:tableView.frame.size.width];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
