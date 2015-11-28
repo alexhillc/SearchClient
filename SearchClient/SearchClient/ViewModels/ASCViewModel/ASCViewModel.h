@@ -20,6 +20,7 @@
 
 @interface ASCViewModel : NSObject
 
+@property (nonatomic, strong) NSArray *data;
 @property (nonatomic, weak) id<ASCViewModelDelegate> delegate;
 
 @end

@@ -11,8 +11,7 @@
 @implementation ASCSearchViewModel
 
 - (void)loadSearchHistory {
-    self.searchHistoryData = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five",
-                              @"Six", @"Seven", @"Eight", @"Nine", @"Ten", nil];
+    self.data = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", nil];
     
     if ([self.delegate respondsToSelector:@selector(viewModelDidReceiveNewDataSet:)]) {
         [self.delegate viewModelDidReceiveNewDataSet:self];

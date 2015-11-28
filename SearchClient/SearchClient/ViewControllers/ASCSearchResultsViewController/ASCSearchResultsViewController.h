@@ -9,14 +9,12 @@
 #import "ASCViewController.h"
 #import "TTTAttributedLabel.h"
 
-@class ASCSearchResultsViewModel, ASCSearchViewModel, ASCSearchTableViewDelegateAndDatasource, ASCSearchResultsTableViewDelegateAndDatasource;
+@class ASCSearchResultsViewModel, ASCSearchTableViewDelegateAndDatasource, ASCSearchResultsTableViewDelegateAndDatasource;
 
 @interface ASCSearchResultsViewController : ASCViewController <TTTAttributedLabelDelegate>
 
-@property (nonatomic, strong) ASCSearchViewModel *searchViewModel;
 @property (nonatomic, strong) ASCSearchResultsViewModel *searchResultsViewModel;
 @property (nonatomic) ASCSearchResultsTableViewDelegateAndDatasource *searchResultsTableViewDD;
-@property (nonatomic) ASCSearchTableViewDelegateAndDatasource *searchTableViewDD;
 
 - (void)presentResultsForQuery:(NSString *)query;
 

@@ -22,7 +22,7 @@
     }
     
     cell.titleLabel.delegate = self.vc;
-    cell.cellModel = [self.vc.searchResultsViewModel.resultsData objectAtIndex:indexPath.section];
+    cell.cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
     
     return cell;
 }
@@ -32,7 +32,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.vc.searchResultsViewModel.resultsData.count;
+    return self.vc.searchResultsViewModel.data.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -48,7 +48,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ASCTableViewSearchResultCell *cell = (ASCTableViewSearchResultCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    cell.cellModel = [self.vc.searchResultsViewModel.resultsData objectAtIndex:indexPath.section];
     
     return [cell intrinsicHeightForWidth:tableView.frame.size.width];
 }

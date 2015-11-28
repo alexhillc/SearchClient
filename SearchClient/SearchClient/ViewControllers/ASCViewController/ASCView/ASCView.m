@@ -8,14 +8,14 @@
 
 #import "ASCView.h"
 
-#define ASCViewBackgroundColor [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
+#define ASCViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0]
 
 CGFloat const ASCViewTextFieldHeight = 40.0;
 CGFloat const ASCViewTableViewExpandedOffsetY = 69.0;
 CGFloat const ASCViewTextFieldExpandedOffsetY = 24.0;
 CGFloat const ASCViewTextFieldContractedMultiplierOffsetY = 0.48;
 CGFloat const ASCViewTextFieldContractedMultiplierWidth = 0.75;
-CGFloat const ASCViewTextFieldExpandedMultiplierWidth = 0.95;
+CGFloat const ASCViewTextFieldExpandedMultiplierWidth = 0.97;
 NSTimeInterval const ASCViewAnimationDuration = 0.25;
 
 @implementation ASCView
@@ -33,14 +33,10 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
     
     self.backgroundColor = ASCViewBackgroundColor;
     
-    self.searchTextField = [[ASCTextField alloc] init];
-    self.searchTextField.horizontalPadding = 10.0;
-    self.searchTextField.cancelButtonColor = [UIColor darkGrayColor];
-    self.searchTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.searchTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.searchBar = [[ASCSearchBar alloc] init];
+    self.searchBar.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addSubview:self.searchTextField];
+    [self addSubview:self.searchBar];
     
     self.searchTableView = [[ASCTableView alloc] init];
     self.searchTableView.hidden = YES;

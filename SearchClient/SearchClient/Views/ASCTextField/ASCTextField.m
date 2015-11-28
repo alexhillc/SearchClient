@@ -39,12 +39,6 @@
     self.rightView = self.cancelButton;
     self.font = [UIFont systemFontOfSize:13.0];
     
-    self.layer.cornerRadius = 1.5;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.layer.shadowRadius = 1.;
-    self.layer.shadowOpacity = 0.08;
-    
     self.isFirstLayout = YES;
 }
 
@@ -71,8 +65,9 @@
 
 #pragma mark - Button actions
 - (void)cancelButtonPressed:(UIButton *)button {
-    self.text = @"";
-    [self endEditing:YES];
+    if ([self.ascDelegate respondsToSelector:@selector(textFieldDidCancel:)]) {
+        [self.ascDelegate textFieldDidCancel:self];
+    }
 }
 
 @end

@@ -54,7 +54,7 @@ CGFloat const contentPadding = 10.;
     
     [self addSubview:self.urlLabel];
     
-    self.dividerView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.dividerView = [[UIView alloc] init];
     self.dividerView.backgroundColor = [UIColor colorWithRed:241./255. green:241./255. blue:241./255. alpha:1];
     
     [self addSubview:self.dividerView];

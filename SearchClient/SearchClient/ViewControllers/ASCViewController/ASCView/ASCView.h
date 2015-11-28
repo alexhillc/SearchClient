@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASCTableView.h"
-#import "ASCTextField.h"
+#import "ASCSearchBar.h"
 
 extern CGFloat const ASCViewTextFieldHeight;
 extern CGFloat const ASCViewTableViewExpandedOffsetY;
@@ -20,10 +20,10 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 
 @interface ASCView : UIView
 
-@property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintTop;
-@property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintHeight;
-@property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintWidth;
-@property (nonatomic, weak) NSLayoutConstraint *searchTextFieldConstraintCenter;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintTop;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintHeight;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintWidth;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintCenter;
 @property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintTop;
 @property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintHeight;
 @property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintWidth;
@@ -31,7 +31,7 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 
 @property (nonatomic, assign) BOOL isFirstLayout;
 
-@property ASCTextField *searchTextField;
+@property ASCSearchBar *searchBar;
 @property ASCTableView *searchTableView;
 @property UIView *shadowSearchTableView;
 

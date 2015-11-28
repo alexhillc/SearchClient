@@ -29,7 +29,7 @@
 }
 
 - (void)loaderDidFinishLoadWithSuccess:(ASCLoader *)loader {
-    self.resultsData = (NSArray *)loader.parsedResult;
+    self.data = (NSArray *)loader.parsedResult;
     
     if ([self.delegate respondsToSelector:@selector(viewModelDidReceiveNewDataSet:)]) {
         [self.delegate viewModelDidReceiveNewDataSet:self];

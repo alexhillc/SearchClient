@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, ASCQueryType) {
 
 @property (nonatomic, copy) NSString *query;
 @property (nonatomic) ASCQueryType queryType;
-@property (nonatomic, strong) NSArray *resultsData;
 
 - (void)loadResultsWithQueryType:(ASCQueryType)queryType;
 

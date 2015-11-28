@@ -21,6 +21,7 @@
 - (void)setup {
     self.backgroundColor = [UIColor whiteColor];
     self.separatorColor = [UIColor lightGrayColor];
+    self.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
 }
 
 @end

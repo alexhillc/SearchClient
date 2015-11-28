@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASCSearchViewModel.h"
+#import "ASCSearchTableViewDelegateAndDatasource.h"
+#import "ASCTextField.h"
 
-@class ASCViewModel;
+@class ASCSearchTableViewDelegateAndDatasource, ASCView;
 
-@interface ASCViewController : UIViewController
+@interface ASCViewController : UIViewController <ASCViewModelDelegate, ASCTextFieldDelegate>
 
-- (CGFloat)offsetForStatusAndNavigationBar;
+@property (nonatomic, strong) ASCSearchViewModel *searchViewModel;
+@property (nonatomic) ASCSearchTableViewDelegateAndDatasource *searchTableViewDD;
 
 @end

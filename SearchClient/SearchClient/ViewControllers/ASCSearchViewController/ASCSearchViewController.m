@@ -8,43 +8,20 @@
 
 #import "ASCSearchViewController.h"
 #import "ASCSearchResultsViewController.h"
-#import "ASCSearchView.h"
-#import "ASCTextField.h"
-#import "ASCSearchTableViewDelegateAndDatasource.h"
-
 #import "ASCSearchResultsViewModel.h"
-#import "ASCSearchViewModel.h"
+#import "ASCSearchView.h"
 
-#import "ASCTableViewSearchCell.h"
+@interface ASCSearchViewController ()
 
-@interface ASCSearchViewController () <UITextFieldDelegate, ASCViewModelDelegate>
+@property (nonatomic, weak) ASCSearchView *searchView;
 
 @end
 
 @implementation ASCSearchViewController
 
-- (void)loadView {
-    [super loadView];
-    
+- (void)loadView {    
     self.view = [[ASCSearchView alloc] init];
     self.searchView = (ASCSearchView *)self.view;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.searchTableViewDD = [[ASCSearchTableViewDelegateAndDatasource alloc] init];
-    self.searchTableViewDD.vc = self;
-    
-    self.searchView.searchTableView.delegate = self.searchTableViewDD;
-    self.searchView.searchTableView.dataSource = self.searchTableViewDD;
-    [self.searchView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
-    
-    self.searchView.searchTextField.delegate = self;
-    
-    self.searchViewModel.delegate = self;
-    
-    [self.searchViewModel loadSearchHistory];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,6 +48,11 @@
     [self presentViewControllerWithQuery:textField.text];
     
     return YES;
+}
+
+- (void)textFieldDidCancel:(ASCTextField *)textField {
+    textField.text = @"";
+    [textField endEditing:YES];
 }
 
 #pragma mark - ASCViewModelDelegate
@@ -117,7 +99,7 @@
     searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
     searchResultsViewController.searchViewModel = searchViewModel;
     
-    self.searchView.searchTextField.text = query;
+    self.searchView.searchBar.textField.text = query;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 

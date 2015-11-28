@@ -10,8 +10,16 @@
 
 @class ASCTextField;
 
+@protocol ASCTextFieldDelegate <UITextFieldDelegate>
+
+@optional
+- (void)textFieldDidCancel:(ASCTextField *)textField;
+
+@end
+
 @interface ASCTextField : UITextField
 
+@property (nonatomic, weak) id<ASCTextFieldDelegate> ascDelegate;
 @property (nonatomic, assign) float verticalPadding;
 @property (nonatomic, assign) float horizontalPadding;
 @property (nonatomic) UIColor *cancelButtonColor;

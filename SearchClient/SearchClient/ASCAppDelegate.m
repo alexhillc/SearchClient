@@ -10,17 +10,13 @@
 #import "ASCSearchViewController.h"
 #import "ASCSearchViewModel.h"
 
-@interface ASCAppDelegate ()
-
-@end
-
 @implementation ASCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ASCSearchViewModel *vm = [[ASCSearchViewModel alloc] init];
     ASCSearchViewController *searchViewController = [[ASCSearchViewController alloc] init];
+    ASCSearchViewModel *vm = [[ASCSearchViewModel alloc] init];
     searchViewController.searchViewModel = vm;
     self.window.rootViewController = searchViewController;
     [self.window makeKeyAndVisible];

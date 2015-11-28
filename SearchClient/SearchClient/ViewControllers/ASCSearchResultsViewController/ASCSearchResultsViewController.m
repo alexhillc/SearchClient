@@ -9,23 +9,22 @@
 #import "ASCSearchResultsViewController.h"
 #import "ASCSearchResultsView.h"
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
-#import "ASCSearchTableViewDelegateAndDatasource.h"
 #import "ASCSearchResultsViewModel.h"
+#import "ASCTextField.h"
 #import "ASCTableViewSearchResultCell.h"
+#import "ASCTableViewSearchCell.h"
 #import "TTTAttributedLabel.h"
 #import <SafariServices/SafariServices.h>
 
-@interface ASCSearchResultsViewController () <UITextFieldDelegate, ASCViewModelDelegate, TTTAttributedLabelDelegate>
+@interface ASCSearchResultsViewController () <TTTAttributedLabelDelegate>
 
-@property (weak) ASCSearchResultsView *searchResultsView;
+@property (nonatomic, weak) ASCSearchResultsView *searchResultsView;
 
 @end
 
 @implementation ASCSearchResultsViewController
 
-- (void)loadView {
-    [super loadView];
-    
+- (void)loadView {    
     self.view = [[ASCSearchResultsView alloc] init];
     self.searchResultsView = (ASCSearchResultsView *)self.view;
 }
@@ -33,27 +32,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.searchTableViewDD = [[ASCSearchTableViewDelegateAndDatasource alloc] init];
-    self.searchTableViewDD.vc = self;
-    self.searchResultsView.searchTableView.delegate = self.searchTableViewDD;
-    self.searchResultsView.searchTableView.dataSource = self.searchTableViewDD;
-    self.searchResultsView.searchTextField.delegate = self;
-    
     self.searchResultsTableViewDD = [[ASCSearchResultsTableViewDelegateAndDatasource alloc] init];
     self.searchResultsTableViewDD.vc = self;
     self.searchResultsView.searchResultsTableView.delegate = self.searchResultsTableViewDD;
     self.searchResultsView.searchResultsTableView.dataSource = self.searchResultsTableViewDD;
-    
-    self.searchViewModel.delegate = self;
+
     self.searchResultsViewModel.delegate = self;
     
     [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewSearchResultCell class] forCellReuseIdentifier:ASCTableViewSearchResultCellIdentifier];
     
     [self.searchResultsView startLoadingAnimation];
     [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
-    self.searchResultsView.searchTextField.text = self.searchResultsViewModel.query;
-    
-    [self.searchViewModel loadSearchHistory];
+    self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +66,7 @@
 - (void)presentResultsForQuery:(NSString *)query {
     [self.searchResultsView startLoadingAnimation];
     self.searchResultsViewModel.query = query;
-    self.searchResultsView.searchTextField.text = self.searchResultsViewModel.query;
+    self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
     
     [self.searchResultsView contract];
     [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
@@ -87,6 +77,10 @@
     [self presentResultsForQuery:textField.text];
     
     return YES;
+}
+
+- (void)textFieldDidCancel:(ASCTextField *)textField {
+    [textField endEditing:YES];
 }
 
 #pragma mark - ASCViewModelDelegate

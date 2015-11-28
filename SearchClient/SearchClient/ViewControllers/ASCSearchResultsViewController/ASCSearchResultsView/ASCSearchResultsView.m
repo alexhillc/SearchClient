@@ -36,7 +36,8 @@
     self.loadingSpinner.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:self.loadingSpinner];
-    
+
+    [self bringSubviewToFront:self.searchBar];
     [self bringSubviewToFront:self.shadowSearchTableView];
     [self bringSubviewToFront:self.searchTableView];
 }
@@ -45,16 +46,17 @@
     [super layoutSubviews];
     
     if (self.isFirstLayout) {
-        // searchTextField constraints
-        self.searchTextFieldConstraintTop = [self.searchTextField asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop
+        // searchBar constraints
+        self.searchBarConstraintTop = [self.searchBar asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop
                                                                      constant:ASCViewTextFieldExpandedOffsetY];
-        self.searchTextFieldConstraintHeight = [self.searchTextField asc_setAttribute:NSLayoutAttributeHeight toConstant:ASCViewTextFieldHeight];
-        self.searchTextFieldConstraintWidth = [self.searchTextField asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
-        self.searchTextFieldConstraintCenter = [self.searchTextField asc_centerHorizontallyInParent];
+        self.searchBarConstraintHeight = [self.searchBar asc_setAttribute:NSLayoutAttributeHeight toConstant:self.searchBar.intrinsicContentSize.height];
+        self.searchBarConstraintWidth = [self.searchBar asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
+        self.searchBarConstraintCenter = [self.searchBar asc_centerHorizontallyInParent];
         
         // searchTableView constraints
         self.searchTableViewConstraintTop = [self.searchTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
-                                                                    ofSibling:self.searchTextField constant:0.5];
+                                                                    ofSibling:self.searchBar constant:1.];
+
         self.searchTableViewConstraintHeight = [self.searchTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:0.];
         self.searchTableViewConstraintWidth = [self.searchTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth];
         self.searchTableViewConstraintCenter = [self.searchTableView asc_centerHorizontallyInParent];
@@ -67,7 +69,7 @@
         
         // searchResultsTableView constraints
         self.searchResultsTableViewConstraintTop = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
-                                                                                  ofSibling:self.searchTextField constant:7.];
+                                                                                  ofSibling:self.searchBar constant:7.];
         self.searchResultsTableViewConstraintBottom = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeBottom toParentEdge:NSLayoutAttributeBottom
                                                                                       constant:-5.];
         self.searchResultsTableViewConstraintWidth = [self.searchResultsTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
@@ -83,16 +85,24 @@
 - (void)expandToKeyboardHeight:(CGFloat)keyboardHeight {
     [self layoutIfNeeded];
     
-    self.searchTableViewConstraintHeight.constant = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 10.0;
+    CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 5.;
+    if (availableSpace > self.searchTableView.contentSize.height) {
+        self.searchTableViewConstraintHeight.constant = self.searchTableView.contentSize.height;
+    } else {
+        self.searchTableViewConstraintHeight.constant = availableSpace;
+    }
+    
+    self.searchTableViewConstraintTop.constant = -30.;
+    
     self.searchTableView.hidden = NO;
     self.shadowSearchTableView.hidden = NO;
     
     __weak ASCSearchResultsView *weakSelf = self;
     
-    [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
-        weakSelf.searchResultsTableView.alpha = 0.5;
+    [UIView animateWithDuration:ASCViewAnimationDuration delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:1 options:0 animations:^{
+        weakSelf.searchResultsTableView.alpha = 0.25;
         [weakSelf layoutIfNeeded];
-    }];
+    } completion:nil];
 }
 
 - (void)contract {
@@ -109,13 +119,14 @@
     } completion:^(BOOL finished) {
         weakSelf.searchTableView.hidden = YES;
         weakSelf.shadowSearchTableView.hidden = YES;
+        weakSelf.searchTableViewConstraintTop.constant = 1.;
     }];
 }
 
 - (void)updateConstraints {
     [super updateConstraints];
     
-    self.searchTextFieldConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
+    self.searchBarConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
     self.searchTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
     self.searchResultsTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
 }

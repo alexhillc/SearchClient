@@ -15,7 +15,6 @@
 		FA1944B01BF2E2F4000A4712 /* ASCSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944AF1BF2E2F4000A4712 /* ASCSearchView.m */; };
 		FA1944B31BF2E317000A4712 /* ASCTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944B21BF2E317000A4712 /* ASCTableView.m */; };
 		FA1944B61BF2E324000A4712 /* ASCTableViewSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944B51BF2E324000A4712 /* ASCTableViewSearchCell.m */; };
-		FA1944B91BF2E332000A4712 /* ASCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1944B81BF2E332000A4712 /* ASCTextField.m */; };
 		FA22A4C21BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22A4C11BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m */; };
 		FA22A4C51BFC1FCB003D05A7 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22A4C41BFC1FCB003D05A7 /* ASCSearchResultsTableViewDelegateAndDatasource.m */; };
 		FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA310C6C1BF7BFDB00E386A5 /* ASCQueryModel.m */; };
@@ -25,12 +24,17 @@
 		FA41DFCC1BFC236300DB57C0 /* ASCSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCB1BFC236300DB57C0 /* ASCSearchViewModel.m */; };
 		FA41DFD01BFC23EA00DB57C0 /* ASCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41DFCF1BFC23EA00DB57C0 /* ASCViewModel.m */; };
 		FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */; };
+		FA638F451C08F9D200BDD439 /* ASCCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA638F441C08F9D200BDD439 /* ASCCollectionView.m */; };
+		FA638F491C08F9EE00BDD439 /* ASCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA638F481C08F9EE00BDD439 /* ASCCollectionViewCell.m */; };
+		FA638F501C09015100BDD439 /* UIColor+Google.m in Sources */ = {isa = PBXBuildFile; fileRef = FA638F4F1C09015100BDD439 /* UIColor+Google.m */; };
 		FA731FB31C011B2600B07E92 /* ASCView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA731FB21C011B2600B07E92 /* ASCView.m */; };
 		FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
 		FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */; };
 		FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */; };
 		FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */; };
+		FAD5C2261C068C900061E13E /* ASCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2251C068C900061E13E /* ASCTextField.m */; };
+		FAD5C22A1C068D880061E13E /* ASCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2291C068D880061E13E /* ASCSearchBar.m */; };
 		FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */; };
 		FAF6C1591BD41DEF00F966A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C1581BD41DEF00F966A1 /* main.m */; };
 		FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C15B1BD41DEF00F966A1 /* ASCAppDelegate.m */; };
@@ -67,8 +71,6 @@
 		FA1944B21BF2E317000A4712 /* ASCTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTableView.m; path = Views/ASCTableView/ASCTableView.m; sourceTree = "<group>"; };
 		FA1944B41BF2E324000A4712 /* ASCTableViewSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTableViewSearchCell.h; path = Views/ASCTableView/Cells/ASCTableViewSearchCell.h; sourceTree = "<group>"; };
 		FA1944B51BF2E324000A4712 /* ASCTableViewSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTableViewSearchCell.m; path = Views/ASCTableView/Cells/ASCTableViewSearchCell.m; sourceTree = "<group>"; };
-		FA1944B71BF2E332000A4712 /* ASCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTextField.h; path = Views/ASCTextField/ASCTextField.h; sourceTree = "<group>"; };
-		FA1944B81BF2E332000A4712 /* ASCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTextField.m; path = Views/ASCTextField/ASCTextField.m; sourceTree = "<group>"; };
 		FA22A4C01BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchTableViewDelegateAndDatasource.h; path = ViewControllers/ASCSearchViewController/ASCSearchTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
 		FA22A4C11BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchTableViewDelegateAndDatasource.m; path = ViewControllers/ASCSearchViewController/ASCSearchTableViewDelegateAndDatasource.m; sourceTree = "<group>"; };
 		FA22A4C31BFC1FCB003D05A7 /* ASCSearchResultsTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsTableViewDelegateAndDatasource.h; path = ViewControllers/ASCSearchViewController/ASCSearchResultsTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
@@ -87,6 +89,12 @@
 		FA4B2AA51BF1831100B78CF7 /* UIView+NSLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+NSLayoutConstraint.h"; path = "Utilities/Categories/UIView+NSLayoutConstraint.h"; sourceTree = "<group>"; };
 		FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+NSLayoutConstraint.m"; path = "Utilities/Categories/UIView+NSLayoutConstraint.m"; sourceTree = "<group>"; };
 		FA4B2AAA1BF185B700B78CF7 /* SearchClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SearchClient-Prefix.pch"; sourceTree = "<group>"; };
+		FA638F431C08F9D200BDD439 /* ASCCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCCollectionView.h; path = Views/ASCCollectionView/ASCCollectionView.h; sourceTree = "<group>"; };
+		FA638F441C08F9D200BDD439 /* ASCCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCCollectionView.m; path = Views/ASCCollectionView/ASCCollectionView.m; sourceTree = "<group>"; };
+		FA638F471C08F9EE00BDD439 /* ASCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCCollectionViewCell.h; path = Views/ASCCollectionView/Cells/ASCCollectionViewCell.h; sourceTree = "<group>"; };
+		FA638F481C08F9EE00BDD439 /* ASCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCCollectionViewCell.m; path = Views/ASCCollectionView/Cells/ASCCollectionViewCell.m; sourceTree = "<group>"; };
+		FA638F4E1C09015100BDD439 /* UIColor+Google.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Google.h"; path = "Utilities/Categories/UIColor+Google.h"; sourceTree = "<group>"; };
+		FA638F4F1C09015100BDD439 /* UIColor+Google.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Google.m"; path = "Utilities/Categories/UIColor+Google.m"; sourceTree = "<group>"; };
 		FA731FB11C011B2600B07E92 /* ASCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCView.h; path = ViewControllers/ASCViewController/ASCView/ASCView.h; sourceTree = "<group>"; };
 		FA731FB21C011B2600B07E92 /* ASCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCView.m; path = ViewControllers/ASCViewController/ASCView/ASCView.m; sourceTree = "<group>"; };
 		FA966CE31BF6B717006FC8DB /* ASCSearchLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchLoader.h; path = Utilities/ASCLoader/ASCImageSearchLoader/ASCSearchLoader.h; sourceTree = "<group>"; };
@@ -100,6 +108,10 @@
 		FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCImageSearchResultModel.m; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.m; sourceTree = "<group>"; };
 		FACE5ADE1C00047600B2C964 /* ASCSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewController.h; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsViewController.h; sourceTree = "<group>"; };
 		FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsViewController.m; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsViewController.m; sourceTree = "<group>"; };
+		FAD5C2241C068C900061E13E /* ASCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTextField.h; path = Views/ASCTextField/ASCTextField.h; sourceTree = "<group>"; };
+		FAD5C2251C068C900061E13E /* ASCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTextField.m; path = Views/ASCTextField/ASCTextField.m; sourceTree = "<group>"; };
+		FAD5C2281C068D880061E13E /* ASCSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchBar.h; path = Views/ASCSearchBar/ASCSearchBar.h; sourceTree = "<group>"; };
+		FAD5C2291C068D880061E13E /* ASCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchBar.m; path = Views/ASCSearchBar/ASCSearchBar.m; sourceTree = "<group>"; };
 		FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCDataStore.h; path = Utilities/DataStore/ASCDataStore.h; sourceTree = "<group>"; };
 		FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCDataStore.m; path = Utilities/DataStore/ASCDataStore.m; sourceTree = "<group>"; };
 		FAF6C1541BD41DEF00F966A1 /* SearchClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,8 +197,8 @@
 		FA1526EB1BD567B30077D5A2 /* ASCTextField */ = {
 			isa = PBXGroup;
 			children = (
-				FA1944B71BF2E332000A4712 /* ASCTextField.h */,
-				FA1944B81BF2E332000A4712 /* ASCTextField.m */,
+				FAD5C2241C068C900061E13E /* ASCTextField.h */,
+				FAD5C2251C068C900061E13E /* ASCTextField.m */,
 			);
 			name = ASCTextField;
 			sourceTree = "<group>";
@@ -194,7 +206,7 @@
 		FA1944A41BF2E267000A4712 /* ASCLoader */ = {
 			isa = PBXGroup;
 			children = (
-				FA966CE21BF6B6EC006FC8DB /* ASCImageSearchLoader */,
+				FA966CE21BF6B6EC006FC8DB /* ASCSearchLoader */,
 				FA1944A51BF2E279000A4712 /* ASCLoader.h */,
 				FA1944A61BF2E279000A4712 /* ASCLoader.m */,
 			);
@@ -267,8 +279,29 @@
 				FA4B2AA61BF1831100B78CF7 /* UIView+NSLayoutConstraint.m */,
 				FA400F4B1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.h */,
 				FA400F4C1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m */,
+				FA638F4E1C09015100BDD439 /* UIColor+Google.h */,
+				FA638F4F1C09015100BDD439 /* UIColor+Google.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		FA638F421C08F9BE00BDD439 /* ASCCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				FA638F431C08F9D200BDD439 /* ASCCollectionView.h */,
+				FA638F441C08F9D200BDD439 /* ASCCollectionView.m */,
+				FA638F461C08F9DA00BDD439 /* Cells */,
+			);
+			name = ASCCollectionView;
+			sourceTree = "<group>";
+		};
+		FA638F461C08F9DA00BDD439 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FA638F471C08F9EE00BDD439 /* ASCCollectionViewCell.h */,
+				FA638F481C08F9EE00BDD439 /* ASCCollectionViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		FA6F57801BE0647E00C959B2 /* ASCViewController */ = {
@@ -299,13 +332,13 @@
 			name = ASCView;
 			sourceTree = "<group>";
 		};
-		FA966CE21BF6B6EC006FC8DB /* ASCImageSearchLoader */ = {
+		FA966CE21BF6B6EC006FC8DB /* ASCSearchLoader */ = {
 			isa = PBXGroup;
 			children = (
 				FA966CE31BF6B717006FC8DB /* ASCSearchLoader.h */,
 				FA966CE41BF6B717006FC8DB /* ASCSearchLoader.m */,
 			);
-			name = ASCImageSearchLoader;
+			name = ASCSearchLoader;
 			sourceTree = "<group>";
 		};
 		FACBF8D61BFAA5F5000099B6 /* ASCWebSearchResultModel */ = {
@@ -334,6 +367,15 @@
 				FA0FEECD1C00F8C40046F849 /* ASCSearchResultsView */,
 			);
 			name = ASCSearchResultsViewController;
+			sourceTree = "<group>";
+		};
+		FAD5C2271C068D650061E13E /* ASCSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				FAD5C2281C068D880061E13E /* ASCSearchBar.h */,
+				FAD5C2291C068D880061E13E /* ASCSearchBar.m */,
+			);
+			name = ASCSearchBar;
 			sourceTree = "<group>";
 		};
 		FAE46EB91BDC2B5300B55E00 /* ASCTableView */ = {
@@ -433,6 +475,8 @@
 		FAF6C17D1BD41E2A00F966A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA638F421C08F9BE00BDD439 /* ASCCollectionView */,
+				FAD5C2271C068D650061E13E /* ASCSearchBar */,
 				FA1526EB1BD567B30077D5A2 /* ASCTextField */,
 				FAE46EB91BDC2B5300B55E00 /* ASCTableView */,
 			);
@@ -602,22 +646,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA638F451C08F9D200BDD439 /* ASCCollectionView.m in Sources */,
 				FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */,
 				FA1944A71BF2E279000A4712 /* ASCLoader.m in Sources */,
 				FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */,
 				FA41DFCC1BFC236300DB57C0 /* ASCSearchViewModel.m in Sources */,
 				FA41DFD01BFC23EA00DB57C0 /* ASCViewModel.m in Sources */,
+				FA638F491C08F9EE00BDD439 /* ASCCollectionViewCell.m in Sources */,
 				FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */,
 				FA1944B31BF2E317000A4712 /* ASCTableView.m in Sources */,
 				FA1944B61BF2E324000A4712 /* ASCTableViewSearchCell.m in Sources */,
+				FA638F501C09015100BDD439 /* UIColor+Google.m in Sources */,
 				FA400F4D1C02DD8E008873B8 /* NSMutableAttributedString+Replacement.m in Sources */,
+				FAD5C2261C068C900061E13E /* ASCTextField.m in Sources */,
 				FA966CE51BF6B717006FC8DB /* ASCSearchLoader.m in Sources */,
 				FA22A4C21BFC1E6A003D05A7 /* ASCSearchTableViewDelegateAndDatasource.m in Sources */,
 				FA1944AD1BF2E2CD000A4712 /* ASCSearchViewController.m in Sources */,
 				FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */,
+				FAD5C22A1C068D880061E13E /* ASCSearchBar.m in Sources */,
 				FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */,
 				FA310C881BF7EFF900E386A5 /* ASCSearchResultModel.m in Sources */,
-				FA1944B91BF2E332000A4712 /* ASCTextField.m in Sources */,
 				FA1944B01BF2E2F4000A4712 /* ASCSearchView.m in Sources */,
 				FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */,
 				FA731FB31C011B2600B07E92 /* ASCView.m in Sources */,
@@ -748,6 +796,7 @@
 			baseConfigurationReference = 8326D2F49571B16E25ABCB0F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SearchClient/SearchClient-Prefix.pch";
 				INFOPLIST_FILE = "SearchClient/SearchClient-Info.plist";
@@ -763,6 +812,7 @@
 			baseConfigurationReference = DF6E98A51038CD8D690B11E2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SearchClient/SearchClient-Prefix.pch";
 				INFOPLIST_FILE = "SearchClient/SearchClient-Info.plist";

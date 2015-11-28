@@ -18,5 +18,6 @@
 
 #import "UIView+NSLayoutConstraint.h"
 #import "NSMutableAttributedString+Replacement.h"
+#import "UIColor+Google.h"
 
 #endif /* SearchClient_Prefix_pch */

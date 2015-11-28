@@ -11,8 +11,6 @@
 
 @interface ASCSearchViewModel : ASCViewModel
 
-@property (nonatomic, strong) NSArray *searchHistoryData;
-
 - (void)loadSearchHistory;
 
 @end

@@ -22,27 +22,13 @@
         cell = [[ASCTableViewSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchCellIdentifier];
     }
     
-    if ([self.vc isKindOfClass:[ASCSearchViewController class]]) {
-        ASCSearchViewController *searchVc = (ASCSearchViewController *)self.vc;
-        cell.textLabel.text = [searchVc.searchViewModel.searchHistoryData objectAtIndex:indexPath.row];
-    } else if ([self.vc isKindOfClass:[ASCSearchResultsViewController class]]) {
-        ASCSearchResultsViewController *searchResultsVc = (ASCSearchResultsViewController *)self.vc;
-        cell.textLabel.text = [searchResultsVc.searchViewModel.searchHistoryData objectAtIndex:indexPath.row];
-    }
+    cell.textLabel.text = [self.vc.searchViewModel.data objectAtIndex:indexPath.row];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self.vc isKindOfClass:[ASCSearchViewController class]]) {
-        ASCSearchViewController *searchVc = (ASCSearchViewController *)self.vc;
-        return searchVc.searchViewModel.searchHistoryData.count;
-    } else if ([self.vc isKindOfClass:[ASCSearchResultsViewController class]]) {
-        ASCSearchResultsViewController *searchResultsVc = (ASCSearchResultsViewController *)self.vc;
-        return searchResultsVc.searchViewModel.searchHistoryData.count;
-    }
-    
-    return 1;
+    return self.vc.searchViewModel.data.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,10 +38,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.vc isKindOfClass:[ASCSearchViewController class]]) {
         ASCSearchViewController *searchVc = (ASCSearchViewController *)self.vc;
-        [searchVc presentViewControllerWithQuery:[searchVc.searchViewModel.searchHistoryData objectAtIndex:indexPath.row]];
+        [searchVc presentViewControllerWithQuery:[searchVc.searchViewModel.data objectAtIndex:indexPath.row]];
     } else if ([self.vc isKindOfClass:[ASCSearchResultsViewController class]]) {
         ASCSearchResultsViewController *searchResultsVc = (ASCSearchResultsViewController *)self.vc;
-        [searchResultsVc presentResultsForQuery:[searchResultsVc.searchViewModel.searchHistoryData objectAtIndex:indexPath.row]];
+        [searchResultsVc presentResultsForQuery:[searchResultsVc.searchViewModel.data objectAtIndex:indexPath.row]];
     }
 }
 
