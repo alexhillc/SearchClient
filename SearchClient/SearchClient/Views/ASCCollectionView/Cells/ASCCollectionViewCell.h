@@ -12,7 +12,7 @@ extern NSString * const ASCCollectionViewCellReuseIdentifier;
 
 @interface ASCCollectionViewCell : UICollectionViewCell
 
-@property (strong) UILabel *textLabel;
+@property UILabel *textLabel;
 
 - (CGFloat)intrinsicWidthForHeight:(CGFloat)height;
 

@@ -12,9 +12,9 @@
 
 @interface ASCSearchBar : UIView
 
-@property (strong) ASCTextField *textField;
-@property (strong) UIView *dividerView;
-@property (strong) ASCCollectionView *collectionView;
+@property ASCTextField *textField;
+@property UIView *dividerView;
+@property ASCCollectionView *collectionView;
 
 - (void)updateSliderPositionToOffset:(CGFloat)offset withSize:(CGSize)size;
 - (void)updateSliderPositionToOffset:(CGFloat)offset indexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
