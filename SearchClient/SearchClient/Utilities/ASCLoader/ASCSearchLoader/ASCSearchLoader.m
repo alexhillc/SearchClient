@@ -11,26 +11,30 @@
 
 @implementation ASCSearchLoader
 
++ (NSString *)baseSearchUrl {
+    return @"https://ajax.googleapis.com/ajax/services/search";
+}
+
 - (ASCLoaderType)type {
     return ASCLoaderTypeSearch;
 }
 
-- (NSString *)createRequest {
+- (void)createRequest {
     NSString *queryType = [self.requestParameters valueForKey:@"queryType"];
     NSString *queryString = [self.requestParameters valueForKey:@"queryString"];
     
     // Base string
-    self.request = [[[[ASCLoader baseSearchUrl] stringByAppendingString:@"/"] stringByAppendingString:queryType]
+    NSString *requestString = [[[[ASCSearchLoader baseSearchUrl] stringByAppendingString:@"/"] stringByAppendingString:queryType]
                     stringByAppendingString:@"?v=1.0"];
     
     // Build query
-    self.request = [[self.request stringByAppendingString:@"&q="]
+    requestString = [[requestString stringByAppendingString:@"&q="]
                     stringByAppendingString:[queryString stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
     
     // 8 results max
-    self.request = [self.request stringByAppendingString:@"&rsz=8"];
+    requestString = [requestString stringByAppendingString:@"&rsz=8"];
     
-    return self.request;
+    self.request = [NSURL URLWithString:requestString];
 }
 
 - (void)processResponse {

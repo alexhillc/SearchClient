@@ -39,7 +39,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     self.ascView.searchTableView.dataSource = self.searchTableViewDD;
     [self.ascView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
     
-    self.ascView.searchBar.textField.ascDelegate = self;
+    self.ascView.searchBar.textField.delegate = self;
     self.ascView.searchBar.delegate = self;
     self.ascView.searchBar.collectionView.delegate = self;
     self.ascView.searchBar.collectionView.dataSource = self;

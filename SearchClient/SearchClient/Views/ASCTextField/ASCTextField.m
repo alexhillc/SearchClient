@@ -18,6 +18,8 @@
 
 @implementation ASCTextField
 
+@dynamic delegate;
+
 - (instancetype)init {
     if (self = [super init]) {
         [self setup];
@@ -65,8 +67,8 @@
 
 #pragma mark - Button actions
 - (void)cancelButtonPressed:(UIButton *)button {
-    if ([self.ascDelegate respondsToSelector:@selector(textFieldDidCancel:)]) {
-        [self.ascDelegate textFieldDidCancel:self];
+    if ([self.delegate respondsToSelector:@selector(textFieldDidCancel:)]) {
+        [self.delegate textFieldDidCancel:self];
     }
 }
 

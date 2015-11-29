@@ -17,7 +17,7 @@
         self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
         self.content = [dic valueForKey:@"content"];
         self.url = [NSURL URLWithString:[dic valueForKey:@"url"]];
-        self.visibleUrl = [NSURL URLWithString:[dic valueForKey:@"visibleUrl"]];
+        self.visibleUrl = [NSURL URLWithString:[dic valueForKey:@"visibleUrl"]];        
     }
     
     return self;

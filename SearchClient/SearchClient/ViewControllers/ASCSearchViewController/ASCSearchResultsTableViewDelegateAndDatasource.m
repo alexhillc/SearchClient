@@ -64,9 +64,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ASCTableViewSearchResultCell *cell = (ASCTableViewSearchResultCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    CGFloat cachedCellHeight = [[self.vc.cachedResultsTableViewCellHeights objectForKey:
+                                [NSString stringWithFormat:ASCSearchResultsTableViewCachedCellHeightsStringFormat, indexPath]] floatValue];
+    if (!cachedCellHeight) {
+        ASCTableViewSearchResultCell *cell = (ASCTableViewSearchResultCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        cachedCellHeight = [cell intrinsicHeightForWidth:tableView.frame.size.width];
+        [self.vc.cachedResultsTableViewCellHeights setObject:@(cachedCellHeight)
+                                                      forKey:[NSString stringWithFormat:ASCSearchResultsTableViewCachedCellHeightsStringFormat,
+                                                              indexPath]];
+        
+    }
     
-    return [cell intrinsicHeightForWidth:tableView.frame.size.width];
+    return cachedCellHeight;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

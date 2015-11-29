@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
 
-@class ASCLoader, AFHTTPRequestOperation;
+@class ASCLoader;
 
 typedef NS_ENUM(NSInteger, ASCLoaderType) {
     ASCLoaderTypeDefault,
     ASCLoaderTypeSearch,
+    ASCLoaderTypeImage,
     ASCLoaderTypeLocalSearch
 };
 
@@ -30,20 +32,19 @@ typedef void (^ASCLoaderCompletion)(ASCLoader *loader, NSError *error);
 @property (nonatomic, weak) id<ASCLoaderDelegate> delegate;
 @property (nonatomic, copy) ASCLoaderCompletion completion;
 @property (nonatomic, copy) NSDictionary *requestParameters;
-@property (nonatomic, copy) NSString *request;
+@property (nonatomic, strong) NSURL *request;
 @property (nonatomic, strong) NSObject *responseObject;
 @property (nonatomic, strong) NSObject *parsedResult;
 @property (nonatomic, strong) AFHTTPRequestOperation *operation;
 @property (nonatomic, readonly) ASCLoaderType type;
 @property (nonatomic) NSInteger *timeout;
 
-+ (NSString *)baseSearchUrl;
-
 - (instancetype)initWithDelegate:(NSObject<ASCLoaderDelegate> *)delegate;
 - (instancetype)initWithCompletionBlock:(ASCLoaderCompletion)completion;
 
-- (NSString *)createRequest;
+- (void)createRequest;
 - (void)processResponse;
+- (void)prepareForLoad;
 - (void)startLoad;
 - (void)cancelLoad;
 

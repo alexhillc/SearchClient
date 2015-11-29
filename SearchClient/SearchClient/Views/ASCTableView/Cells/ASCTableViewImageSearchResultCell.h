@@ -7,9 +7,16 @@
 //
 
 #import "ASCTableViewSearchResultCell.h"
+#import "ASCImageSearchResultModel.h"
 
 extern NSString * const ASCTableViewImageSearchResultCellIdentifier;
 
+@class ASCAsyncImageView;
+
 @interface ASCTableViewImageSearchResultCell : ASCTableViewSearchResultCell
+
+@property (nonatomic) ASCImageSearchResultModel *cellModel;
+@property ASCAsyncImageView *asyncImageView;
+@property UILabel *imageTitleLabel;
 
 @end

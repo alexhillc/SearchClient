@@ -19,7 +19,7 @@
 
 @interface ASCTextField : UITextField
 
-@property (nonatomic, weak) id<ASCTextFieldDelegate> ascDelegate;
+@property (nonatomic, weak) id<ASCTextFieldDelegate> delegate;
 @property (nonatomic, assign) float verticalPadding;
 @property (nonatomic, assign) float horizontalPadding;
 @property (nonatomic) UIColor *cancelButtonColor;

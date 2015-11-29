@@ -10,4 +10,7 @@
 
 @interface ASCAsyncImageView : UIImageView
 
+@property (nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic) CGSize imageSize;
+
 @end

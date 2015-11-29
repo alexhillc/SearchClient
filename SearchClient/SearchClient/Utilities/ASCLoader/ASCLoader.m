@@ -7,11 +7,10 @@
 //
 
 #import "ASCLoader.h"
-#import "AFNetworking.h"
 
 @interface ASCLoader ()
 
-@property (nonatomic, strong) ASCLoader *strongSelf;
+@property (strong) ASCLoader *strongSelf;
     
 @end
 
@@ -37,19 +36,13 @@
     return self;
 }
 
-+ (NSString *)baseSearchUrl {
-    return @"https://ajax.googleapis.com/ajax/services/search";
-}
-
 - (ASCLoaderType)type {
     return ASCLoaderTypeDefault;
 }
 
-- (NSString *)createRequest {
+- (void)createRequest {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-    
-    return nil;
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];    
 }
 
 - (void)processResponse {
@@ -57,9 +50,9 @@
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
-- (void)startLoad {
+- (void)prepareForLoad {
     if (self.requestParameters) {
-        self.request = [self createRequest];
+        [self createRequest];
     }
     
     if (!self.strongSelf) {
@@ -68,27 +61,25 @@
     
     __weak ASCLoader *weakSelf = self;
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    self.operation = [manager GET:self.request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    self.operation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:self.request]];
+    self.operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         weakSelf.responseObject = responseObject;
         [weakSelf processResponse];
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if ([weakSelf.delegate respondsToSelector:@selector(loader:didFinishWithFailure:)]) {
             [weakSelf informDelegateLoadingFailed:error];
         }
     }];
 }
 
+- (void)startLoad {
+    [self prepareForLoad];
+    [self.operation start];
+}
+
 - (void)cancelLoad {
-    __weak ASCLoader *weakSelf = self;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.operationQueue.operations enumerateObjectsUsingBlock:^(__kindof NSOperation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isEqual:weakSelf.operation]) {
-            [obj cancel];
-        }
-    }];
+    [self.operation cancel];
     
     self.strongSelf = nil;
 }

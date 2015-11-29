@@ -1,13 +1,13 @@
 //
-//  ASCImageSearchLoader.h
+//  ASCImageLoader.h
 //  SearchClient
 //
-//  Created by Alex Hill on 11/13/15.
+//  Created by Alex Hill on 11/28/15.
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
 #import "ASCLoader.h"
 
-@interface ASCSearchLoader : ASCLoader
+@interface ASCImageLoader : ASCLoader
 
 @end

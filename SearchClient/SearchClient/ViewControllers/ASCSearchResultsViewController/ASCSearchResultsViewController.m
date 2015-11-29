@@ -18,6 +18,8 @@
 #import "TTTAttributedLabel.h"
 #import <SafariServices/SafariServices.h>
 
+NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cachedheight%@";
+
 @interface ASCSearchResultsViewController () <TTTAttributedLabelDelegate>
 
 @property (nonatomic, weak) ASCSearchResultsView *searchResultsView;
@@ -33,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.cachedResultsTableViewCellHeights = [[NSMutableDictionary alloc] init];
     
     self.searchResultsTableViewDD = [[ASCSearchResultsTableViewDelegateAndDatasource alloc] init];
     self.searchResultsTableViewDD.vc = self;
@@ -91,7 +95,9 @@
     if ([viewModel isKindOfClass:[ASCSearchViewModel class]]) {
         [self.searchResultsView.searchTableView reloadData];
     } else if ([viewModel isKindOfClass:[ASCSearchResultsViewModel class]]) {
+        [self.cachedResultsTableViewCellHeights removeAllObjects];
         [self.searchResultsView.searchResultsTableView reloadData];
+        [self.searchResultsView.searchResultsTableView setContentOffset:CGPointZero];
         [self.searchResultsView stopLoadingAnimation];
     }
 }

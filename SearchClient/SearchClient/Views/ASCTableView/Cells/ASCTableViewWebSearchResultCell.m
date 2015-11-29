@@ -12,6 +12,8 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
 
 @implementation ASCTableViewWebSearchResultCell
 
+@dynamic cellModel;
+
 - (void)setup {
     [super setup];
 
@@ -56,12 +58,11 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     self.urlLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height,
                                      self.frame.size.width - (2 * ASCTableViewCellContentPadding), 13.5);
     
-    self.dividerView.frame = CGRectMake(0, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + self.urlLabel.frame.size.height
-                                        + ASCTableViewCellContentPadding, self.frame.size.width, 1);
+    self.dividerView.frame = CGRectMake(0, self.urlLabel.frame.origin.y + self.urlLabel.frame.size.height + ASCTableViewCellContentPadding,
+                                        self.frame.size.width, 1);
     
-    self.contentLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height +
-                                         self.urlLabel.frame.size.height + self.dividerView.frame.size.height + (2 * ASCTableViewCellContentPadding),
-                                         self.frame.size.width - (2 * ASCTableViewCellContentPadding), 0);
+    self.contentLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.dividerView.frame.origin.y + self.dividerView.frame.size.height +
+                                         ASCTableViewCellContentPadding, self.frame.size.width - (2 * ASCTableViewCellContentPadding), 0);
     [self.contentLabel sizeToFit];
 }
 

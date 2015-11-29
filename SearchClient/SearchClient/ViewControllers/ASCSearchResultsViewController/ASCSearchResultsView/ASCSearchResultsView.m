@@ -71,7 +71,7 @@
         self.searchResultsTableViewConstraintTop = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
                                                                                   ofSibling:self.searchBar constant:7.];
         self.searchResultsTableViewConstraintBottom = [self.searchResultsTableView asc_pinEdge:NSLayoutAttributeBottom toParentEdge:NSLayoutAttributeBottom
-                                                                                      constant:-5.];
+                                                                                      constant:0.];
         self.searchResultsTableViewConstraintWidth = [self.searchResultsTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
         self.searchResultsTableViewConstraintCenter = [self.searchResultsTableView asc_centerHorizontallyInParent];
         
