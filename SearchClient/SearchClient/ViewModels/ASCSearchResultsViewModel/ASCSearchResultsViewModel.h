@@ -13,7 +13,7 @@
 
 typedef NS_ENUM(NSInteger, ASCQueryType) {
     ASCQueryTypeWeb,
-    ASCQueryypeImage
+    ASCQueryTypeImage
 };
 
 @interface ASCSearchResultsViewModel : ASCViewModel

@@ -14,7 +14,7 @@
 
 NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
 
-@interface ASCViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ASCViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ASCSearchBarDelegate>
 
 @property (nonatomic, weak) ASCView *ascView;
 @property (nonatomic, strong) NSMutableDictionary *cachedCollectionViewCellWidths;
@@ -40,6 +40,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     [self.ascView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
     
     self.ascView.searchBar.textField.ascDelegate = self;
+    self.ascView.searchBar.delegate = self;
     self.ascView.searchBar.collectionView.delegate = self;
     self.ascView.searchBar.collectionView.dataSource = self;
     [self.ascView.searchBar.collectionView registerClass:[ASCCollectionViewCell class] forCellWithReuseIdentifier:ASCCollectionViewCellReuseIdentifier];
@@ -50,9 +51,9 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     
     ASCCollectionViewCell *sliderSizingCell = [[ASCCollectionViewCell alloc] init];
     sliderSizingCell.textLabel.text = [self.searchOptions objectAtIndex:0];
-    
+
     CGFloat height = 30.;
-    CGFloat width = [sliderSizingCell intrinsicWidthForHeight:height];
+    CGFloat width = sliderSizingCell.intrinsicContentSize.width;
     [self.ascView.searchBar updateSliderPositionToOffset:0. withSize:CGSizeMake(width, height)];
 }
 
@@ -95,7 +96,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
         ASCCollectionViewCell *sizingCell = [[ASCCollectionViewCell alloc] init];
         sizingCell.textLabel.text = [self.searchOptions objectAtIndex:indexPath.row];
         
-        width = [sizingCell intrinsicWidthForHeight:collectionView.frame.size.height];
+        width = sizingCell.intrinsicContentSize.width;
         [self.cachedCollectionViewCellWidths setObject:@(width) forKey:[NSString stringWithFormat:ASCCollectionViewCachedWidthsStringFormat,
                                                                         (long)indexPath.row]];
         

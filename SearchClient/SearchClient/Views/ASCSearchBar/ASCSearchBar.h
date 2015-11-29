@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class ASCTextField, ASCCollectionView;
+@class ASCTextField, ASCCollectionView, ASCSearchBar;
+
+@protocol ASCSearchBarDelegate <NSObject>
+
+@optional
+- (void)searchBar:(ASCSearchBar *)searchBar didChangeToSearchOptionIndex:(NSInteger)idx;
+
+@end
 
 @interface ASCSearchBar : UIView
 
+@property (nonatomic, weak) id<ASCSearchBarDelegate> delegate;
 @property ASCTextField *textField;
 @property UIView *dividerView;
 @property ASCCollectionView *collectionView;

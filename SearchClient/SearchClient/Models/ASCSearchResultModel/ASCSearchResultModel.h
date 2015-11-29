@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *titleNoFormatting;
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSURL *visibleUrl;
 
 + (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic;
 

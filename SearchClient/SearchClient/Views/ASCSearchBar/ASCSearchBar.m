@@ -108,6 +108,10 @@
     } else {
         self.sliderView.frame = CGRectMake(offset, cell.frame.size.height - 2., cell.frame.size.width, 2.);
     }
+    
+    if ([self.delegate respondsToSelector:@selector(searchBar:didChangeToSearchOptionIndex:)]) {
+        [self.delegate searchBar:self didChangeToSearchOptionIndex:indexPath.row];
+    }
 }
 
 @end

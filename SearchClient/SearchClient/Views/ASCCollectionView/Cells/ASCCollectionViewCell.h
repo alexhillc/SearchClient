@@ -14,6 +14,4 @@ extern NSString * const ASCCollectionViewCellReuseIdentifier;
 
 @property UILabel *textLabel;
 
-- (CGFloat)intrinsicWidthForHeight:(CGFloat)height;
-
 @end

@@ -41,13 +41,14 @@ NSString * const ASCCollectionViewCellReuseIdentifier = @"ASCCollectionViewCellR
                                                                 self.textLabel.frame.size.height);
 }
 
-- (CGFloat)intrinsicWidthForHeight:(CGFloat)height {
+- (CGSize)intrinsicContentSize {
+    CGFloat height = 30.;
     self.bounds = CGRectMake(0, 0, 0, height);
     [self layoutSubviews];
-    
+
     CGFloat width = self.textLabel.frame.size.width + 30.;
-    
-    return width;
+
+    return CGSizeMake(width, height);
 }
 
 @end

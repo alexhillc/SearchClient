@@ -16,6 +16,6 @@
 @property (nonatomic, strong) ASCSearchResultsViewModel *searchResultsViewModel;
 @property (nonatomic) ASCSearchResultsTableViewDelegateAndDatasource *searchResultsTableViewDD;
 
-- (void)presentResultsForQuery:(NSString *)query;
+- (void)presentResults;
 
 @end

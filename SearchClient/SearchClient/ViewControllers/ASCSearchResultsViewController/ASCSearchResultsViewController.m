@@ -11,6 +11,8 @@
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
 #import "ASCSearchResultsViewModel.h"
 #import "ASCTextField.h"
+#import "ASCTableViewWebSearchResultCell.h"
+#import "ASCTableViewImageSearchResultCell.h"
 #import "ASCTableViewSearchResultCell.h"
 #import "ASCTableViewSearchCell.h"
 #import "TTTAttributedLabel.h"
@@ -39,7 +41,8 @@
 
     self.searchResultsViewModel.delegate = self;
     
-    [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewSearchResultCell class] forCellReuseIdentifier:ASCTableViewSearchResultCellIdentifier];
+    [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewWebSearchResultCell class] forCellReuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
+    [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewImageSearchResultCell class] forCellReuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
     
     [self.searchResultsView startLoadingAnimation];
     [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
@@ -63,18 +66,18 @@
     return NO;
 }
 
-- (void)presentResultsForQuery:(NSString *)query {
+- (void)presentResults {
     [self.searchResultsView startLoadingAnimation];
-    self.searchResultsViewModel.query = query;
     self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
     
     [self.searchResultsView contract];
-    [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
+    [self.searchResultsViewModel loadResultsWithQueryType:self.searchResultsViewModel.queryType];
 }
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self presentResultsForQuery:textField.text];
+    self.searchResultsViewModel.query = textField.text;
+    [self presentResults];
     
     return YES;
 }
@@ -124,6 +127,12 @@
     } else {
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+#pragma mark - ASCSearchBarDelegate
+- (void)searchBar:(ASCSearchBar *)searchBar didChangeToSearchOptionIndex:(NSInteger)idx {
+    self.searchResultsViewModel.queryType = idx;
+    [self presentResults];
 }
 
 @end

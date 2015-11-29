@@ -13,5 +13,6 @@
 @property (nonatomic) CGSize thumbSize;
 @property (nonatomic) CGSize size;
 @property (nonatomic, strong) NSURL *thumbUrl;
+@property (nonatomic, strong) NSURL *contextUrl;
 
 @end

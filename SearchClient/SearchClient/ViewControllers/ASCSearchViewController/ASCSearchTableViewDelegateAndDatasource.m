@@ -41,7 +41,8 @@
         [searchVc presentViewControllerWithQuery:[searchVc.searchViewModel.data objectAtIndex:indexPath.row]];
     } else if ([self.vc isKindOfClass:[ASCSearchResultsViewController class]]) {
         ASCSearchResultsViewController *searchResultsVc = (ASCSearchResultsViewController *)self.vc;
-        [searchResultsVc presentResultsForQuery:[searchResultsVc.searchViewModel.data objectAtIndex:indexPath.row]];
+        searchResultsVc.searchResultsViewModel.query = [searchResultsVc.searchViewModel.data objectAtIndex:indexPath.row];
+        [searchResultsVc presentResults];
     }
 }
 

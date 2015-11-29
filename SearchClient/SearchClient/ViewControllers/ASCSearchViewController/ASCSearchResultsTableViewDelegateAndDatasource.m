@@ -8,21 +8,38 @@
 
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
 #import "ASCTableViewSearchResultCell.h"
+#import "ASCTableViewWebSearchResultCell.h"
+#import "ASCTableViewImageSearchResultCell.h"
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchResultsViewController.h"
-
+#import "ASCWebSearchResultModel.h"
+#import "ASCImageSearchResultModel.h"
 
 @implementation ASCSearchResultsTableViewDelegateAndDatasource
 
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ASCTableViewSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewSearchResultCellIdentifier];
-    if (!cell) {
-        cell = [[ASCTableViewSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ASCTableViewSearchResultCellIdentifier];
+    ASCSearchResultModel *cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
+    
+    ASCTableViewSearchResultCell *cell = nil;
+    if ([cellModel isKindOfClass:[ASCWebSearchResultModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewWebSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewWebSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                          reuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
+        }
+    } else if ([cellModel isKindOfClass:[ASCImageSearchResultModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewImageSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                       reuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
+        }
     }
     
     cell.titleLabel.delegate = self.vc;
-    cell.cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
+    cell.cellModel = cellModel;
     
     return cell;
 }
