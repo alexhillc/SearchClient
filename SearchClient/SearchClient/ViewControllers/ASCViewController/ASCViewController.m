@@ -8,7 +8,7 @@
 
 #import "ASCViewController.h"
 #import "ASCView.h"
-#import "ASCTableViewSearchCell.h"
+#import "ASCTableViewSearchHistoryCell.h"
 #import "ASCCollectionViewCell.h"
 #import "ASCCollectionView.h"
 
@@ -31,13 +31,13 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     
     self.cachedCollectionViewCellWidths = [[NSMutableDictionary alloc] init];
     
-    self.searchTableViewDD = [[ASCSearchTableViewDelegateAndDatasource alloc] init];
-    self.searchTableViewDD.vc = self;
-    self.searchViewModel.delegate = self;
+    self.searchHistoryTableViewDD = [[ASCSearchHistoryTableViewDelegateAndDatasource alloc] init];
+    self.searchHistoryTableViewDD.vc = self;
+    self.searchHistoryViewModel.delegate = self;
     
-    self.ascView.searchTableView.delegate = self.searchTableViewDD;
-    self.ascView.searchTableView.dataSource = self.searchTableViewDD;
-    [self.ascView.searchTableView registerClass:[ASCTableViewSearchCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
+    self.ascView.searchHistoryTableView.delegate = self.searchHistoryTableViewDD;
+    self.ascView.searchHistoryTableView.dataSource = self.searchHistoryTableViewDD;
+    [self.ascView.searchHistoryTableView registerClass:[ASCTableViewSearchHistoryCell class] forCellReuseIdentifier:ASCTableViewSearchCellIdentifier];
     
     self.ascView.searchBar.textField.delegate = self;
     self.ascView.searchBar.delegate = self;
@@ -45,7 +45,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     self.ascView.searchBar.collectionView.dataSource = self;
     [self.ascView.searchBar.collectionView registerClass:[ASCCollectionViewCell class] forCellWithReuseIdentifier:ASCCollectionViewCellReuseIdentifier];
     
-    [self.searchViewModel loadSearchHistory];
+    [self.searchHistoryViewModel loadSearchHistory];
 
     self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"SHOPPING", @"VIDEOS", @"BOOKS", nil];
     

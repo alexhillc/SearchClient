@@ -24,20 +24,20 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 @property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintHeight;
 @property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintWidth;
 @property (nonatomic, weak) NSLayoutConstraint *searchBarConstraintCenter;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintTop;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintHeight;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintWidth;
-@property (nonatomic, weak) NSLayoutConstraint *searchTableViewConstraintCenter;
+@property (nonatomic, weak) NSLayoutConstraint *searchHistoryTableViewConstraintTop;
+@property (nonatomic, weak) NSLayoutConstraint *searchHistoryTableViewConstraintHeight;
+@property (nonatomic, weak) NSLayoutConstraint *searchHistoryTableViewConstraintWidth;
+@property (nonatomic, weak) NSLayoutConstraint *searchHistoryTableViewConstraintCenter;
 
 @property (nonatomic, assign) BOOL isFirstLayout;
 
 @property ASCSearchBar *searchBar;
-@property ASCTableView *searchTableView;
-@property UIView *shadowSearchTableView;
+@property ASCTableView *searchHistoryTableView;
+@property UIView *shadowSearchHistoryTableView;
 
 - (void)setup;
 
-- (void)expandToKeyboardHeight:(CGFloat)keyboardHeight;
+- (void)expandToHeight:(CGFloat)height;
 - (void)contract;
 - (BOOL)isExpanded;
 

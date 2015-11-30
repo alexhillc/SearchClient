@@ -14,7 +14,7 @@
 #import "ASCTableViewWebSearchResultCell.h"
 #import "ASCTableViewImageSearchResultCell.h"
 #import "ASCTableViewSearchResultCell.h"
-#import "ASCTableViewSearchCell.h"
+#import "ASCTableViewSearchHistoryCell.h"
 #import "TTTAttributedLabel.h"
 #import <SafariServices/SafariServices.h>
 
@@ -92,8 +92,8 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 
 #pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
-    if ([viewModel isKindOfClass:[ASCSearchViewModel class]]) {
-        [self.searchResultsView.searchTableView reloadData];
+    if ([viewModel isKindOfClass:[ASCSearchHistoryViewModel class]]) {
+        [self.searchResultsView.searchHistoryTableView reloadData];
     } else if ([viewModel isKindOfClass:[ASCSearchResultsViewModel class]]) {
         [self.cachedResultsTableViewCellHeights removeAllObjects];
         [self.searchResultsView.searchResultsTableView reloadData];
@@ -108,7 +108,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     
     __weak ASCSearchResultsViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchResultsView expandToKeyboardHeight:keyboardSize.height];
+        [weakSelf.searchResultsView expandToHeight:keyboardSize.height];
     });
 }
 

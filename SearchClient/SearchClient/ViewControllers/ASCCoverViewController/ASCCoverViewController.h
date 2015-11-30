@@ -1,5 +1,5 @@
 //
-//  ASCSearchViewController.h
+//  ASCCoverViewController.h
 //  SearchClient
 //
 //  Created by Alex Hill on 10/21/15.
@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ASCViewController.h"
 
-@class ASCSearchView;
+@class ASCCoverView;
 
-@interface ASCSearchViewController : ASCViewController
+@interface ASCCoverViewController : ASCViewController
 
 - (void)presentViewControllerWithQuery:(NSString *)query;
 

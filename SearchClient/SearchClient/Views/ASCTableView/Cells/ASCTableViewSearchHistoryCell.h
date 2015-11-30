@@ -10,6 +10,6 @@
 
 extern NSString * const ASCTableViewSearchCellIdentifier;
 
-@interface ASCTableViewSearchCell : UITableViewCell
+@interface ASCTableViewSearchHistoryCell : UITableViewCell
 
 @end

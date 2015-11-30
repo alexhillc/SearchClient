@@ -6,11 +6,11 @@
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
-#import "ASCTableViewSearchCell.h"
+#import "ASCTableViewSearchHistoryCell.h"
 
 NSString * const ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIdentifier";
 
-@implementation ASCTableViewSearchCell
+@implementation ASCTableViewSearchHistoryCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {

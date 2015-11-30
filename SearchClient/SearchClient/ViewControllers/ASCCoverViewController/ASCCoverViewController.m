@@ -1,27 +1,27 @@
 //
-//  ASCSearchViewController.m
+//  ASCCoverViewController.m
 //  SearchClient
 //
 //  Created by Alex Hill on 10/21/15.
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
-#import "ASCSearchViewController.h"
+#import "ASCCoverViewController.h"
+#import "ASCCoverView.h"
 #import "ASCSearchResultsViewController.h"
 #import "ASCSearchResultsViewModel.h"
-#import "ASCSearchView.h"
 
-@interface ASCSearchViewController ()
+@interface ASCCoverViewController ()
 
-@property (nonatomic, weak) ASCSearchView *searchView;
+@property (nonatomic, weak) ASCCoverView *coverView;
 
 @end
 
-@implementation ASCSearchViewController
+@implementation ASCCoverViewController
 
 - (void)loadView {    
-    self.view = [[ASCSearchView alloc] init];
-    self.searchView = (ASCSearchView *)self.view;
+    self.view = [[ASCCoverView alloc] init];
+    self.coverView = (ASCCoverView *)self.view;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,7 +38,7 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    BOOL shouldHide = ![self.searchView isExpanded];
+    BOOL shouldHide = ![self.coverView isExpanded];
     
     return shouldHide;
 }
@@ -57,7 +57,7 @@
 
 #pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
-    [self.searchView.searchTableView reloadData];
+    [self.coverView.searchHistoryTableView reloadData];
 }
 
 - (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error {
@@ -68,9 +68,9 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    __weak ASCSearchViewController *weakSelf = self;
+    __weak ASCCoverViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchView expandToKeyboardHeight:keyboardSize.height];
+        [weakSelf.coverView expandToHeight:keyboardSize.height];
         
         [UIView animateWithDuration:ASCViewAnimationDuration delay:ASCViewAnimationDuration
                             options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -80,9 +80,9 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    __weak ASCSearchViewController *weakSelf = self;
+    __weak ASCCoverViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchView contract];
+        [weakSelf.coverView contract];
         
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
             [weakSelf setNeedsStatusBarAppearanceUpdate];
@@ -91,20 +91,20 @@
 }
 
 - (void)presentViewControllerWithQuery:(NSString *)query {
-    ASCSearchViewModel *searchViewModel = [[ASCSearchViewModel alloc] init];
+    ASCSearchHistoryViewModel *searchHistoryViewModel = [[ASCSearchHistoryViewModel alloc] init];
     ASCSearchResultsViewModel *searchResultsViewModel = [[ASCSearchResultsViewModel alloc] init];
     searchResultsViewModel.query = query;
     
     ASCSearchResultsViewController *searchResultsViewController = [[ASCSearchResultsViewController alloc] init];
     searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
-    searchResultsViewController.searchViewModel = searchViewModel;
+    searchResultsViewController.searchHistoryViewModel = searchHistoryViewModel;
     
-    self.searchView.searchBar.textField.text = query;
+    self.coverView.searchBar.textField.text = query;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    __weak ASCSearchViewController *weakSelf = self;
-    [self.searchView hideSearchTableViewAnimated:YES completion:^{
+    __weak ASCCoverViewController *weakSelf = self;
+    [self.coverView hideSearchHistoryTableViewAnimated:YES completion:^{
         [weakSelf presentViewController:searchResultsViewController animated:NO completion:nil];
     }];
 }

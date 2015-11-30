@@ -7,18 +7,18 @@
 //
 
 #import "ASCAppDelegate.h"
-#import "ASCSearchViewController.h"
-#import "ASCSearchViewModel.h"
+#import "ASCCoverViewController.h"
+#import "ASCSearchHistoryViewModel.h"
 
 @implementation ASCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ASCSearchViewController *searchViewController = [[ASCSearchViewController alloc] init];
-    ASCSearchViewModel *vm = [[ASCSearchViewModel alloc] init];
-    searchViewController.searchViewModel = vm;
-    self.window.rootViewController = searchViewController;
+    ASCCoverViewController *coverViewController = [[ASCCoverViewController alloc] init];
+    ASCSearchHistoryViewModel *vm = [[ASCSearchHistoryViewModel alloc] init];
+    coverViewController.searchHistoryViewModel = vm;
+    self.window.rootViewController = coverViewController;
     [self.window makeKeyAndVisible];
     
     return YES;

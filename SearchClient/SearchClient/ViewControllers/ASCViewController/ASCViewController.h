@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASCSearchViewModel.h"
-#import "ASCSearchTableViewDelegateAndDatasource.h"
+#import "ASCSearchHistoryViewModel.h"
+#import "ASCSearchHistoryTableViewDelegateAndDatasource.h"
 #import "ASCTextField.h"
 
-@class ASCSearchTableViewDelegateAndDatasource, ASCView;
+@class ASCSearchHistoryTableViewDelegateAndDatasource, ASCView;
 
 @interface ASCViewController : UIViewController <ASCViewModelDelegate, ASCTextFieldDelegate>
 
-@property (nonatomic, strong) ASCSearchViewModel *searchViewModel;
-@property (nonatomic) ASCSearchTableViewDelegateAndDatasource *searchTableViewDD;
+@property (nonatomic, strong) ASCSearchHistoryViewModel *searchHistoryViewModel;
+@property (nonatomic) ASCSearchHistoryTableViewDelegateAndDatasource *searchHistoryTableViewDD;
 
 @end

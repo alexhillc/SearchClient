@@ -11,7 +11,7 @@
 
 extern NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat;
 
-@class ASCSearchResultsViewModel, ASCSearchTableViewDelegateAndDatasource, ASCSearchResultsTableViewDelegateAndDatasource;
+@class ASCSearchResultsViewModel, ASCSearchHistoryTableViewDelegateAndDatasource, ASCSearchResultsTableViewDelegateAndDatasource;
 
 @interface ASCSearchResultsViewController : ASCViewController <TTTAttributedLabelDelegate>
 

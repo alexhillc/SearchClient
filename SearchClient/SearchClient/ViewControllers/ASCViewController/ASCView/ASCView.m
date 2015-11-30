@@ -38,26 +38,26 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
     
     [self addSubview:self.searchBar];
     
-    self.searchTableView = [[ASCTableView alloc] init];
-    self.searchTableView.hidden = YES;
-    self.searchTableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
-    self.searchTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.searchHistoryTableView = [[ASCTableView alloc] init];
+    self.searchHistoryTableView.hidden = YES;
+    self.searchHistoryTableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    self.searchHistoryTableView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addSubview:self.searchTableView];
+    [self addSubview:self.searchHistoryTableView];
     
-    self.shadowSearchTableView = [[UIView alloc] init];
-    self.shadowSearchTableView.backgroundColor = [UIColor whiteColor];
-    self.shadowSearchTableView.hidden = YES;
-    self.shadowSearchTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.shadowSearchHistoryTableView = [[UIView alloc] init];
+    self.shadowSearchHistoryTableView.backgroundColor = [UIColor whiteColor];
+    self.shadowSearchHistoryTableView.hidden = YES;
+    self.shadowSearchHistoryTableView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.shadowSearchTableView.clipsToBounds = NO;
-    self.shadowSearchTableView.layer.cornerRadius = 1.5;
-    self.shadowSearchTableView.layer.masksToBounds = NO;
-    self.shadowSearchTableView.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.shadowSearchTableView.layer.shadowRadius = 1.;
-    self.shadowSearchTableView.layer.shadowOpacity = 0.08;
+    self.shadowSearchHistoryTableView.clipsToBounds = NO;
+    self.shadowSearchHistoryTableView.layer.cornerRadius = 1.5;
+    self.shadowSearchHistoryTableView.layer.masksToBounds = NO;
+    self.shadowSearchHistoryTableView.layer.shadowOffset = CGSizeMake(0, 1.5);
+    self.shadowSearchHistoryTableView.layer.shadowRadius = 1.;
+    self.shadowSearchHistoryTableView.layer.shadowOpacity = 0.08;
     
-    [self insertSubview:self.shadowSearchTableView belowSubview:self.searchTableView];
+    [self insertSubview:self.shadowSearchHistoryTableView belowSubview:self.searchHistoryTableView];
 }
 
 - (BOOL)isExpanded {
@@ -72,7 +72,7 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
-- (void)expandToKeyboardHeight:(CGFloat)keyboardHeight {
+- (void)expandToHeight:(CGFloat)height {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }

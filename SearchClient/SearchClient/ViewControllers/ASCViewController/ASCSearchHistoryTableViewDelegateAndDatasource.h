@@ -10,7 +10,7 @@
 
 @class ASCViewController;
 
-@interface ASCSearchTableViewDelegateAndDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
+@interface ASCSearchHistoryTableViewDelegateAndDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) ASCViewController *vc;
 

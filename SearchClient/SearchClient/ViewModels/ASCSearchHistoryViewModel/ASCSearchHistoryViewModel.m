@@ -6,9 +6,9 @@
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
-#import "ASCSearchViewModel.h"
+#import "ASCSearchHistoryViewModel.h"
 
-@implementation ASCSearchViewModel
+@implementation ASCSearchHistoryViewModel
 
 - (void)loadSearchHistory {
     self.data = [[NSMutableArray alloc] initWithObjects:@"One", @"Two", @"Three", @"Four", @"Five", nil];

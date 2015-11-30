@@ -10,11 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ASCView.h"
 
-@interface ASCSearchView : ASCView
+@interface ASCCoverView : ASCView
 
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
 
-- (void)hideSearchTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
+- (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
 
 @end

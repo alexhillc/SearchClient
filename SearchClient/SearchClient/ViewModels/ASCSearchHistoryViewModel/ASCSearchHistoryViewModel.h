@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ASCViewModel.h"
 
-@interface ASCSearchViewModel : ASCViewModel
+@interface ASCSearchHistoryViewModel : ASCViewModel
 
 - (void)loadSearchHistory;
 
