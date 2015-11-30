@@ -78,7 +78,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     [self.searchResultsViewModel loadResultsWithQueryType:self.searchResultsViewModel.queryType];
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - ASCTextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     self.searchResultsViewModel.query = textField.text;
     [self presentResults];

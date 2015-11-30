@@ -1,24 +1,14 @@
 //
-//  ASCTableViewImageSearchResultsCell.m
+//  ASCTableViewNewsSearchResultCell.m
 //  SearchClient
 //
-//  Created by Alex Hill on 11/28/15.
+//  Created by Alex Hill on 11/29/15.
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
-#import "ASCTableViewImageSearchResultCell.h"
-#import "ASCAsyncImageView.h"
-#import "ASCImageSearchResultModel.h"
+#import "ASCTableViewNewsSearchResultCell.h"
 
-NSString * const ASCTableViewImageSearchResultCellIdentifier = @"ASCTableViewImageSearchResultCellIdentifier";
-
-@interface ASCTableViewImageSearchResultCell ()
-
-@property NSMutableString *imageTitleLabelText;
-
-@end
-
-@implementation ASCTableViewImageSearchResultCell
+@implementation ASCTableViewNewsSearchResultCell
 
 @dynamic cellModel;
 
@@ -68,7 +58,7 @@ NSString * const ASCTableViewImageSearchResultCellIdentifier = @"ASCTableViewIma
     [super layoutSubviews];
     
     self.asyncImageView.frame = CGRectMake((self.frame.size.width - self.asyncImageView.imageSize.width) / 2, ASCTableViewCellContentPadding,
-                                      self.asyncImageView.imageSize.width, self.asyncImageView.imageSize.height);
+                                           self.asyncImageView.imageSize.width, self.asyncImageView.imageSize.height);
     
     self.imageTitleLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.asyncImageView.frame.origin.y + self.asyncImageView.frame.size.height + 3.,
                                             self.frame.size.width - (2 * ASCTableViewCellContentPadding), 13.5);

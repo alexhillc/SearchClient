@@ -17,17 +17,17 @@
         self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
         self.content = [dic valueForKey:@"content"];
         self.visibleUrl = [NSURL URLWithString:[dic valueForKey:@"visibleUrl"]];
-        self.size = CGSizeMake([[dic valueForKey:@"width"] floatValue], [[dic valueForKey:@"height"] floatValue]);
+        self.imgSize = CGSizeMake([[dic valueForKey:@"width"] floatValue], [[dic valueForKey:@"height"] floatValue]);
         self.thumbSize = CGSizeMake([[dic valueForKey:@"tbWidth"] floatValue], [[dic valueForKey:@"tbHeight"] floatValue]);
-        self.contextUrl = [NSURL URLWithString:[dic valueForKey:@"originalContextUrl"]];
+        self.url = [NSURL URLWithString:[dic valueForKey:@"originalContextUrl"]];
         
         NSMutableString *thumbUrl = [[dic valueForKey:@"tbUrl"] mutableCopy];
         [thumbUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, thumbUrl.length)];
-        self.thumbUrl = [NSURL URLWithString:[thumbUrl copy]];
+        self.thumbImgUrl = [NSURL URLWithString:[thumbUrl copy]];
         
-        NSMutableString *url = [[dic valueForKey:@"url"] mutableCopy];
-        [url replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, url.length)];
-        self.url = [NSURL URLWithString:[url copy]];
+        NSMutableString *imageUrl = [[dic valueForKey:@"url"] mutableCopy];
+        [imageUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, imageUrl.length)];
+        self.imgUrl = [NSURL URLWithString:[imageUrl copy]];
     }
     
     return self;

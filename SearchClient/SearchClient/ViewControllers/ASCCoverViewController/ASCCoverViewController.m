@@ -43,7 +43,7 @@
     return shouldHide;
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - ASCTextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self presentViewControllerWithQuery:textField.text];
     

@@ -10,10 +10,10 @@
 
 @interface ASCSearchResultModel : NSObject
 
-@property (nonatomic, strong) NSString *googleSearchResultClass;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *titleNoFormatting;
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, copy) NSString *googleSearchResultClass;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *titleNoFormatting;
+@property (nonatomic, copy) NSString *content;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSURL *visibleUrl;
 

@@ -11,8 +11,8 @@
 @interface ASCImageSearchResultModel : ASCSearchResultModel
 
 @property (nonatomic) CGSize thumbSize;
-@property (nonatomic) CGSize size;
-@property (nonatomic, strong) NSURL *thumbUrl;
-@property (nonatomic, strong) NSURL *contextUrl;
+@property (nonatomic) CGSize imgSize;
+@property (nonatomic, strong) NSURL *thumbImgUrl;
+@property (nonatomic, strong) NSURL *imgUrl;
 
 @end

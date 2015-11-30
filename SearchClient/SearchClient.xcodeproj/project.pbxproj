@@ -33,7 +33,9 @@
 		FA731FB31C011B2600B07E92 /* ASCView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA731FB21C011B2600B07E92 /* ASCView.m */; };
 		FA97D21F1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
+		FAA2CE931C0BF86300DE7E5C /* ASCNewsSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2CE921C0BF86300DE7E5C /* ASCNewsSearchResultModel.m */; };
 		FAA8BD641C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA8BD631C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m */; };
+		FAA8BD671C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA8BD661C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m */; };
 		FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */; };
 		FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */; };
 		FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */; };
@@ -112,8 +114,12 @@
 		FA997EE31BF2F44100101806 /* ASCSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewModel.h; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.h; sourceTree = "<group>"; };
 		FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsViewModel.m; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.m; sourceTree = "<group>"; };
 		FA997EE61BF2F46300101806 /* ASCSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultModel.h; path = Models/ASCSearchResultModel/ASCSearchResultModel.h; sourceTree = "<group>"; };
+		FAA2CE911C0BF86300DE7E5C /* ASCNewsSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCNewsSearchResultModel.h; path = Models/ASCSearchResultModel/ASCNewsSearchResultModel/ASCNewsSearchResultModel.h; sourceTree = "<group>"; };
+		FAA2CE921C0BF86300DE7E5C /* ASCNewsSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCNewsSearchResultModel.m; path = Models/ASCSearchResultModel/ASCNewsSearchResultModel/ASCNewsSearchResultModel.m; sourceTree = "<group>"; };
 		FAA8BD621C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsTableViewDelegateAndDatasource.h; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
 		FAA8BD631C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsTableViewDelegateAndDatasource.m; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsTableViewDelegateAndDatasource.m; sourceTree = "<group>"; };
+		FAA8BD651C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTableViewNewsSearchResultCell.h; path = Views/ASCTableView/Cells/ASCTableViewNewsSearchResultCell.h; sourceTree = "<group>"; };
+		FAA8BD661C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTableViewNewsSearchResultCell.m; path = Views/ASCTableView/Cells/ASCTableViewNewsSearchResultCell.m; sourceTree = "<group>"; };
 		FACBF8D71BFAA614000099B6 /* ASCWebSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCWebSearchResultModel.h; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.h; sourceTree = "<group>"; };
 		FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCWebSearchResultModel.m; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.m; sourceTree = "<group>"; };
 		FACBF8DB1BFAA6DD000099B6 /* ASCImageSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCImageSearchResultModel.h; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.h; sourceTree = "<group>"; };
@@ -252,6 +258,7 @@
 		FA1944C01BF2E44A000A4712 /* ASCSearchResultModel */ = {
 			isa = PBXGroup;
 			children = (
+				FAA2CE901C0BF83D00DE7E5C /* ASCNewsSearchResultModel */,
 				FACBF8DA1BFAA6C6000099B6 /* ASCImageSearchResultModel */,
 				FACBF8D61BFAA5F5000099B6 /* ASCWebSearchResultModel */,
 				FA997EE61BF2F46300101806 /* ASCSearchResultModel.h */,
@@ -276,10 +283,9 @@
 				FA1944B51BF2E324000A4712 /* ASCTableViewSearchHistoryCell.m */,
 				FA310C891BF8087500E386A5 /* ASCTableViewSearchResultCell.h */,
 				FA310C8A1BF8087500E386A5 /* ASCTableViewSearchResultCell.m */,
-				FA0CEA611C0A5B89002C4248 /* ASCTableViewWebSearchResultCell.h */,
-				FA0CEA621C0A5B89002C4248 /* ASCTableViewWebSearchResultCell.m */,
-				FA97D21D1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.h */,
-				FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */,
+				FAA2CE941C0BF86F00DE7E5C /* ASCTableViewWebSearchResultCell */,
+				FAA2CE961C0BF88C00DE7E5C /* ASCTableViewImageSearchResultCell */,
+				FAA2CE971C0BF89C00DE7E5C /* ASCTableViewNewsSearchResultCell */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -372,6 +378,42 @@
 				FA03173A1C0A8F27003EF4C1 /* ASCSearchLoader.m */,
 			);
 			name = ASCSearchLoader;
+			sourceTree = "<group>";
+		};
+		FAA2CE901C0BF83D00DE7E5C /* ASCNewsSearchResultModel */ = {
+			isa = PBXGroup;
+			children = (
+				FAA2CE911C0BF86300DE7E5C /* ASCNewsSearchResultModel.h */,
+				FAA2CE921C0BF86300DE7E5C /* ASCNewsSearchResultModel.m */,
+			);
+			name = ASCNewsSearchResultModel;
+			sourceTree = "<group>";
+		};
+		FAA2CE941C0BF86F00DE7E5C /* ASCTableViewWebSearchResultCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA0CEA611C0A5B89002C4248 /* ASCTableViewWebSearchResultCell.h */,
+				FA0CEA621C0A5B89002C4248 /* ASCTableViewWebSearchResultCell.m */,
+			);
+			name = ASCTableViewWebSearchResultCell;
+			sourceTree = "<group>";
+		};
+		FAA2CE961C0BF88C00DE7E5C /* ASCTableViewImageSearchResultCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA97D21D1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.h */,
+				FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */,
+			);
+			name = ASCTableViewImageSearchResultCell;
+			sourceTree = "<group>";
+		};
+		FAA2CE971C0BF89C00DE7E5C /* ASCTableViewNewsSearchResultCell */ = {
+			isa = PBXGroup;
+			children = (
+				FAA8BD651C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.h */,
+				FAA8BD661C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m */,
+			);
+			name = ASCTableViewNewsSearchResultCell;
 			sourceTree = "<group>";
 		};
 		FACBF8D61BFAA5F5000099B6 /* ASCWebSearchResultModel */ = {
@@ -709,7 +751,9 @@
 				FAA8BD641C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */,
 				FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */,
 				FA731FB31C011B2600B07E92 /* ASCView.m in Sources */,
+				FAA2CE931C0BF86300DE7E5C /* ASCNewsSearchResultModel.m in Sources */,
 				FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */,
+				FAA8BD671C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m in Sources */,
 				FA0FEED01C00F8E60046F849 /* ASCSearchResultsView.m in Sources */,
 				FA63E8C31C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m in Sources */,
 				FAF6C1591BD41DEF00F966A1 /* main.m in Sources */,
