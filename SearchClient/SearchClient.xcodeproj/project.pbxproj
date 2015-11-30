@@ -27,13 +27,13 @@
 		FA638F491C08F9EE00BDD439 /* ASCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA638F481C08F9EE00BDD439 /* ASCCollectionViewCell.m */; };
 		FA638F501C09015100BDD439 /* UIColor+Google.m in Sources */ = {isa = PBXBuildFile; fileRef = FA638F4F1C09015100BDD439 /* UIColor+Google.m */; };
 		FA63E8B91C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8B61C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.m */; };
-		FA63E8BA1C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8B81C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.m */; };
 		FA63E8BD1C0BEC600081B901 /* ASCCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8BC1C0BEC600081B901 /* ASCCoverViewController.m */; };
 		FA63E8C01C0BEC6C0081B901 /* ASCCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8BF1C0BEC6C0081B901 /* ASCCoverView.m */; };
 		FA63E8C31C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8C21C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m */; };
 		FA731FB31C011B2600B07E92 /* ASCView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA731FB21C011B2600B07E92 /* ASCView.m */; };
 		FA97D21F1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
+		FAA8BD641C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA8BD631C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m */; };
 		FACBF8D91BFAA614000099B6 /* ASCWebSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */; };
 		FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACBF8DC1BFAA6DD000099B6 /* ASCImageSearchResultModel.m */; };
 		FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */; };
@@ -99,8 +99,6 @@
 		FA638F4F1C09015100BDD439 /* UIColor+Google.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Google.m"; path = "Utilities/Categories/UIColor+Google.m"; sourceTree = "<group>"; };
 		FA63E8B51C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchHistoryTableViewDelegateAndDatasource.h; path = ViewControllers/ASCViewController/ASCSearchHistoryTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
 		FA63E8B61C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchHistoryTableViewDelegateAndDatasource.m; path = ViewControllers/ASCViewController/ASCSearchHistoryTableViewDelegateAndDatasource.m; sourceTree = "<group>"; };
-		FA63E8B71C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsTableViewDelegateAndDatasource.h; path = ViewControllers/ASCViewController/ASCSearchResultsTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
-		FA63E8B81C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsTableViewDelegateAndDatasource.m; path = ViewControllers/ASCViewController/ASCSearchResultsTableViewDelegateAndDatasource.m; sourceTree = "<group>"; };
 		FA63E8BB1C0BEC600081B901 /* ASCCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCCoverViewController.h; path = ViewControllers/ASCCoverViewController/ASCCoverViewController.h; sourceTree = "<group>"; };
 		FA63E8BC1C0BEC600081B901 /* ASCCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCCoverViewController.m; path = ViewControllers/ASCCoverViewController/ASCCoverViewController.m; sourceTree = "<group>"; };
 		FA63E8BE1C0BEC6C0081B901 /* ASCCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCCoverView.h; path = ViewControllers/ASCCoverViewController/ASCCoverView/ASCCoverView.h; sourceTree = "<group>"; };
@@ -114,6 +112,8 @@
 		FA997EE31BF2F44100101806 /* ASCSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewModel.h; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.h; sourceTree = "<group>"; };
 		FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsViewModel.m; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.m; sourceTree = "<group>"; };
 		FA997EE61BF2F46300101806 /* ASCSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultModel.h; path = Models/ASCSearchResultModel/ASCSearchResultModel.h; sourceTree = "<group>"; };
+		FAA8BD621C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsTableViewDelegateAndDatasource.h; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsTableViewDelegateAndDatasource.h; sourceTree = "<group>"; };
+		FAA8BD631C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchResultsTableViewDelegateAndDatasource.m; path = ViewControllers/ASCSearchResultsViewController/ASCSearchResultsTableViewDelegateAndDatasource.m; sourceTree = "<group>"; };
 		FACBF8D71BFAA614000099B6 /* ASCWebSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCWebSearchResultModel.h; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.h; sourceTree = "<group>"; };
 		FACBF8D81BFAA614000099B6 /* ASCWebSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCWebSearchResultModel.m; path = Models/ASCSearchResultModel/ASCWebSearchResultModel/ASCWebSearchResultModel.m; sourceTree = "<group>"; };
 		FACBF8DB1BFAA6DD000099B6 /* ASCImageSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCImageSearchResultModel.h; path = Models/ASCSearchResultModel/ASCImageSearchResultModel/ASCImageSearchResultModel.h; sourceTree = "<group>"; };
@@ -342,8 +342,6 @@
 				FA1944A91BF2E2C4000A4712 /* ASCViewController.m */,
 				FA63E8B51C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.h */,
 				FA63E8B61C0BEC500081B901 /* ASCSearchHistoryTableViewDelegateAndDatasource.m */,
-				FA63E8B71C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.h */,
-				FA63E8B81C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.m */,
 				FA731FB01C011AF700B07E92 /* ASCView */,
 			);
 			name = ASCViewController;
@@ -399,6 +397,8 @@
 			children = (
 				FACE5ADE1C00047600B2C964 /* ASCSearchResultsViewController.h */,
 				FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */,
+				FAA8BD621C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.h */,
+				FAA8BD631C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m */,
 				FA0FEECD1C00F8C40046F849 /* ASCSearchResultsView */,
 			);
 			name = ASCSearchResultsViewController;
@@ -705,8 +705,8 @@
 				FAD5C22A1C068D880061E13E /* ASCSearchBar.m in Sources */,
 				FACBF8DD1BFAA6DD000099B6 /* ASCImageSearchResultModel.m in Sources */,
 				FA310C881BF7EFF900E386A5 /* ASCSearchResultModel.m in Sources */,
-				FA63E8BA1C0BEC500081B901 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */,
 				FA0317341C0A8CD7003EF4C1 /* ASCAsyncImageView.m in Sources */,
+				FAA8BD641C0BEFD100F69904 /* ASCSearchResultsTableViewDelegateAndDatasource.m in Sources */,
 				FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */,
 				FA731FB31C011B2600B07E92 /* ASCView.m in Sources */,
 				FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */,
