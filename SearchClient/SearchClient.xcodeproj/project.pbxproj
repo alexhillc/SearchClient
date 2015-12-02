@@ -31,6 +31,7 @@
 		FA63E8C01C0BEC6C0081B901 /* ASCCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8BF1C0BEC6C0081B901 /* ASCCoverView.m */; };
 		FA63E8C31C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63E8C21C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m */; };
 		FA731FB31C011B2600B07E92 /* ASCView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA731FB21C011B2600B07E92 /* ASCView.m */; };
+		FA8442BD1C0EC61B0025795B /* ASCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8442BC1C0EC61B0025795B /* ASCNetwork.m */; };
 		FA97D21F1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */; };
 		FA997EE51BF2F44100101806 /* ASCSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997EE41BF2F44100101806 /* ASCSearchResultsViewModel.m */; };
 		FAA2CE931C0BF86300DE7E5C /* ASCNewsSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2CE921C0BF86300DE7E5C /* ASCNewsSearchResultModel.m */; };
@@ -109,6 +110,8 @@
 		FA63E8C21C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchHistoryViewModel.m; path = ViewModels/ASCSearchHistoryViewModel/ASCSearchHistoryViewModel.m; sourceTree = "<group>"; };
 		FA731FB11C011B2600B07E92 /* ASCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCView.h; path = ViewControllers/ASCViewController/ASCView/ASCView.h; sourceTree = "<group>"; };
 		FA731FB21C011B2600B07E92 /* ASCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCView.m; path = ViewControllers/ASCViewController/ASCView/ASCView.m; sourceTree = "<group>"; };
+		FA8442BB1C0EC61B0025795B /* ASCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCNetwork.h; path = Utilities/ASCNetwork/ASCNetwork.h; sourceTree = "<group>"; };
+		FA8442BC1C0EC61B0025795B /* ASCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCNetwork.m; path = Utilities/ASCNetwork/ASCNetwork.m; sourceTree = "<group>"; };
 		FA97D21D1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCTableViewImageSearchResultCell.h; path = Views/ASCTableView/Cells/ASCTableViewImageSearchResultCell.h; sourceTree = "<group>"; };
 		FA97D21E1C0A6BF7004FEE82 /* ASCTableViewImageSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTableViewImageSearchResultCell.m; path = Views/ASCTableView/Cells/ASCTableViewImageSearchResultCell.m; sourceTree = "<group>"; };
 		FA997EE31BF2F44100101806 /* ASCSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchResultsViewModel.h; path = ViewModels/ASCSearchResultsViewModel/ASCSearchResultsViewModel.h; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		FA1944A41BF2E267000A4712 /* ASCLoader */ = {
 			isa = PBXGroup;
 			children = (
+				FA8442BA1C0EC5F30025795B /* ASCNetwork */,
 				FA0317351C0A8EDD003EF4C1 /* ASCImageLoader */,
 				FA966CE21BF6B6EC006FC8DB /* ASCSearchLoader */,
 				FA1944A51BF2E279000A4712 /* ASCLoader.h */,
@@ -369,6 +373,15 @@
 				FA731FB21C011B2600B07E92 /* ASCView.m */,
 			);
 			name = ASCView;
+			sourceTree = "<group>";
+		};
+		FA8442BA1C0EC5F30025795B /* ASCNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				FA8442BB1C0EC61B0025795B /* ASCNetwork.h */,
+				FA8442BC1C0EC61B0025795B /* ASCNetwork.m */,
+			);
+			name = ASCNetwork;
 			sourceTree = "<group>";
 		};
 		FA966CE21BF6B6EC006FC8DB /* ASCSearchLoader */ = {
@@ -754,6 +767,7 @@
 				FAA2CE931C0BF86300DE7E5C /* ASCNewsSearchResultModel.m in Sources */,
 				FA310C6D1BF7BFDB00E386A5 /* ASCQueryModel.m in Sources */,
 				FAA8BD671C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m in Sources */,
+				FA8442BD1C0EC61B0025795B /* ASCNetwork.m in Sources */,
 				FA0FEED01C00F8E60046F849 /* ASCSearchResultsView.m in Sources */,
 				FA63E8C31C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m in Sources */,
 				FAF6C1591BD41DEF00F966A1 /* main.m in Sources */,

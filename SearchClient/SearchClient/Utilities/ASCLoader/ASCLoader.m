@@ -11,7 +11,9 @@
 @interface ASCLoader ()
 
 @property (strong) ASCLoader *strongSelf;
-    
+@property (nonatomic) ASCLoaderCompletion completion;
+@property (nonatomic) NSData *responseData;
+
 @end
 
 @implementation ASCLoader
@@ -59,27 +61,30 @@
         self.strongSelf = self;
     }
     
-    __weak ASCLoader *weakSelf = self;
-    
-    self.operation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:self.request]];
-    self.operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [self.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        weakSelf.responseObject = responseObject;
-        [weakSelf processResponse];
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        if ([weakSelf.delegate respondsToSelector:@selector(loader:didFinishWithFailure:)]) {
-            [weakSelf informDelegateLoadingFailed:error];
-        }
-    }];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:self.requestUrl];
+    self.request = [request copy];
 }
 
 - (void)startLoad {
     [self prepareForLoad];
-    [self.operation start];
+    
+    __weak ASCLoader *weakSelf = self;
+    [[ASCNetwork sharedInstance] fetchDataWithUrlRequest:self.request completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            if ([weakSelf.delegate respondsToSelector:@selector(loader:didFinishWithFailure:)]) {
+                [weakSelf informDelegateLoadingFailed:error];
+            }
+            
+            return;
+        }
+        
+        weakSelf.responseData = data;
+        [weakSelf processResponse];
+    }];    
 }
 
 - (void)cancelLoad {
-    [self.operation cancel];
+    [[ASCNetwork sharedInstance] cancelFetchWithUrlRequest:self.request];
     
     self.strongSelf = nil;
 }

@@ -53,10 +53,15 @@
         self.searchBarConstraintWidth = [self.searchBar asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
         self.searchBarConstraintCenter = [self.searchBar asc_centerHorizontallyInParent];
         
+        // shadowSearchBar constraints
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeLeft toEdge:NSLayoutAttributeLeft ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeRight toEdge:NSLayoutAttributeRight ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeBottom toEdge:NSLayoutAttributeBottom ofSibling:self.searchBar constant:0];
+        
         // searchHistoryTableView constraints
         self.searchHistoryTableViewConstraintTop = [self.searchHistoryTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
                                                                     ofSibling:self.searchBar constant:1.];
-
         self.searchHistoryTableViewConstraintHeight = [self.searchHistoryTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:0.];
         self.searchHistoryTableViewConstraintWidth = [self.searchHistoryTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth];
         self.searchHistoryTableViewConstraintCenter = [self.searchHistoryTableView asc_centerHorizontallyInParent];

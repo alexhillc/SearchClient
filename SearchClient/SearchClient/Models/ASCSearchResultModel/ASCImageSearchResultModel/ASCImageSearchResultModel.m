@@ -10,24 +10,19 @@
 
 @implementation ASCImageSearchResultModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic {
+- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
     if (self = [super init]) {
-        self.googleSearchResultClass = [dic valueForKey:@"GsearchResultClass"];
-        self.title = [dic valueForKey:@"title"];
-        self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
-        self.content = [dic valueForKey:@"content"];
-        self.visibleUrl = [NSURL URLWithString:[dic valueForKey:@"visibleUrl"]];
-        self.imgSize = CGSizeMake([[dic valueForKey:@"width"] floatValue], [[dic valueForKey:@"height"] floatValue]);
-        self.thumbSize = CGSizeMake([[dic valueForKey:@"tbWidth"] floatValue], [[dic valueForKey:@"tbHeight"] floatValue]);
-        self.url = [NSURL URLWithString:[dic valueForKey:@"originalContextUrl"]];
+        self.bingSearchResultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
+        self.searchId = [dic valueForKey:@"ID"];
+        self.title = [dic valueForKey:@"Title"];
+        self.displayUrl = [dic valueForKey:@"DisplayUrl"];
+        self.url = [NSURL URLWithString:[dic valueForKey:@"Url"]];
+        self.imgUrl = [NSURL URLWithString:[dic valueForKey:@"MediaUrl"]];
+        self.thumbImgUrl = [NSURL URLWithString:[[dic valueForKey:@"Thumbnail"] valueForKey:@"MediaUrl"]];
         
-        NSMutableString *thumbUrl = [[dic valueForKey:@"tbUrl"] mutableCopy];
-        [thumbUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, thumbUrl.length)];
-        self.thumbImgUrl = [NSURL URLWithString:[thumbUrl copy]];
-        
-        NSMutableString *imageUrl = [[dic valueForKey:@"url"] mutableCopy];
-        [imageUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, imageUrl.length)];
-        self.imgUrl = [NSURL URLWithString:[imageUrl copy]];
+        self.imgSize = CGSizeMake([[dic valueForKey:@"Width"] floatValue], [[dic valueForKey:@"Height"] floatValue]);
+        self.thumbSize = CGSizeMake([[[dic valueForKey:@"Thumbnail"] valueForKey:@"Width"] floatValue],
+                                    [[[dic valueForKey:@"Thumbnail"] valueForKey:@"Height"] floatValue]);
     }
     
     return self;

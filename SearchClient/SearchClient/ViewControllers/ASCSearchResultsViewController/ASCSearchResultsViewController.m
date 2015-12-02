@@ -15,12 +15,12 @@
 #import "ASCTableViewImageSearchResultCell.h"
 #import "ASCTableViewSearchResultCell.h"
 #import "ASCTableViewSearchHistoryCell.h"
-#import "TTTAttributedLabel.h"
+#import "JTSImageViewController.h"
 #import <SafariServices/SafariServices.h>
 
 NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cachedheight%@";
 
-@interface ASCSearchResultsViewController () <TTTAttributedLabelDelegate>
+@interface ASCSearchResultsViewController ()
 
 @property (nonatomic, weak) ASCSearchResultsView *searchResultsView;
 
@@ -70,7 +70,29 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     return NO;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    if (self.searchResultsViewModel.queryType == ASCQueryTypeImage) {
+        return UIStatusBarStyleLightContent;
+    }
+    
+    return UIStatusBarStyleDefault;
+}
+
 - (void)presentResults {
+    if (self.searchResultsViewModel.queryType == ASCQueryTypeImage) {
+        [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
+            self.searchResultsView.layer.backgroundColor = [UIColor blackColor].CGColor;
+            self.searchResultsView.searchResultsTableView.layer.backgroundColor = [UIColor blackColor].CGColor;
+        } completion:nil];
+    } else {
+        [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
+            self.searchResultsView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+            self.searchResultsView.searchResultsTableView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+        } completion:nil];
+    }
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     [self.searchResultsView startLoadingAnimation];
     self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
     
@@ -96,9 +118,13 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
         [self.searchResultsView.searchHistoryTableView reloadData];
     } else if ([viewModel isKindOfClass:[ASCSearchResultsViewModel class]]) {
         [self.cachedResultsTableViewCellHeights removeAllObjects];
-        [self.searchResultsView.searchResultsTableView reloadData];
-        [self.searchResultsView.searchResultsTableView setContentOffset:CGPointZero];
-        [self.searchResultsView stopLoadingAnimation];
+
+        __weak ASCSearchResultsViewController *weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.searchResultsView.searchResultsTableView reloadData];
+            [weakSelf.searchResultsView.searchResultsTableView setContentOffset:CGPointZero];
+            [weakSelf.searchResultsView stopLoadingAnimation];
+        });
     }
 }
 
@@ -139,6 +165,19 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 - (void)searchBar:(ASCSearchBar *)searchBar didChangeToSearchOptionIndex:(NSInteger)idx {
     self.searchResultsViewModel.queryType = idx;
     [self presentResults];
+}
+
+#pragma mark - JTSImageViewControllerDelegate
+- (void)imageViewTapped:(ASCAsyncImageView *)imageView {
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.imageURL = imageView.largeImageUrl;
+    imageInfo.referenceRect = imageView.frame;
+    imageInfo.referenceView = imageView.superview;
+    
+    JTSImageViewController *imageViewController = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
+                                                                                               mode:JTSImageViewControllerMode_Image
+                                                                                    backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    [imageViewController showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 @end

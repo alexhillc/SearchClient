@@ -8,10 +8,6 @@
 
 #import "ASCImageLoader.h"
 
-@interface ASCImageLoader ()
-
-@end
-
 @implementation ASCImageLoader
 
 - (ASCLoaderType)type {
@@ -19,24 +15,23 @@
 }
 
 - (void)createRequest {
-    self.request = [self.requestParameters objectForKey:@"imageUrl"];
+    self.requestUrl = [self.requestParameters objectForKey:@"imageUrl"];
 }
 
 - (void)processResponse {
-    UIImage *result = (UIImage *)self.responseObject;
-    
-    if (result) {
-        self.parsedResult = result;
-        [self informDelegateLoadingFinished];
-    } else {
-        [self informDelegateLoadingFailed:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorDataNotAllowed userInfo:nil]];
-    }
-}
-
-- (void)prepareForLoad {
-    [super prepareForLoad];
-    
-    self.operation.responseSerializer = [AFImageResponseSerializer serializer];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *resultImage = [UIImage imageWithData:self.responseData];
+        UIGraphicsBeginImageContext(CGSizeMake(100, 100));
+        [resultImage drawAtPoint:CGPointZero];
+        UIGraphicsEndImageContext();
+        
+        if (resultImage) {
+            self.parsedResult = resultImage;
+            [self informDelegateLoadingFinished];
+        } else {
+            [self informDelegateLoadingFailed:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotParseResponse userInfo:nil]];
+        }
+    });
 }
 
 @end

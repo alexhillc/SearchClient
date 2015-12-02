@@ -10,6 +10,8 @@
 #import "ASCTableView.h"
 #import "ASCSearchBar.h"
 
+#define ASCViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0]
+
 extern CGFloat const ASCViewTextFieldHeight;
 extern CGFloat const ASCViewTableViewExpandedOffsetY;
 extern CGFloat const ASCViewTextFieldExpandedOffsetY;
@@ -32,6 +34,7 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 @property (nonatomic, assign) BOOL isFirstLayout;
 
 @property ASCSearchBar *searchBar;
+@property UIView *shadowSearchBar;
 @property ASCTableView *searchHistoryTableView;
 @property UIView *shadowSearchHistoryTableView;
 

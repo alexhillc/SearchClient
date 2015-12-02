@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
 
 @class ASCLoader;
 
@@ -30,12 +29,12 @@ typedef void (^ASCLoaderCompletion)(ASCLoader *loader, NSError *error);
 @interface ASCLoader : NSObject
 
 @property (nonatomic, weak) id<ASCLoaderDelegate> delegate;
-@property (nonatomic, copy) ASCLoaderCompletion completion;
+@property (nonatomic, readonly) ASCLoaderCompletion completion;
 @property (nonatomic, copy) NSDictionary *requestParameters;
-@property (nonatomic, strong) NSURL *request;
-@property (nonatomic, strong) NSObject *responseObject;
+@property (nonatomic, strong) NSURL *requestUrl;
+@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, readonly) NSData *responseData;
 @property (nonatomic, strong) NSObject *parsedResult;
-@property (nonatomic, strong) AFHTTPRequestOperation *operation;
 @property (nonatomic, readonly) ASCLoaderType type;
 @property (nonatomic) NSInteger *timeout;
 

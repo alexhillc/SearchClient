@@ -10,14 +10,19 @@
 
 @implementation ASCWebSearchResultModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic {
+- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
     if (self = [super init]) {
-        self.googleSearchResultClass = [dic valueForKey:@"GsearchResultClass"];
-        self.title = [dic valueForKey:@"title"];
-        self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
-        self.content = [dic valueForKey:@"content"];
-        self.url = [NSURL URLWithString:[dic valueForKey:@"url"]];
-        self.visibleUrl = [NSURL URLWithString:[dic valueForKey:@"visibleUrl"]];        
+        self.bingSearchResultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
+        self.searchId = [dic valueForKey:@"ID"];
+        self.title = [dic valueForKey:@"Title"];
+        self.displayUrl = [dic valueForKey:@"DisplayUrl"];
+        self.url = [NSURL URLWithString:[dic valueForKey:@"Url"]];
+        
+        NSArray *keys = [[NSArray alloc] initWithObjects:NSFontAttributeName, nil];
+        NSArray *objects = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:12.], nil];
+        NSMutableAttributedString *attributedDesc = [[NSMutableAttributedString alloc] initWithString:[dic valueForKey:@"Description"]];
+        [attributedDesc replaceOccurancesOfStrings:params withAttributes:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
+        self.searchDesc = [attributedDesc copy];
     }
     
     return self;

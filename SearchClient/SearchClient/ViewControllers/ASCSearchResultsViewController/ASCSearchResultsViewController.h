@@ -8,12 +8,13 @@
 
 #import "ASCViewController.h"
 #import "TTTAttributedLabel.h"
+#import "ASCAsyncImageView.h"
 
 extern NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat;
 
 @class ASCSearchResultsViewModel, ASCSearchHistoryTableViewDelegateAndDatasource, ASCSearchResultsTableViewDelegateAndDatasource;
 
-@interface ASCSearchResultsViewController : ASCViewController <TTTAttributedLabelDelegate>
+@interface ASCSearchResultsViewController : ASCViewController <TTTAttributedLabelDelegate, ASCAsyncImageViewDelegate>
 
 @property (nonatomic, strong) ASCSearchResultsViewModel *searchResultsViewModel;
 @property (nonatomic) ASCSearchResultsTableViewDelegateAndDatasource *searchResultsTableViewDD;

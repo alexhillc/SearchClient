@@ -60,10 +60,10 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    __weak ASCViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.ascView.searchBar updateSliderPositionToOffset:0. indexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO];
-    });
+//    __weak ASCViewController *weakSelf = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [weakSelf.ascView.searchBar updateSliderPositionToOffset:0. indexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO];
+//    });
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

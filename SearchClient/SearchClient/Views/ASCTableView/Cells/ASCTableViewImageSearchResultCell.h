@@ -16,7 +16,5 @@ extern NSString * const ASCTableViewImageSearchResultCellIdentifier;
 @interface ASCTableViewImageSearchResultCell : ASCTableViewSearchResultCell
 
 @property (nonatomic) ASCImageSearchResultModel *cellModel;
-@property ASCAsyncImageView *asyncImageView;
-@property UILabel *imageTitleLabel;
 
 @end

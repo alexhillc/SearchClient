@@ -33,9 +33,11 @@
         cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewImageSearchResultCellIdentifier];
         
         if (!cell) {
-            cell = [[ASCTableViewSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+            cell = [[ASCTableViewImageSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                        reuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
         }
+        
+        cell.asyncImageView.delegate = self.vc;
     }
     
     cell.titleLabel.delegate = self.vc;

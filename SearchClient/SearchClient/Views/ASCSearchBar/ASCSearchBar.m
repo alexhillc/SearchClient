@@ -60,10 +60,7 @@
     [self.collectionView addSubview:self.sliderView];
     
     self.layer.cornerRadius = 1.5;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.layer.shadowRadius = 1.;
-    self.layer.shadowOpacity = 0.08;
+    self.layer.masksToBounds = YES;
 }
 
 - (void)layoutSubviews {

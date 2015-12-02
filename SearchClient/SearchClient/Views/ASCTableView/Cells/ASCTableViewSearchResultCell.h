@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASCSearchResultModel.h"
 #import "TTTAttributedLabel.h"
 #import <QuartzCore/QuartzCore.h>
 
 extern CGFloat const ASCTableViewCellContentPadding;
 
-@class TTTAttributedLabel, ASCSearchResultModel;
+@class TTTAttributedLabel, ASCSearchResultModel, ASCAsyncImageView;
 
 @interface ASCTableViewSearchResultCell : UITableViewCell
 
@@ -22,11 +21,9 @@ extern CGFloat const ASCTableViewCellContentPadding;
 @property (strong) UILabel *urlLabel;
 @property (strong) UIView *dividerView;
 @property (nonatomic) ASCSearchResultModel *cellModel;
-@property NSMutableAttributedString *titleLabelText;
-@property NSMutableAttributedString *contentLabelText;
+@property ASCAsyncImageView *asyncImageView;
 
 - (void)setup;
-- (void)parseCellAttributes;
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width;
 
 @end

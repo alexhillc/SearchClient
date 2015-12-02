@@ -14,6 +14,5 @@
 @interface ASCTableViewNewsSearchResultCell : ASCTableViewSearchResultCell
 
 @property (nonatomic) ASCNewsSearchResultModel *cellModel;
-@property ASCAsyncImageView *asyncImageView;
 
 @end

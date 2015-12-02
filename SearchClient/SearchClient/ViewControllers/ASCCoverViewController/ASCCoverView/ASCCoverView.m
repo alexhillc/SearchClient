@@ -64,6 +64,12 @@
         self.searchBarConstraintWidth = [self.searchBar asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth];
         self.searchBarConstraintCenter = [self.searchBar asc_centerHorizontallyInParent];
         
+        // shadowSearchBar constraints
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeLeft toEdge:NSLayoutAttributeLeft ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeRight toEdge:NSLayoutAttributeRight ofSibling:self.searchBar constant:0];
+        [self.shadowSearchBar asc_pinEdge:NSLayoutAttributeBottom toEdge:NSLayoutAttributeBottom ofSibling:self.searchBar constant:0];
+        
         // searchHistoryTableView constraints
         self.searchHistoryTableViewConstraintTop = [self.searchHistoryTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
                                                                     ofSibling:self.searchBar constant:-(self.searchBarConstraintHeight.constant)];
@@ -164,11 +170,14 @@
 }
 
 - (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion {
-    [self layoutIfNeeded];
-    self.searchHistoryTableViewConstraintHeight.constant = 0;
     self.searchBar.collectionView.hidden = NO;
     self.searchBar.dividerView.hidden = NO;
+    self.searchBarConstraintHeight.constant = self.searchBar.intrinsicContentSize.height;
+    self.searchHistoryTableViewConstraintTop.constant = -30.;
+    [self layoutIfNeeded];
     
+    self.searchHistoryTableViewConstraintHeight.constant = 0;
+
     __weak ASCView *weakSelf = self;
     void (^animations)(void) = ^void(void) {
         [weakSelf layoutIfNeeded];

@@ -68,25 +68,11 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
 
 - (void)setCellModel:(ASCSearchResultModel *)cellModel {
     [super setCellModel:cellModel];
-    
-    [self parseCellAttributes];
-    
-    self.titleLabel.attributedText = self.titleLabelText;
-    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.titleLabelText.length)];
-    self.contentLabel.attributedText = self.contentLabelText;
+        
+    self.titleLabel.text = self.cellModel.title;
+    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.cellModel.title.length)];
+    self.contentLabel.attributedText = self.cellModel.searchDesc;
     self.urlLabel.text = [self.cellModel.url absoluteString];
-}
-
-- (void)parseCellAttributes {
-    self.titleLabelText = [[NSMutableAttributedString alloc] initWithString:self.cellModel.titleNoFormatting];
-    [self.titleLabelText replaceHtmlSymbols];
-    
-    self.contentLabelText = [[NSMutableAttributedString alloc] initWithString:self.cellModel.content];
-    [self.contentLabelText replaceHtmlSymbols];
-    
-    NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTFontAttributeName, nil];
-    NSArray *objects = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:12.], nil];
-    [self.contentLabelText replaceOccurancesOfHtmlTag:@"b" withAttributes:[[NSDictionary alloc] initWithObjects:objects forKeys:keys]];
 }
 
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width {

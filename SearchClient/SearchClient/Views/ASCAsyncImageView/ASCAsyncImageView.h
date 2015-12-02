@@ -8,9 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class ASCAsyncImageView;
+
+@protocol ASCAsyncImageViewDelegate <NSObject>
+
+@optional
+- (void)imageViewTapped:(ASCAsyncImageView *)imageView;
+
+@end
+
 @interface ASCAsyncImageView : UIImageView
 
-@property (nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic, weak) id<ASCAsyncImageViewDelegate> delegate;
+@property (nonatomic) NSURL *imageUrl;
 @property (nonatomic) CGSize imageSize;
+@property (nonatomic) NSURL *largeImageUrl;
+@property (nonatomic) CGSize largeImageSize;
+
+- (void)scaleToWidth:(CGFloat)width;
 
 @end

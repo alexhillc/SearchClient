@@ -10,15 +10,15 @@
 
 @interface ASCSearchResultModel : NSObject
 
-@property (nonatomic, copy) NSString *googleSearchResultClass;
+@property (nonatomic, copy) NSString *bingSearchResultClass;
+@property (nonatomic, copy) NSString *searchId;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *titleNoFormatting;
-@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSAttributedString *searchDesc;
+@property (nonatomic, copy) NSString *displayUrl;
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) NSURL *visibleUrl;
 
-+ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic;
++ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic requestParams:(NSArray *)params;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic;
+- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params;
 
 @end
