@@ -70,12 +70,11 @@
     
     __weak ASCCoverViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.coverView expandToHeight:keyboardSize.height];
-        
-        [UIView animateWithDuration:ASCViewAnimationDuration delay:ASCViewAnimationDuration
-                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                [weakSelf setNeedsStatusBarAppearanceUpdate];
-                            } completion:nil];
+        [weakSelf.coverView expandToHeight:keyboardSize.height completion:^{
+            [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
+                [weakSelf setNeedsStatusBarAppearanceUpdate];
+            }];
+        }];
     });
 }
 

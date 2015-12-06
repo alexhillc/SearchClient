@@ -10,33 +10,24 @@
 
 @implementation ASCNewsSearchResultModel
 
-//- (instancetype)initWithDictionary:(NSDictionary *)dic {
-//    if (self = [super init]) {
-//        self.googleSearchResultClass = [dic valueForKey:@"GsearchResultClass"];
-//        self.title = [dic valueForKey:@"title"];
-//        self.titleNoFormatting = [dic valueForKey:@"titleNoFormatting"];
-//        self.content = [dic valueForKey:@"content"];
-//        self.url = [NSURL URLWithString:[dic valueForKey:@"unescapedUrl"]];
-//        self.publisher = [dic valueForKey:@"publisher"];
-//        self.clusterUrl = [NSURL URLWithString:[dic valueForKey:@"clusterUrl"]];
-//        
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZZ"];
-//        self.publishedDate = [formatter dateFromString:[dic valueForKey:@"datePublished"]];
-//        
-//        NSDictionary *imageDic = [dic valueForKey:@"image"];
-//        self.thumbSize = CGSizeMake([[imageDic valueForKey:@"tbWidth"] floatValue], [[dic valueForKey:@"tbHeight"] floatValue]);
-//        
-//        NSMutableString *thumbUrl = [[imageDic valueForKey:@"tbUrl"] mutableCopy];
-//        [thumbUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, thumbUrl.length)];
-//        self.thumbImgUrl = [NSURL URLWithString:[thumbUrl copy]];
-//        
-//        NSMutableString *imageUrl = [[imageDic valueForKey:@"url"] mutableCopy];
-//        [imageUrl replaceOccurrencesOfString:@"http://" withString:@"https://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, imageUrl.length)];
-//        self.imgUrl = [NSURL URLWithString:[imageUrl copy]];
-//    }
-//    
-//    return self;
-//}
+- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
+    if (self = [super init]) {
+        self.bingSearchResultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
+        self.searchId = [dic valueForKey:@"ID"];
+        self.title = [dic valueForKey:@"Title"];
+        self.url = [NSURL URLWithString:[dic valueForKey:@"Url"]];
+        
+        NSArray *keys = [[NSArray alloc] initWithObjects:NSFontAttributeName, nil];
+        NSArray *objects = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:12.], nil];
+        NSMutableAttributedString *attributedDesc = [[NSMutableAttributedString alloc] initWithString:[dic valueForKey:@"Description"]];
+        [attributedDesc replaceOccurancesOfStrings:params withAttributes:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
+        self.searchDesc = [attributedDesc copy];
+        
+        self.publisher = [dic valueForKey:@"Source"];
+        self.publishedDate = [NSDate asc_dateFromISO8601String:[dic valueForKey:@"Date"]];
+    }
+    
+    return self;
+}
 
 @end

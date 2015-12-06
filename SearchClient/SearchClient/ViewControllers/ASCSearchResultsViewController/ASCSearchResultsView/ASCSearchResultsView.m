@@ -87,7 +87,7 @@
     }
 }
 
-- (void)expandToHeight:(CGFloat)keyboardHeight {
+- (void)expandToHeight:(CGFloat)keyboardHeight completion:(void (^)(void))completion {
     [self layoutIfNeeded];
     
     CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 5.;
@@ -107,7 +107,11 @@
     [UIView animateWithDuration:ASCViewAnimationDuration delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:1 options:0 animations:^{
         weakSelf.searchResultsTableView.alpha = 0.25;
         [weakSelf layoutIfNeeded];
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        if (completion) {
+            completion();
+        }
+    }];
 }
 
 - (void)contract {

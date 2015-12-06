@@ -55,7 +55,7 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     self.titleLabel.frame = CGRectMake(ASCTableViewCellContentPadding, ASCTableViewCellContentPadding, self.frame.size.width - (2 * ASCTableViewCellContentPadding), 0);
     [self.titleLabel sizeToFit];
     
-    self.urlLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height,
+    self.urlLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 2.,
                                      self.frame.size.width - (2 * ASCTableViewCellContentPadding), 13.5);
     
     self.dividerView.frame = CGRectMake(0, self.urlLabel.frame.origin.y + self.urlLabel.frame.size.height + ASCTableViewCellContentPadding,
@@ -66,12 +66,12 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     [self.contentLabel sizeToFit];
 }
 
-- (void)setCellModel:(ASCSearchResultModel *)cellModel {
+- (void)setCellModel:(ASCTableViewWebSearchResultCellModel *)cellModel {
     [super setCellModel:cellModel];
         
-    self.titleLabel.text = self.cellModel.title;
-    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.cellModel.title.length)];
-    self.contentLabel.attributedText = self.cellModel.searchDesc;
+    self.titleLabel.text = self.cellModel.titleLabelText;
+    [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.cellModel.titleLabelText.length)];
+    self.contentLabel.attributedText = self.cellModel.contentLabelText;
     self.urlLabel.text = [self.cellModel.url absoluteString];
 }
 
@@ -87,7 +87,8 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     sizingCell.cellModel = self.cellModel;
     [sizingCell layoutSubviews];
     
-    CGFloat height = sizingCell.titleLabel.frame.size.height + sizingCell.contentLabel.frame.size.height + sizingCell.urlLabel.frame.size.height + sizingCell.dividerView.frame.size.height + (4 * ASCTableViewCellContentPadding);
+    CGFloat height = sizingCell.titleLabel.frame.size.height + sizingCell.contentLabel.frame.size.height + sizingCell.urlLabel.frame.size.height + sizingCell.dividerView.frame.size.height + 2. +
+                    (4 * ASCTableViewCellContentPadding);
     
     return height;
 }

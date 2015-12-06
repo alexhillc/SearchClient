@@ -7,29 +7,28 @@
 //
 
 #import "ASCSearchResultsTableViewDelegateAndDatasource.h"
-#import "ASCTableViewSearchResultCell.h"
 #import "ASCTableViewWebSearchResultCell.h"
 #import "ASCTableViewImageSearchResultCell.h"
+#import "ASCTableViewNewsSearchResultCell.h"
+#import "ASCTableViewSpellSearchResultCell.h"
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchResultsViewController.h"
-#import "ASCWebSearchResultModel.h"
-#import "ASCImageSearchResultModel.h"
 
 @implementation ASCSearchResultsTableViewDelegateAndDatasource
 
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ASCSearchResultModel *cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
+    ASCTableViewSearchResultCellModel *cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
     
     ASCTableViewSearchResultCell *cell = nil;
-    if ([cellModel isKindOfClass:[ASCWebSearchResultModel class]]) {
+    if ([cellModel isKindOfClass:[ASCTableViewWebSearchResultCellModel class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewWebSearchResultCellIdentifier];
         
         if (!cell) {
             cell = [[ASCTableViewWebSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                           reuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
         }
-    } else if ([cellModel isKindOfClass:[ASCImageSearchResultModel class]]) {
+    } else if ([cellModel isKindOfClass:[ASCTableViewImageSearchResultCellModel class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewImageSearchResultCellIdentifier];
         
         if (!cell) {
@@ -37,7 +36,23 @@
                                                        reuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
         }
         
-        cell.asyncImageView.delegate = self.vc;
+        cell.asyncImageViewFirst.delegate = self.vc;
+        cell.asyncImageViewSecond.delegate = self.vc;
+        cell.asyncImageViewThird.delegate = self.vc;
+    } else if ([cellModel isKindOfClass:[ASCTableViewNewsSearchResultCellModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewNewsSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewNewsSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                            reuseIdentifier:ASCTableViewNewsSearchResultCellIdentifier];
+        }
+    } else if ([cellModel isKindOfClass:[ASCTableViewSpellSearchResultCellModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewSpellSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewSpellSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                           reuseIdentifier:ASCTableViewSpellSearchResultCellIdentifier];
+        }
     }
     
     cell.titleLabel.delegate = self.vc;

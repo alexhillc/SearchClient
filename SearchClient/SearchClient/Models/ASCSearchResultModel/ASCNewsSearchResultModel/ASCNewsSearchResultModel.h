@@ -10,10 +10,6 @@
 
 @interface ASCNewsSearchResultModel : ASCSearchResultModel
 
-@property (nonatomic) CGSize thumbSize;
-@property (nonatomic, strong) NSURL *thumbImgUrl;
-@property (nonatomic, strong) NSURL *imgUrl;
-@property (nonatomic, strong) NSURL *clusterUrl;
 @property (nonatomic, strong) NSDate *publishedDate;
 @property (nonatomic, copy) NSString *publisher;
 

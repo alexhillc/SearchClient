@@ -25,6 +25,4 @@
 @property (nonatomic) NSURL *largeImageUrl;
 @property (nonatomic) CGSize largeImageSize;
 
-- (void)scaleToWidth:(CGFloat)width;
-
 @end

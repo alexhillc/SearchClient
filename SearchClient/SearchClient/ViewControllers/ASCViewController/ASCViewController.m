@@ -47,7 +47,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     
     [self.searchHistoryViewModel loadSearchHistory];
 
-    self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"SHOPPING", @"VIDEOS", @"BOOKS", nil];
+    self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"VIDEOS", @"RELATED", @"SPELLING", nil];
     
     ASCCollectionViewCell *sliderSizingCell = [[ASCCollectionViewCell alloc] init];
     sliderSizingCell.textLabel.text = [self.searchOptions objectAtIndex:0];

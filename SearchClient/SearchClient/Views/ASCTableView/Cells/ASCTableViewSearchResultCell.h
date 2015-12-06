@@ -12,7 +12,7 @@
 
 extern CGFloat const ASCTableViewCellContentPadding;
 
-@class TTTAttributedLabel, ASCSearchResultModel, ASCAsyncImageView;
+@class TTTAttributedLabel, ASCTableViewSearchResultCellModel, ASCAsyncImageView;
 
 @interface ASCTableViewSearchResultCell : UITableViewCell
 
@@ -20,8 +20,10 @@ extern CGFloat const ASCTableViewCellContentPadding;
 @property (strong) UILabel *contentLabel;
 @property (strong) UILabel *urlLabel;
 @property (strong) UIView *dividerView;
-@property (nonatomic) ASCSearchResultModel *cellModel;
-@property ASCAsyncImageView *asyncImageView;
+@property (nonatomic) ASCTableViewSearchResultCellModel *cellModel;
+@property ASCAsyncImageView *asyncImageViewFirst;
+@property ASCAsyncImageView *asyncImageViewSecond;
+@property ASCAsyncImageView *asyncImageViewThird;
 
 - (void)setup;
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width;

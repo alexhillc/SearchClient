@@ -7,12 +7,16 @@
 //
 
 #import "ASCTableViewSearchResultCell.h"
-#import "ASCNewsSearchResultModel.h"
+#import "ASCTableViewNewsSearchResultCellModel.h"
+
+extern NSString * const ASCTableViewNewsSearchResultCellIdentifier;
 
 @class ASCAsyncImageView;
 
 @interface ASCTableViewNewsSearchResultCell : ASCTableViewSearchResultCell
 
-@property (nonatomic) ASCNewsSearchResultModel *cellModel;
+@property (nonatomic) ASCTableViewNewsSearchResultCellModel *cellModel;
+@property (strong) UILabel *publishedDateLabel;
+@property (strong) UILabel *publisherLabel;
 
 @end

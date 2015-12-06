@@ -9,10 +9,13 @@
 #import "ASCSearchResultModel.h"
 #import "ASCWebSearchResultModel.h"
 #import "ASCImageSearchResultModel.h"
+#import "ASCNewsSearchResultModel.h"
+#import "ASCSpellSearchResultModel.h"
 
 NSString * const BsearchResultClassWeb = @"WebResult";
 NSString * const BsearchResultClassImage = @"ImageResult";
 NSString * const BsearchResultClassNews = @"NewsResult";
+NSString * const BsearchResultClassSpell = @"SpellResult";
 
 @implementation ASCSearchResultModel
 
@@ -23,6 +26,10 @@ NSString * const BsearchResultClassNews = @"NewsResult";
         return [[ASCWebSearchResultModel alloc] initWithDictionary:dic requestParams:params];
     } else if ([resultClass isEqualToString:BsearchResultClassImage]) {
         return [[ASCImageSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+    } else if ([resultClass isEqualToString:BsearchResultClassNews]) {
+        return [[ASCNewsSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+    } else if ([resultClass isEqualToString:BsearchResultClassSpell]) {
+        return [[ASCSpellSearchResultModel alloc] initWithDictionary:dic requestParams:params];
     }
     
     return nil;

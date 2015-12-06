@@ -30,7 +30,6 @@
 - (instancetype)init {
     if (self = [super init]) {
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        config.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicyNever;
         self.urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     }
     

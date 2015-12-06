@@ -134,7 +134,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     
     __weak ASCSearchResultsViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchResultsView expandToHeight:keyboardSize.height];
+        [weakSelf.searchResultsView expandToHeight:keyboardSize.height completion:nil];
     });
 }
 
@@ -163,8 +163,10 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 
 #pragma mark - ASCSearchBarDelegate
 - (void)searchBar:(ASCSearchBar *)searchBar didChangeToSearchOptionIndex:(NSInteger)idx {
-    self.searchResultsViewModel.queryType = idx;
-    [self presentResults];
+    if (self.searchResultsViewModel.queryType != idx) {
+        self.searchResultsViewModel.queryType = idx;
+        [self presentResults];
+    }
 }
 
 #pragma mark - JTSImageViewControllerDelegate

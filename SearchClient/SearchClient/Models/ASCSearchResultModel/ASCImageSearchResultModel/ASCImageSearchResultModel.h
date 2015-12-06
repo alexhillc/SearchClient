@@ -14,6 +14,5 @@
 @property (nonatomic) CGSize imgSize;
 @property (nonatomic, strong) NSURL *thumbImgUrl;
 @property (nonatomic, strong) NSURL *imgUrl;
-@property (nonatomic, copy) NSString *contentType;
 
 @end

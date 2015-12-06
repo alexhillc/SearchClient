@@ -40,7 +40,7 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 
 - (void)setup;
 
-- (void)expandToHeight:(CGFloat)height;
+- (void)expandToHeight:(CGFloat)height completion:(void (^)(void))completion;
 - (void)contract;
 - (BOOL)isExpanded;
 

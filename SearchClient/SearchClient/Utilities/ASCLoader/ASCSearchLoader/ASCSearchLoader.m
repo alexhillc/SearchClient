@@ -18,6 +18,17 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
 }
 
 - (ASCLoaderType)type {
+    NSString *queryType = [self.requestParameters valueForKey:@"queryType"];
+    if (queryType) {
+        if ([queryType isEqualToString:@"Web"]) {
+            return ASCLoaderTypeWebSearch;
+        } else if ([queryType isEqualToString:@"Image"]) {
+            return ASCLoaderTypeImageSearch;
+        } else if ([queryType isEqualToString:@"News"]) {
+            return ASCLoaderTypeNewsSearch;
+        }
+    }
+    
     return ASCLoaderTypeSearch;
 }
 
@@ -26,16 +37,17 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
     NSString *queryString = [self.requestParameters valueForKey:@"queryString"];
     
     // Base string
-    NSString *requestString = [[[ASCSearchLoader baseSearchUrl] stringByAppendingString:@"/"] stringByAppendingString:queryType];
+    NSString *requestString = [[ASCSearchLoader baseSearchUrl] stringByAppendingString:@"/Composite?"];
     
     // Append json format
-    requestString = [requestString stringByAppendingString:@"?$format=json"];
+    requestString = [[[[requestString stringByAppendingString:@"$format=json"] stringByAppendingString:@"&Sources=%27spell%2B"] stringByAppendingString:queryType]
+                     stringByAppendingString:@"%27"];
     
     // Build query
     requestString = [[requestString stringByAppendingString:@"&Query=%27"]
                      stringByAppendingString:[[queryString stringByReplacingOccurrencesOfString:@" " withString:@"%20"]
                                               stringByAppendingString:@"%27"]];
-    
+
     self.requestUrl = [NSURL URLWithString:requestString];
 }
 
@@ -57,9 +69,18 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
                                                                 options:NSJSONReadingAllowFragments
                                                                   error:&jsonError];
     if (responseDic) {
-        NSArray *resultsArray = [[responseDic valueForKey:@"d"] valueForKey:@"results"];
-        NSMutableArray *parsedResultsArray = [[NSMutableArray alloc] init];
+        NSArray *spelling = [[[[responseDic valueForKey:@"d"] valueForKey:@"results"] firstObject] valueForKey:@"SpellingSuggestions"];
+        NSArray *responseObjects = [[[[responseDic valueForKey:@"d"] valueForKey:@"results"] firstObject] valueForKey:[self.requestParameters valueForKey:@"queryType"]];
         
+        NSMutableArray *resultsArray = [[NSMutableArray alloc] init];
+        
+        if (self.type != ASCLoaderTypeImageSearch) {
+            [resultsArray addObjectsFromArray:spelling];
+        }
+        
+        [resultsArray addObjectsFromArray:responseObjects];
+        
+        NSMutableArray *parsedResultsArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in resultsArray) {
             ASCSearchResultModel *model = [ASCSearchResultModel modelForDictionary:dic requestParams:[self.requestParameters allValues]];
             [parsedResultsArray addObject:model];

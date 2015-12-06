@@ -83,7 +83,7 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
-- (void)expandToHeight:(CGFloat)height {
+- (void)expandToHeight:(CGFloat)height completion:(void (^)(void))completion {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }

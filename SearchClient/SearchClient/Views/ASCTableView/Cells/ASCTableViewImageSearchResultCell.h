@@ -7,7 +7,7 @@
 //
 
 #import "ASCTableViewSearchResultCell.h"
-#import "ASCImageSearchResultModel.h"
+#import "ASCTableViewImageSearchResultCellModel.h"
 
 extern NSString * const ASCTableViewImageSearchResultCellIdentifier;
 
@@ -15,6 +15,6 @@ extern NSString * const ASCTableViewImageSearchResultCellIdentifier;
 
 @interface ASCTableViewImageSearchResultCell : ASCTableViewSearchResultCell
 
-@property (nonatomic) ASCImageSearchResultModel *cellModel;
+@property (nonatomic) ASCTableViewImageSearchResultCellModel *cellModel;
 
 @end

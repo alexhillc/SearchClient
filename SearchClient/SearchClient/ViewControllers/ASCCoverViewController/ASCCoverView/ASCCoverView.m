@@ -96,7 +96,7 @@
 }
 
 #pragma mark - Helper methods
-- (void)expandToHeight:(CGFloat)keyboardHeight {
+- (void)expandToHeight:(CGFloat)keyboardHeight completion:(void (^)(void))completion {
     [self layoutIfNeeded];
     
     CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 5.;
@@ -124,6 +124,10 @@
     } completion:^(BOOL finished) {
         weakSelf.titleLabelSecondary.hidden = YES;
         weakSelf.titleLabelPrimary.hidden = YES;
+        
+        if (completion) {
+            completion();
+        }
     }];
 }
 

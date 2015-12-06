@@ -20,5 +20,6 @@
 #import "NSMutableAttributedString+Replacement.h"
 #import "UIColor+Google.h"
 #import "ASCNetwork.h"
+#import "NSDate+ISO8601.h"
 
 #endif /* SearchClient_Prefix_pch */

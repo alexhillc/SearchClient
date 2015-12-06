@@ -8,7 +8,7 @@
 
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchLoader.h"
-#import "ASCQueryModel.h"
+#import "ASCTableViewImageSearchResultCellModel.h"
 
 @interface ASCSearchResultsViewModel () <ASCLoaderDelegate>
 
@@ -29,7 +29,8 @@
 }
 
 - (void)loaderDidFinishLoadWithSuccess:(ASCLoader *)loader {
-    self.data = (NSArray *)loader.parsedResult;
+    NSArray *resultData = (NSArray *)loader.parsedResult;
+    self.data = [ASCTableViewSearchResultCellModel cellModelsForResultModels:resultData];
     
     if ([self.delegate respondsToSelector:@selector(viewModelDidReceiveNewDataSet:)]) {
         [self.delegate viewModelDidReceiveNewDataSet:self];
@@ -37,7 +38,7 @@
 }
 
 - (NSString *)stringForQueryType:(ASCQueryType)queryType {
-    NSArray *queryStrings = @[ @"Web",@"Image" ];
+    NSArray *queryStrings = @[ @"Web", @"Image", @"News", @"Video" ];
     
     return [queryStrings objectAtIndex:queryType];
 }

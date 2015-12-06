@@ -7,12 +7,12 @@
 //
 
 #import "ASCTableViewSearchResultCell.h"
-#import "ASCWebSearchResultModel.h"
+#import "ASCTableViewWebSearchResultCellModel.h"
 
 extern NSString * const ASCTableViewWebSearchResultCellIdentifier;
 
 @interface ASCTableViewWebSearchResultCell : ASCTableViewSearchResultCell
 
-@property (nonatomic) ASCWebSearchResultModel *cellModel;
+@property (nonatomic) ASCTableViewWebSearchResultCellModel *cellModel;
 
 @end
