@@ -8,7 +8,6 @@
 
 #import "ASCView.h"
 
-CGFloat const ASCViewTextFieldHeight = 40.0;
 CGFloat const ASCViewTableViewExpandedOffsetY = 69.0;
 CGFloat const ASCViewTextFieldExpandedOffsetY = 24.0;
 CGFloat const ASCViewTextFieldContractedMultiplierOffsetY = 0.48;
@@ -75,7 +74,7 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
     
-    return nil;
+    return NO;
 }
 
 - (void)contract {

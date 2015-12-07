@@ -12,7 +12,6 @@
 
 #define ASCViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0]
 
-extern CGFloat const ASCViewTextFieldHeight;
 extern CGFloat const ASCViewTableViewExpandedOffsetY;
 extern CGFloat const ASCViewTextFieldExpandedOffsetY;
 extern CGFloat const ASCViewTextFieldContractedMultiplierOffsetY;

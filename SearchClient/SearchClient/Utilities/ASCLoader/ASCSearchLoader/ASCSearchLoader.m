@@ -26,6 +26,8 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
             return ASCLoaderTypeImageSearch;
         } else if ([queryType isEqualToString:@"News"]) {
             return ASCLoaderTypeNewsSearch;
+        } else if ([queryType isEqualToString:@"Video"]) {
+            return ASCLoaderTypeVideoSearch;
         }
     }
     
@@ -47,6 +49,12 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
     requestString = [[requestString stringByAppendingString:@"&Query=%27"]
                      stringByAppendingString:[[queryString stringByReplacingOccurrencesOfString:@" " withString:@"%20"]
                                               stringByAppendingString:@"%27"]];
+    
+    // Don't correct query on server side
+    requestString = [requestString stringByAppendingString:@"&WebSearchOptions=%27DisableQueryAlterations%27"];
+    
+    // Highlight query parameters
+    requestString = [requestString stringByAppendingString:@"&Options=%27EnableHighlighting%27"];
 
     self.requestUrl = [NSURL URLWithString:requestString];
 }
@@ -82,7 +90,7 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
         
         NSMutableArray *parsedResultsArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in resultsArray) {
-            ASCSearchResultModel *model = [ASCSearchResultModel modelForDictionary:dic requestParams:[self.requestParameters allValues]];
+            ASCSearchResultModel *model = [ASCSearchResultModel modelForDictionary:dic];
             [parsedResultsArray addObject:model];
         }
         

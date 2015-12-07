@@ -10,17 +10,22 @@
 
 @implementation ASCNewsSearchResultModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
+- (instancetype)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         self.bingSearchResultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
         self.searchId = [dic valueForKey:@"ID"];
-        self.title = [dic valueForKey:@"Title"];
         self.url = [NSURL URLWithString:[dic valueForKey:@"Url"]];
         
         NSArray *keys = [[NSArray alloc] initWithObjects:NSFontAttributeName, nil];
-        NSArray *objects = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:12.], nil];
+        NSArray *objectsDesc = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:14.], nil];
+        NSArray *objectsTitle = [[NSArray alloc] initWithObjects:[UIFont boldSystemFontOfSize:16.], nil];
+        
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:[dic valueForKey:@"Title"]];
+        [attributedTitle replaceOccurancesOfBeginningTag:@"\uE000" endingTag:@"\uE001" withAttributes:[NSDictionary dictionaryWithObjects:objectsTitle forKeys:keys]];
+        self.title = [attributedTitle copy];
+        
         NSMutableAttributedString *attributedDesc = [[NSMutableAttributedString alloc] initWithString:[dic valueForKey:@"Description"]];
-        [attributedDesc replaceOccurancesOfStrings:params withAttributes:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
+        [attributedDesc replaceOccurancesOfBeginningTag:@"\uE000" endingTag:@"\uE001" withAttributes:[NSDictionary dictionaryWithObjects:objectsDesc forKeys:keys]];
         self.searchDesc = [attributedDesc copy];
         
         self.publisher = [dic valueForKey:@"Source"];

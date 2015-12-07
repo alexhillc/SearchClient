@@ -90,14 +90,14 @@
 - (void)expandToHeight:(CGFloat)keyboardHeight completion:(void (^)(void))completion {
     [self layoutIfNeeded];
     
-    CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 5.;
+    CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 10.;
     if (availableSpace > self.searchHistoryTableView.contentSize.height) {
         self.searchHistoryTableViewConstraintHeight.constant = self.searchHistoryTableView.contentSize.height;
     } else {
         self.searchHistoryTableViewConstraintHeight.constant = availableSpace;
     }
     
-    self.searchHistoryTableViewConstraintTop.constant = -30.;
+    self.searchHistoryTableViewConstraintTop.constant = -40.;
     
     self.searchHistoryTableView.hidden = NO;
     self.shadowSearchHistoryTableView.hidden = NO;
@@ -117,7 +117,6 @@
 - (void)contract {
     [self layoutIfNeeded];
     
-    [self endEditing:YES];
     self.searchHistoryTableViewConstraintHeight.constant = 0;
     
     __weak ASCSearchResultsView *weakSelf = self;

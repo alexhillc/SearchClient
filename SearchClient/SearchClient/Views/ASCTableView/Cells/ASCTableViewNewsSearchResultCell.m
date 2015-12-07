@@ -20,18 +20,18 @@ NSString * const ASCTableViewNewsSearchResultCellIdentifier = @"ASCTableViewNews
     self.textLabel.hidden = YES;
     
     NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTForegroundColorAttributeName,(id)kCTUnderlineStyleAttributeName, kCTFontAttributeName, nil];
-    NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor blueColor],[NSNumber numberWithInt:kCTUnderlineStyleNone], [UIFont systemFontOfSize:14.], nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor blueColor],[NSNumber numberWithInt:kCTUnderlineStyleNone], [UIFont systemFontOfSize:16.], nil];
     NSDictionary *linkAttributes = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
     
     self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.titleLabel.font = [UIFont systemFontOfSize:14.];
+    self.titleLabel.font = [UIFont systemFontOfSize:16.];
     self.titleLabel.linkAttributes = linkAttributes;
     self.titleLabel.numberOfLines = 0;
     
     [self addSubview:self.titleLabel];
     
     self.publisherLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.publisherLabel.font = [UIFont systemFontOfSize:11.];
+    self.publisherLabel.font = [UIFont systemFontOfSize:14.];
     self.publisherLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.publisherLabel.numberOfLines = 1;
     [self.publisherLabel setTextColor:[UIColor colorWithRed:102./255. green:102./255. blue:102./255. alpha:1]];
@@ -39,7 +39,7 @@ NSString * const ASCTableViewNewsSearchResultCellIdentifier = @"ASCTableViewNews
     [self addSubview:self.publisherLabel];
     
     self.publishedDateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.publishedDateLabel.font = [UIFont systemFontOfSize:11.];
+    self.publishedDateLabel.font = [UIFont systemFontOfSize:14.];
     self.publishedDateLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.publishedDateLabel.numberOfLines = 1;
     [self.publishedDateLabel setTextColor:[UIColor colorWithRed:102./255. green:102./255. blue:102./255. alpha:1]];
@@ -52,7 +52,7 @@ NSString * const ASCTableViewNewsSearchResultCellIdentifier = @"ASCTableViewNews
     [self addSubview:self.dividerView];
     
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.contentLabel.font = [UIFont systemFontOfSize:12.];
+    self.contentLabel.font = [UIFont systemFontOfSize:14.];
     self.contentLabel.numberOfLines = 0;
     [self addSubview:self.contentLabel];
 }

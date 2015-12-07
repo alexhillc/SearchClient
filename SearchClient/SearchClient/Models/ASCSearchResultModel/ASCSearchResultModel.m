@@ -11,31 +11,39 @@
 #import "ASCImageSearchResultModel.h"
 #import "ASCNewsSearchResultModel.h"
 #import "ASCSpellSearchResultModel.h"
+#import "ASCVideoSearchResultModel.h"
+#import "ASCRelatedSearchResultModel.h"
 
 NSString * const BsearchResultClassWeb = @"WebResult";
 NSString * const BsearchResultClassImage = @"ImageResult";
 NSString * const BsearchResultClassNews = @"NewsResult";
 NSString * const BsearchResultClassSpell = @"SpellResult";
+NSString * const BsearchResultClassVideo = @"VideoResult";
+NSString * const BsearchResultClassRelated = @"RelatedSearchResult";
 
 @implementation ASCSearchResultModel
 
-+ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
++ (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic {
     NSString *resultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
 
     if ([resultClass isEqualToString:BsearchResultClassWeb]) {
-        return [[ASCWebSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+        return [[ASCWebSearchResultModel alloc] initWithDictionary:dic];
     } else if ([resultClass isEqualToString:BsearchResultClassImage]) {
-        return [[ASCImageSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+        return [[ASCImageSearchResultModel alloc] initWithDictionary:dic];
     } else if ([resultClass isEqualToString:BsearchResultClassNews]) {
-        return [[ASCNewsSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+        return [[ASCNewsSearchResultModel alloc] initWithDictionary:dic];
     } else if ([resultClass isEqualToString:BsearchResultClassSpell]) {
-        return [[ASCSpellSearchResultModel alloc] initWithDictionary:dic requestParams:params];
+        return [[ASCSpellSearchResultModel alloc] initWithDictionary:dic];
+    } else if ([resultClass isEqualToString:BsearchResultClassVideo]) {
+        return [[ASCVideoSearchResultModel alloc] initWithDictionary:dic];
+    } else if ([resultClass isEqualToString:BsearchResultClassRelated]) {
+        return [[ASCRelatedSearchResultModel alloc] initWithDictionary:dic];
     }
     
     return nil;
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
+- (instancetype)initWithDictionary:(NSDictionary *)dic {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
     

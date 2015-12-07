@@ -25,7 +25,7 @@ NSString * const ASCCollectionViewCellReuseIdentifier = @"ASCCollectionViewCellR
     
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.textColor = [UIColor googleBlueColor];
-    self.textLabel.font = [UIFont boldSystemFontOfSize:10.];
+    self.textLabel.font = [UIFont boldSystemFontOfSize:12.];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     
     [self addSubview:self.textLabel];

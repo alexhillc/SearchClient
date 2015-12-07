@@ -47,12 +47,12 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     
     [self.searchHistoryViewModel loadSearchHistory];
 
-    self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"VIDEOS", @"RELATED", @"SPELLING", nil];
+    self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"VIDEOS", @"RELATED+SPELLING", nil];
     
     ASCCollectionViewCell *sliderSizingCell = [[ASCCollectionViewCell alloc] init];
     sliderSizingCell.textLabel.text = [self.searchOptions objectAtIndex:0];
 
-    CGFloat height = 30.;
+    CGFloat height = 40.;
     CGFloat width = sliderSizingCell.intrinsicContentSize.width;
     [self.ascView.searchBar updateSliderPositionToOffset:0. withSize:CGSizeMake(width, height)];
 }
@@ -119,7 +119,7 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     NSInteger i;
     for (i = 0; i < indexPath.row; ++i) {
         totalOffset += [[self.cachedCollectionViewCellWidths objectForKey:[NSString stringWithFormat:ASCCollectionViewCachedWidthsStringFormat,
-                                                                           i]] floatValue];
+                                                                           (long)i]] floatValue];
     }
     
     [self.ascView.searchBar updateSliderPositionToOffset:totalOffset indexPath:indexPath animated:YES];

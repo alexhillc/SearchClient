@@ -34,6 +34,7 @@
     self.textField = [[ASCTextField alloc] init];
     self.textField.horizontalPadding = 10.0;
     self.textField.cancelButtonColor = [UIColor darkGrayColor];
+    [self.textField setFont:[UIFont systemFontOfSize:16.]];
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.translatesAutoresizingMaskIntoConstraints = NO;
@@ -70,7 +71,7 @@
         [self.textField asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop constant:0.];
         [self.textField asc_pinEdge:NSLayoutAttributeLeft toParentEdge:NSLayoutAttributeLeft constant:0.];
         [self.textField asc_pinEdge:NSLayoutAttributeRight toParentEdge:NSLayoutAttributeRight constant:0.];
-        [self.textField asc_setAttribute:NSLayoutAttributeHeight toConstant:40.];
+        [self.textField asc_setAttribute:NSLayoutAttributeHeight toConstant:50.];
         
         [self.dividerView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofSibling:self.textField constant:0.];
         [self.dividerView asc_pinEdge:NSLayoutAttributeLeft toParentEdge:NSLayoutAttributeLeft constant:0.];
@@ -80,14 +81,14 @@
         [self.collectionView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom ofSibling:self.dividerView constant:0.];
         [self.collectionView asc_pinEdge:NSLayoutAttributeLeft toParentEdge:NSLayoutAttributeLeft constant:0.];
         [self.collectionView asc_pinEdge:NSLayoutAttributeRight toParentEdge:NSLayoutAttributeRight constant:0.];
-        [self.collectionView asc_setAttribute:NSLayoutAttributeHeight toConstant:30.];
+        [self.collectionView asc_setAttribute:NSLayoutAttributeHeight toConstant:40.];
         
         self.isFirstLayout = NO;
     }
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(self.bounds.size.width, self.collectionView.hidden?40:70.5);
+    return CGSizeMake(self.bounds.size.width, self.collectionView.hidden?50:90.5);
 }
 
 - (void)updateSliderPositionToOffset:(CGFloat)offset withSize:(CGSize)size {

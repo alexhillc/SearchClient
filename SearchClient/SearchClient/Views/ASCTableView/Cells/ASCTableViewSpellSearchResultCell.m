@@ -20,8 +20,6 @@ NSString * const ASCTableViewSpellSearchResultCellIdentifier = @"ASCTableViewSpe
     self.textLabel.hidden = YES;
     
     self.suggestedSpellingLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.suggestedSpellingLabel.font = [UIFont systemFontOfSize:16.];
-    
     [self addSubview:self.suggestedSpellingLabel];
 }
 
@@ -36,8 +34,8 @@ NSString * const ASCTableViewSpellSearchResultCellIdentifier = @"ASCTableViewSpe
     [super setCellModel:cellModel];
     
     UIFontDescriptor *fontDescriptor = [self.suggestedSpellingLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold | UIFontDescriptorTraitItalic];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[@"Showing search results for: " stringByAppendingString:self.cellModel.suggestedSpellingLabelText]];
-    [string addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:fontDescriptor size:13.] range:[string.string rangeOfString:self.cellModel.suggestedSpellingLabelText]];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[@"Did you mean: " stringByAppendingString:self.cellModel.suggestedSpellingLabelText] attributes: @{ NSFontAttributeName:[UIFont systemFontOfSize:16.] }];
+    [string addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:fontDescriptor size:16.] range:[string.string rangeOfString:self.cellModel.suggestedSpellingLabelText]];
     [string addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:[string.string rangeOfString:self.cellModel.suggestedSpellingLabelText]];
     
     self.suggestedSpellingLabel.attributedText = string;

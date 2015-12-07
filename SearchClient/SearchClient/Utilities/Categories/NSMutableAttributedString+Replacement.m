@@ -10,14 +10,28 @@
 
 @implementation NSMutableAttributedString (Replacement)
 
-- (void)replaceOccurancesOfStrings:(NSArray *)strings withAttributes:(NSDictionary *)attributes {
-    [strings enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+- (void)replaceOccurancesOfBeginningTag:(NSString *)beginningTag endingTag:(NSString *)endingTag withAttributes:(NSDictionary *)attributes {
+    
+    while (YES)   {
         NSString *plainString = self.string;
-        NSRange effectedRange = [plainString rangeOfString:obj options:NSCaseInsensitiveSearch];
+        NSRange openTagRange = [plainString rangeOfString:beginningTag];
+        if (openTagRange.length == 0) {
+            break;
+        }
+        
+        NSRange searchRange;
+        searchRange.location = openTagRange.location + openTagRange.length;
+        searchRange.length = [plainString length] - searchRange.location;
+        NSRange closeTagRange = [plainString rangeOfString:endingTag options:0 range:searchRange];
+        
+        NSRange effectedRange;
+        effectedRange.location = openTagRange.location + openTagRange.length;
+        effectedRange.length = closeTagRange.location - effectedRange.location;
         
         [self setAttributes:attributes range:effectedRange];
-    }];
-
+        [self deleteCharactersInRange:closeTagRange];
+        [self deleteCharactersInRange:openTagRange];
+    }
 }
 
 @end

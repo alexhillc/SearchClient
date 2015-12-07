@@ -23,7 +23,7 @@ NSString * const ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIden
 - (void)setup {
     self.backgroundColor = [UIColor whiteColor];
     self.textLabel.textColor = [UIColor darkGrayColor];
-    self.textLabel.font = [UIFont systemFontOfSize:13.];
+    self.textLabel.font = [UIFont systemFontOfSize:14.];
 }
 
 @end

@@ -1,22 +1,22 @@
 //
-//  ASCTableViewWebSearchResultCell.m
+//  ASCTableViewrelatedSearchResultCell.m
 //  SearchClient
 //
-//  Created by Alex Hill on 11/28/15.
+//  Created by Alex Hill on 12/6/15.
 //  Copyright © 2015 Alex Hill. All rights reserved.
 //
 
-#import "ASCTableViewWebSearchResultCell.h"
+#import "ASCTableViewRelatedSearchResultCell.h"
 
-NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSearchResultCellIdentifier";
+NSString * const ASCTableViewRelatedSearchResultCellIdentifier = @"ASCTableViewRelatedSearchResultCellIdentifier";
 
-@implementation ASCTableViewWebSearchResultCell
+@implementation ASCTableViewRelatedSearchResultCell
 
 @dynamic cellModel;
 
 - (void)setup {
     [super setup];
-
+    
     self.textLabel.hidden = YES;
     
     self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
@@ -35,16 +35,6 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     [self.urlLabel setTextColor:[UIColor colorWithRed:0 green:100./255. blue:0 alpha:1]];
     
     [self addSubview:self.urlLabel];
-    
-    self.dividerView = [[UIView alloc] init];
-    self.dividerView.backgroundColor = [UIColor colorWithRed:241./255. green:241./255. blue:241./255. alpha:1];
-    
-    [self addSubview:self.dividerView];
-    
-    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.contentLabel.font = [UIFont systemFontOfSize:14.];
-    self.contentLabel.numberOfLines = 0;
-    [self addSubview:self.contentLabel];
 }
 
 - (void)layoutSubviews {
@@ -56,36 +46,29 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     self.urlLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 2.,
                                      self.frame.size.width - (2 * ASCTableViewCellContentPadding), 17.);
     
-    self.dividerView.frame = CGRectMake(0, self.urlLabel.frame.origin.y + self.urlLabel.frame.size.height + ASCTableViewCellContentPadding,
-                                        self.frame.size.width, 1);
-    
-    self.contentLabel.frame = CGRectMake(ASCTableViewCellContentPadding, self.dividerView.frame.origin.y + self.dividerView.frame.size.height +
-                                         ASCTableViewCellContentPadding, self.frame.size.width - (2 * ASCTableViewCellContentPadding), 0);
-    [self.contentLabel sizeToFit];
 }
 
-- (void)setCellModel:(ASCTableViewWebSearchResultCellModel *)cellModel {
+- (void)setCellModel:(ASCTableViewRelatedSearchResultCellModel *)cellModel {
     [super setCellModel:cellModel];
     
     self.titleLabel.attributedText = self.cellModel.titleLabelText;
     [self.titleLabel addLinkToURL:self.cellModel.url withRange:NSMakeRange(0, self.cellModel.titleLabelText.length)];
-    self.contentLabel.attributedText = self.cellModel.contentLabelText;
-    self.urlLabel.text = [self.cellModel.url absoluteString];
+    self.urlLabel.text = self.cellModel.urlLabelText;
 }
 
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
-    static ASCTableViewWebSearchResultCell *sizingCell;
+    static ASCTableViewRelatedSearchResultCell *sizingCell;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sizingCell = [[ASCTableViewWebSearchResultCell alloc] init];
+        sizingCell = [[ASCTableViewRelatedSearchResultCell alloc] init];
     });
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
     sizingCell.cellModel = self.cellModel;
     [sizingCell layoutSubviews];
     
-    CGFloat height = sizingCell.titleLabel.frame.size.height + sizingCell.contentLabel.frame.size.height + sizingCell.urlLabel.frame.size.height + sizingCell.dividerView.frame.size.height + 2. + (4 * ASCTableViewCellContentPadding);
+    CGFloat height = sizingCell.titleLabel.frame.size.height + 2. + sizingCell.urlLabel.frame.size.height + (2 * ASCTableViewCellContentPadding);
     
     return height;
 }

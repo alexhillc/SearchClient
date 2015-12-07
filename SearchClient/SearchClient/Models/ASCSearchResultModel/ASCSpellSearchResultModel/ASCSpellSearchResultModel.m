@@ -10,7 +10,7 @@
 
 @implementation ASCSpellSearchResultModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic requestParams:(NSArray *)params {
+- (instancetype)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         self.bingSearchResultClass = [[dic valueForKey:@"__metadata"] valueForKey:@"type"];
         self.searchId = [dic valueForKey:@"ID"];

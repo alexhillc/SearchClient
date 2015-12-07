@@ -11,6 +11,8 @@
 #import "ASCTableViewImageSearchResultCell.h"
 #import "ASCTableViewNewsSearchResultCell.h"
 #import "ASCTableViewSpellSearchResultCell.h"
+#import "ASCTableViewVideoSearchResultCell.h"
+#import "ASCTableViewRelatedSearchResultCell.h"
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchResultsViewController.h"
 
@@ -39,6 +41,7 @@
         cell.asyncImageViewFirst.delegate = self.vc;
         cell.asyncImageViewSecond.delegate = self.vc;
         cell.asyncImageViewThird.delegate = self.vc;
+        
     } else if ([cellModel isKindOfClass:[ASCTableViewNewsSearchResultCellModel class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewNewsSearchResultCellIdentifier];
         
@@ -52,6 +55,20 @@
         if (!cell) {
             cell = [[ASCTableViewSpellSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:ASCTableViewSpellSearchResultCellIdentifier];
+        }
+    } else if ([cellModel isKindOfClass:[ASCTableViewVideoSearchResultCellModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewVideoSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewVideoSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                            reuseIdentifier:ASCTableViewVideoSearchResultCellIdentifier];
+        }
+    } else if ([cellModel isKindOfClass:[ASCTableViewRelatedSearchResultCellModel class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:ASCTableViewRelatedSearchResultCellIdentifier];
+        
+        if (!cell) {
+            cell = [[ASCTableViewRelatedSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                            reuseIdentifier:ASCTableViewRelatedSearchResultCellIdentifier];
         }
     }
     

@@ -11,11 +11,15 @@
 #import "ASCImageSearchResultModel.h"
 #import "ASCNewsSearchResultModel.h"
 #import "ASCSpellSearchResultModel.h"
+#import "ASCVideoSearchResultModel.h"
+#import "ASCRelatedSearchResultModel.h"
 
 #import "ASCTableViewWebSearchResultCellModel.h"
 #import "ASCTableViewImageSearchResultCellModel.h"
 #import "ASCTableViewNewsSearchResultCellModel.h"
 #import "ASCTableViewSpellSearchResultCellModel.h"
+#import "ASCTableViewVideoSearchResultCellModel.h"
+#import "ASCTableViewRelatedSearchResultCellModel.h"
 
 @implementation ASCTableViewSearchResultCellModel
 
@@ -38,6 +42,10 @@
                 [cellModels addObject:[[ASCTableViewNewsSearchResultCellModel alloc] initWithModel:[models objectAtIndex:i]]];
             } else if (resultModelClass == [ASCSpellSearchResultModel class]) {
                 [cellModels addObject:[[ASCTableViewSpellSearchResultCellModel alloc] initWithModel:[models objectAtIndex:i]]];
+            } else if (resultModelClass == [ASCVideoSearchResultModel class]) {
+                [cellModels addObject:[[ASCTableViewVideoSearchResultCellModel alloc] initWithModel:[models objectAtIndex:i]]];
+            } else if (resultModelClass == [ASCRelatedSearchResultModel class]) {
+                [cellModels addObject:[[ASCTableViewRelatedSearchResultCellModel alloc] initWithModel:[models objectAtIndex:i]]];
             }
         }
     }

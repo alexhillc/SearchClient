@@ -17,7 +17,7 @@
 - (instancetype)initWithModel:(ASCSearchResultModel *)model;
 - (instancetype)initWithModels:(NSArray *)models;
 
-@property (nonatomic, copy) NSString *titleLabelText;
+@property (nonatomic, copy) NSAttributedString *titleLabelText;
 @property (nonatomic, copy) NSAttributedString *contentLabelText;
 @property (nonatomic, copy) NSString *urlLabelText;
 @property (nonatomic, strong) NSURL *url;

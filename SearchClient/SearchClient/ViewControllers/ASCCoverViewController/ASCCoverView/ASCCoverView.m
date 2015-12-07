@@ -46,7 +46,7 @@
     [titleLabelText addAttribute:NSForegroundColorAttributeName value:[UIColor googleRedColor] range:NSMakeRange(5, 1)];
     
     self.titleLabelPrimary = [[UILabel alloc] init];
-    self.titleLabelPrimary.font = [UIFont boldSystemFontOfSize:42];
+    self.titleLabelPrimary.font = [UIFont boldSystemFontOfSize:58];
     self.titleLabelPrimary.attributedText = [titleLabelText copy];
     self.titleLabelPrimary.translatesAutoresizingMaskIntoConstraints = NO;
 
@@ -88,7 +88,7 @@
         self.titleLabelSecondaryConstraintCenter = [self.titleLabelSecondary asc_centerHorizontallyInParent];
         
         // titleLabelPrimary constraints
-        self.titleLabelPrimaryConstraintTop = [self.titleLabelPrimary asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.titleLabelSecondary constant:-53.];
+        self.titleLabelPrimaryConstraintTop = [self.titleLabelPrimary asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeTop ofSibling:self.titleLabelSecondary constant:-72.];
         self.titleLabelPrimaryConstraintCenter = [self.titleLabelPrimary asc_centerHorizontallyInParent];
         
         self.isFirstLayout = NO;
@@ -99,7 +99,7 @@
 - (void)expandToHeight:(CGFloat)keyboardHeight completion:(void (^)(void))completion {
     [self layoutIfNeeded];
     
-    CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 5.;
+    CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 10.;
     if (availableSpace > self.searchHistoryTableView.contentSize.height) {
         self.searchHistoryTableViewConstraintHeight.constant = self.searchHistoryTableView.contentSize.height;
     } else {
@@ -177,7 +177,7 @@
     self.searchBar.collectionView.hidden = NO;
     self.searchBar.dividerView.hidden = NO;
     self.searchBarConstraintHeight.constant = self.searchBar.intrinsicContentSize.height;
-    self.searchHistoryTableViewConstraintTop.constant = -30.;
+    self.searchHistoryTableViewConstraintTop.constant = -40.;
     [self layoutIfNeeded];
     
     self.searchHistoryTableViewConstraintHeight.constant = 0;

@@ -38,7 +38,7 @@
 }
 
 - (NSString *)stringForQueryType:(ASCQueryType)queryType {
-    NSArray *queryStrings = @[ @"Web", @"Image", @"News", @"Video" ];
+    NSArray *queryStrings = @[ @"Web", @"Image", @"News", @"Video", @"RelatedSearch" ];
     
     return [queryStrings objectAtIndex:queryType];
 }

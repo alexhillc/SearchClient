@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, ASCLoaderType) {
     ASCLoaderTypeWebSearch,
     ASCLoaderTypeImageSearch,
     ASCLoaderTypeNewsSearch,
+    ASCLoaderTypeVideoSearch,
     ASCLoaderTypeImage,
     ASCLoaderTypeLocalSearch
 };

@@ -35,6 +35,10 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50.;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.vc isKindOfClass:[ASCCoverViewController class]]) {
         ASCCoverViewController *searchVc = (ASCCoverViewController *)self.vc;

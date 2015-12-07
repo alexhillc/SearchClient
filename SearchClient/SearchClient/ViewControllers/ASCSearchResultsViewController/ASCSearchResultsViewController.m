@@ -66,6 +66,12 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+
+    [self.cachedResultsTableViewCellHeights removeAllObjects];
+}
+
 - (BOOL)prefersStatusBarHidden {
     return NO;
 }
@@ -79,15 +85,17 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 }
 
 - (void)presentResults {
+    __weak ASCSearchResultsViewController *weakSelf = self;
+    
     if (self.searchResultsViewModel.queryType == ASCQueryTypeImage) {
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
-            self.searchResultsView.layer.backgroundColor = [UIColor blackColor].CGColor;
-            self.searchResultsView.searchResultsTableView.layer.backgroundColor = [UIColor blackColor].CGColor;
+            weakSelf.searchResultsView.layer.backgroundColor = [UIColor blackColor].CGColor;
+            weakSelf.searchResultsView.searchResultsTableView.layer.backgroundColor = [UIColor blackColor].CGColor;
         } completion:nil];
     } else {
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
-            self.searchResultsView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
-            self.searchResultsView.searchResultsTableView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+            weakSelf.searchResultsView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+            weakSelf.searchResultsView.searchResultsTableView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
         } completion:nil];
     }
     
@@ -96,7 +104,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     [self.searchResultsView startLoadingAnimation];
     self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
     
-    [self.searchResultsView contract];
+    [self.searchResultsView endEditing:YES];
     [self.searchResultsViewModel loadResultsWithQueryType:self.searchResultsViewModel.queryType];
 }
 

@@ -10,6 +10,6 @@
 
 @interface NSMutableAttributedString (Replacement)
 
-- (void)replaceOccurancesOfStrings:(NSArray *)strings withAttributes:(NSDictionary *)attributes;
+- (void)replaceOccurancesOfBeginningTag:(NSString *)beginningTag endingTag:(NSString *)endingTag withAttributes:(NSDictionary*)attributes;
 
 @end
