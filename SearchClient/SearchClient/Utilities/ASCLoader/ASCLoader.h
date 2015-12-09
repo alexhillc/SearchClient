@@ -18,7 +18,6 @@ typedef NS_ENUM(NSInteger, ASCLoaderType) {
     ASCLoaderTypeNewsSearch,
     ASCLoaderTypeVideoSearch,
     ASCLoaderTypeImage,
-    ASCLoaderTypeLocalSearch
 };
 
 @protocol ASCLoaderDelegate <NSObject>

@@ -63,7 +63,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     [self.ascView.searchResultsTableView registerClass:[ASCTableViewWebSearchResultCell class] forCellReuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
     [self.ascView.searchResultsTableView registerClass:[ASCTableViewImageSearchResultCell class] forCellReuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
     
-    [self presentResults];
+    [self presentResults];    
 }
 
 - (void)viewWillLayoutSubviews {

@@ -56,6 +56,7 @@
 		FAD5C2261C068C900061E13E /* ASCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2251C068C900061E13E /* ASCTextField.m */; };
 		FAD5C22A1C068D880061E13E /* ASCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2291C068D880061E13E /* ASCSearchBar.m */; };
 		FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */; };
+		FAF1E2E21C18A83D00D6AF69 /* ASCLocalLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF1E2E11C18A83D00D6AF69 /* ASCLocalLoader.m */; };
 		FAF6C1591BD41DEF00F966A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C1581BD41DEF00F966A1 /* main.m */; };
 		FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C15B1BD41DEF00F966A1 /* ASCAppDelegate.m */; };
 		FAF6C1641BD41DEF00F966A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF6C1631BD41DEF00F966A1 /* Assets.xcassets */; };
@@ -174,6 +175,8 @@
 		FAD5C2291C068D880061E13E /* ASCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchBar.m; path = Views/ASCSearchBar/ASCSearchBar.m; sourceTree = "<group>"; };
 		FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCDataStore.h; path = Utilities/DataStore/ASCDataStore.h; sourceTree = "<group>"; };
 		FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCDataStore.m; path = Utilities/DataStore/ASCDataStore.m; sourceTree = "<group>"; };
+		FAF1E2E01C18A83D00D6AF69 /* ASCLocalLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCLocalLoader.h; path = Utilities/ASCLoader/ASCLocalLoader/ASCLocalLoader.h; sourceTree = "<group>"; };
+		FAF1E2E11C18A83D00D6AF69 /* ASCLocalLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCLocalLoader.m; path = Utilities/ASCLoader/ASCLocalLoader/ASCLocalLoader.m; sourceTree = "<group>"; };
 		FAF6C1541BD41DEF00F966A1 /* SearchClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6C1581BD41DEF00F966A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FAF6C15A1BD41DEF00F966A1 /* ASCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASCAppDelegate.h; sourceTree = "<group>"; };
@@ -280,7 +283,7 @@
 		FA1944A41BF2E267000A4712 /* ASCLoader */ = {
 			isa = PBXGroup;
 			children = (
-				FA8442BA1C0EC5F30025795B /* ASCNetwork */,
+				FAF1E2DF1C18A82A00D6AF69 /* ASCLocalLoader */,
 				FA0317351C0A8EDD003EF4C1 /* ASCImageLoader */,
 				FA966CE21BF6B6EC006FC8DB /* ASCSearchLoader */,
 				FA1944A51BF2E279000A4712 /* ASCLoader.h */,
@@ -393,6 +396,7 @@
 		FA3B0FE81BDECF900057A1A2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FA8442BA1C0EC5F30025795B /* ASCNetwork */,
 				FA1944A41BF2E267000A4712 /* ASCLoader */,
 				FA4B2AA41BF182A700B78CF7 /* Categories */,
 				FAE640DD1BE1639B00EBEFE2 /* DataStore */,
@@ -655,6 +659,15 @@
 				FA63E8C21C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m */,
 			);
 			name = ASCSearchHistoryViewModel;
+			sourceTree = "<group>";
+		};
+		FAF1E2DF1C18A82A00D6AF69 /* ASCLocalLoader */ = {
+			isa = PBXGroup;
+			children = (
+				FAF1E2E01C18A83D00D6AF69 /* ASCLocalLoader.h */,
+				FAF1E2E11C18A83D00D6AF69 /* ASCLocalLoader.m */,
+			);
+			name = ASCLocalLoader;
 			sourceTree = "<group>";
 		};
 		FAF6C14B1BD41DEE00F966A1 = {
@@ -938,6 +951,7 @@
 				FA310C8B1BF8087500E386A5 /* ASCTableViewSearchResultCell.m in Sources */,
 				FA731FB31C011B2600B07E92 /* ASCView.m in Sources */,
 				FA3C65EC1C140023006A62AC /* ASCTableViewSpellSearchResultCell.m in Sources */,
+				FAF1E2E21C18A83D00D6AF69 /* ASCLocalLoader.m in Sources */,
 				FAA2CE931C0BF86300DE7E5C /* ASCNewsSearchResultModel.m in Sources */,
 				FAA8BD671C0BF1A400F69904 /* ASCTableViewNewsSearchResultCell.m in Sources */,
 				FA8442BD1C0EC61B0025795B /* ASCNetwork.m in Sources */,

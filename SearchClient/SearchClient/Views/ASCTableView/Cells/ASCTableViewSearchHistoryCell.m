@@ -26,4 +26,10 @@ NSString * const ASCTableViewSearchCellIdentifier = @"ASCTableViewSearchCellIden
     self.textLabel.font = [UIFont systemFontOfSize:14.];
 }
 
+- (void)layoutSubviews {
+    [UIView performWithoutAnimation:^{
+        [super layoutSubviews];
+    }];
+}
+
 @end

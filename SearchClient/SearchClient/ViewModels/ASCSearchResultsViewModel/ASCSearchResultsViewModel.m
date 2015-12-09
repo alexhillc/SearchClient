@@ -8,6 +8,7 @@
 
 #import "ASCSearchResultsViewModel.h"
 #import "ASCSearchLoader.h"
+#import "ASCLocalLoader.h"
 #import "ASCTableViewImageSearchResultCellModel.h"
 
 @interface ASCSearchResultsViewModel () <ASCLoaderDelegate>
@@ -17,11 +18,18 @@
 @implementation ASCSearchResultsViewModel
 
 - (void)loadResultsWithQueryType:(ASCQueryType)queryType {
+    [self saveQueryToCache];
+    
     ASCSearchLoader *loader = [[ASCSearchLoader alloc] initWithDelegate:self];
     NSString *queryTypeAsString = [self stringForQueryType:queryType];
     loader.requestParameters = [NSDictionary dictionaryWithObjects:@[queryTypeAsString, self.query] forKeys:@[@"queryType", @"queryString"]];
     
     [loader startLoad];
+}
+
+- (void)saveQueryToCache {
+    ASCLocalLoader *loader = [[ASCLocalLoader alloc] init];
+    [loader saveToCache:self.query];
 }
 
 - (void)loader:(ASCLoader *)loader didFinishWithFailure:(NSError *)error {

@@ -43,9 +43,13 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     self.ascView.searchBar.collectionView.dataSource = self;
     [self.ascView.searchBar.collectionView registerClass:[ASCCollectionViewCell class] forCellWithReuseIdentifier:ASCCollectionViewCellReuseIdentifier];
     
-    [self.searchHistoryViewModel loadSearchHistory];
-
     self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"VIDEOS", @"RELATED+SPELLING", nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.searchHistoryViewModel loadSearchHistory];
 }
 
 - (void)viewWillLayoutSubviews {

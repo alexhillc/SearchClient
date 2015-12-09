@@ -37,7 +37,7 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
 - (void)createRequest {
     NSString *queryType = [self.requestParameters valueForKey:@"queryType"];
     NSString *queryString = [self.requestParameters valueForKey:@"queryString"];
-    
+        
     // Base string
     NSString *requestString = [[ASCSearchLoader baseSearchUrl] stringByAppendingString:@"/Composite?"];
     
