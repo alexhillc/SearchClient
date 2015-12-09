@@ -19,6 +19,7 @@ extern NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat;
 @property (nonatomic, strong) ASCSearchResultsViewModel *searchResultsViewModel;
 @property (nonatomic) ASCSearchResultsTableViewDelegateAndDatasource *searchResultsTableViewDD;
 @property (nonatomic, strong) NSMutableDictionary *cachedResultsTableViewCellHeights;
+@property (nonatomic, strong) UIView *snapshotView;
 
 - (void)presentResults;
 

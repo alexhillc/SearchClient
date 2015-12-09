@@ -13,15 +13,17 @@
 
 @interface ASCCoverViewController ()
 
-@property (nonatomic, weak) ASCCoverView *coverView;
+@property (nonatomic, strong) ASCCoverView *ascView;
 
 @end
 
 @implementation ASCCoverViewController
 
+@dynamic ascView;
+
 - (void)loadView {    
     self.view = [[ASCCoverView alloc] init];
-    self.coverView = (ASCCoverView *)self.view;
+    self.ascView = (ASCCoverView *)self.view;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -37,8 +39,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.presentedViewControllerSnapshotView = [self.view snapshotViewAfterScreenUpdates:YES];
+}
+
 - (BOOL)prefersStatusBarHidden {
-    BOOL shouldHide = ![self.coverView isExpanded];
+    BOOL shouldHide = ![self.ascView isExpanded];
     
     return shouldHide;
 }
@@ -57,7 +65,7 @@
 
 #pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
-    [self.coverView.searchHistoryTableView reloadData];
+    [self.ascView.searchHistoryTableView reloadData];
 }
 
 - (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error {
@@ -70,7 +78,7 @@
     
     __weak ASCCoverViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.coverView expandToHeight:keyboardSize.height completion:^{
+        [weakSelf.ascView expandToHeight:keyboardSize.height completion:^{
             [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
                 [weakSelf setNeedsStatusBarAppearanceUpdate];
             }];
@@ -81,7 +89,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     __weak ASCCoverViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.coverView contract];
+        [weakSelf.ascView contract];
         
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
             [weakSelf setNeedsStatusBarAppearanceUpdate];
@@ -97,15 +105,16 @@
     ASCSearchResultsViewController *searchResultsViewController = [[ASCSearchResultsViewController alloc] init];
     searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
     searchResultsViewController.searchHistoryViewModel = searchHistoryViewModel;
+    searchResultsViewController.snapshotView = self.presentedViewControllerSnapshotView;
     
-    self.coverView.searchBar.textField.text = query;
+    self.ascView.searchBar.textField.text = query;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     __weak ASCCoverViewController *weakSelf = self;
-    [self.coverView hideSearchHistoryTableViewAnimated:YES completion:^{
+    [self.ascView hideSearchHistoryTableViewAnimated:YES completion:^{
         [weakSelf presentViewController:searchResultsViewController animated:NO completion:^{
-            [weakSelf.coverView restoreToOriginalState];
+            [weakSelf.ascView restoreToOriginalState];
         }];
     }];
 }

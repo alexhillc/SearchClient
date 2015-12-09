@@ -45,8 +45,7 @@
         [searchVc presentViewControllerWithQuery:[searchVc.searchHistoryViewModel.data objectAtIndex:indexPath.row]];
     } else if ([self.vc isKindOfClass:[ASCSearchResultsViewController class]]) {
         ASCSearchResultsViewController *searchResultsVc = (ASCSearchResultsViewController *)self.vc;
-        searchResultsVc.searchResultsViewModel.query = [searchResultsVc.searchHistoryViewModel.data objectAtIndex:indexPath.row];
-        [searchResultsVc presentResults];
+        [searchResultsVc presentViewControllerWithQuery:[searchResultsVc.searchHistoryViewModel.data objectAtIndex:indexPath.row]];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

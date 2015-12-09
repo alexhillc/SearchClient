@@ -16,6 +16,5 @@
 @property (nonatomic) UILabel *titleLabelSecondary;
 
 - (void)restoreToOriginalState;
-- (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
 
 @end

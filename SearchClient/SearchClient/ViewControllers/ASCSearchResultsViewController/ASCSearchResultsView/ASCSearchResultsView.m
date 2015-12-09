@@ -46,7 +46,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.isFirstLayout) {
+    if (self.isFirstLayout) {        
         // searchBar constraints
         self.searchBarConstraintTop = [self.searchBar asc_pinEdge:NSLayoutAttributeTop toParentEdge:NSLayoutAttributeTop
                                                                      constant:ASCViewTextFieldExpandedOffsetY];
@@ -64,7 +64,7 @@
         self.searchHistoryTableViewConstraintTop = [self.searchHistoryTableView asc_pinEdge:NSLayoutAttributeTop toEdge:NSLayoutAttributeBottom
                                                                     ofSibling:self.searchBar constant:1.];
         self.searchHistoryTableViewConstraintHeight = [self.searchHistoryTableView asc_setAttribute:NSLayoutAttributeHeight toConstant:0.];
-        self.searchHistoryTableViewConstraintWidth = [self.searchHistoryTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth];
+        self.searchHistoryTableViewConstraintWidth = [self.searchHistoryTableView asc_setAttribute:NSLayoutAttributeWidth toConstant:self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth];
         self.searchHistoryTableViewConstraintCenter = [self.searchHistoryTableView asc_centerHorizontallyInParent];
         
         // shadowSearchHistoryTableView constraints
@@ -132,12 +132,10 @@
     }];
 }
 
-- (void)updateConstraints {
-    [super updateConstraints];
-    
-    self.searchBarConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
-    self.searchHistoryTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
-    self.searchResultsTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
+- (void)updateLayoutWithOrientation:(CGSize)screenSize {
+    self.searchBarConstraintWidth.constant = screenSize.width * ASCViewTextFieldExpandedMultiplierWidth;
+    self.searchHistoryTableViewConstraintWidth.constant = screenSize.width * ASCViewTextFieldExpandedMultiplierWidth;
+    self.searchResultsTableViewConstraintWidth.constant = screenSize.width * ASCViewTextFieldExpandedMultiplierWidth;
 }
 
 - (void)startLoadingAnimation {

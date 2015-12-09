@@ -13,6 +13,4 @@
 
 @interface ASCCoverViewController : ASCViewController
 
-- (void)presentViewControllerWithQuery:(NSString *)query;
-
 @end

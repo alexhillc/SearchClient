@@ -15,7 +15,12 @@
 
 @interface ASCViewController : UIViewController <ASCViewModelDelegate, ASCTextFieldDelegate>
 
+@property (nonatomic, strong) ASCView *ascView;
 @property (nonatomic, strong) ASCSearchHistoryViewModel *searchHistoryViewModel;
 @property (nonatomic) ASCSearchHistoryTableViewDelegateAndDatasource *searchHistoryTableViewDD;
+@property (nonatomic, strong) NSMutableDictionary *cachedCollectionViewCellWidths;
+@property (nonatomic, strong) UIView *presentedViewControllerSnapshotView;
+
+- (void)presentViewControllerWithQuery:(NSString *)query;
 
 @end

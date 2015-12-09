@@ -7,6 +7,7 @@
 //
 
 #import "ASCView.h"
+#import "ASCCollectionView.h"
 
 CGFloat const ASCViewTableViewExpandedOffsetY = 69.0;
 CGFloat const ASCViewTextFieldExpandedOffsetY = 24.0;
@@ -85,6 +86,40 @@ NSTimeInterval const ASCViewAnimationDuration = 0.25;
 - (void)expandToHeight:(CGFloat)height completion:(void (^)(void))completion {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
+- (void)updateLayoutWithOrientation:(CGSize)screenSize {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
+- (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion {
+    self.searchBar.collectionView.hidden = NO;
+    self.searchBar.dividerView.hidden = NO;
+    self.searchBarConstraintHeight.constant = self.searchBar.intrinsicContentSize.height;
+    self.searchHistoryTableViewConstraintTop.constant = -40.;
+    [self layoutIfNeeded];
+    
+    self.searchHistoryTableViewConstraintHeight.constant = 0;
+    
+    __weak ASCView *weakSelf = self;
+    void (^animations)(void) = ^void(void) {
+        [weakSelf layoutIfNeeded];
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:ASCViewAnimationDuration animations:animations completion:^(BOOL finished) {
+            if (completion) {
+                completion();
+            }
+        }];
+    } else {
+        animations();
+        
+        if (completion) {
+            completion();
+        }
+    }
 }
 
 @end

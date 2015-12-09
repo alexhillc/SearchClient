@@ -16,8 +16,6 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
 
 @interface ASCViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ASCSearchBarDelegate>
 
-@property (nonatomic, weak) ASCView *ascView;
-@property (nonatomic, strong) NSMutableDictionary *cachedCollectionViewCellWidths;
 @property (nonatomic, strong) NSArray *searchOptions;
 
 @end
@@ -27,9 +25,9 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.ascView = (ASCView *)self.view;
-    
-    self.cachedCollectionViewCellWidths = [[NSMutableDictionary alloc] init];
+    if (!self.cachedCollectionViewCellWidths) {
+        self.cachedCollectionViewCellWidths = [[NSMutableDictionary alloc] init];
+    }
     
     self.searchHistoryTableViewDD = [[ASCSearchHistoryTableViewDelegateAndDatasource alloc] init];
     self.searchHistoryTableViewDD.vc = self;
@@ -48,28 +46,31 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     [self.searchHistoryViewModel loadSearchHistory];
 
     self.searchOptions = [[NSArray alloc] initWithObjects:@"WEB", @"IMAGES", @"NEWS", @"VIDEOS", @"RELATED+SPELLING", nil];
-    
-    ASCCollectionViewCell *sliderSizingCell = [[ASCCollectionViewCell alloc] init];
-    sliderSizingCell.textLabel.text = [self.searchOptions objectAtIndex:0];
-
-    CGFloat height = 40.;
-    CGFloat width = sliderSizingCell.intrinsicContentSize.width;
-    [self.ascView.searchBar updateSliderPositionToOffset:0. withSize:CGSizeMake(width, height)];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     
-//    __weak ASCViewController *weakSelf = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [weakSelf.ascView.searchBar updateSliderPositionToOffset:0. indexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO];
-//    });
+    if (self.ascView.isFirstLayout) {
+        ASCCollectionViewCell *sliderSizingCell = [[ASCCollectionViewCell alloc] init];
+        sliderSizingCell.textLabel.text = [self.searchOptions objectAtIndex:self.ascView.searchBar.selectedIndex];
+        CGFloat width = sliderSizingCell.intrinsicContentSize.width;
+        
+        __block CGFloat totalOffset = 0;
+        
+        for (int i = 0; i < self.ascView.searchBar.selectedIndex; ++i) {
+            totalOffset += [[self.cachedCollectionViewCellWidths objectForKey:[NSString stringWithFormat:ASCCollectionViewCachedWidthsStringFormat,
+                                                                               (long)i]] floatValue];
+        }
+        
+        [self.ascView.searchBar updateSliderPositionToOffset:totalOffset withWidth:width];
+    }
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self.view setNeedsUpdateConstraints];
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    [self.ascView updateLayoutWithOrientation:size];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -128,6 +129,11 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     }
     
     [self.ascView.searchBar updateSliderPositionToOffset:totalOffset indexPath:indexPath animated:YES];
+}
+
+- (void)presentViewControllerWithQuery:(NSString *)query {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
 @end

@@ -23,8 +23,9 @@
 @property ASCTextField *textField;
 @property UIView *dividerView;
 @property ASCCollectionView *collectionView;
+@property NSInteger selectedIndex;
 
-- (void)updateSliderPositionToOffset:(CGFloat)offset withSize:(CGSize)size;
+- (void)updateSliderPositionToOffset:(CGFloat)offset withWidth:(CGFloat)size;
 - (void)updateSliderPositionToOffset:(CGFloat)offset indexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 
 @end

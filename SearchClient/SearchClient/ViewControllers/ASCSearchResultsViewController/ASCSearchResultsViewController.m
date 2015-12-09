@@ -18,47 +18,69 @@
 #import "JTSImageViewController.h"
 #import "ASCTableView.h"
 #import <SafariServices/SafariServices.h>
+#import "ASCCoverViewController.h"
 
 NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cachedheight%@";
 
 @interface ASCSearchResultsViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) ASCSearchResultsView *searchResultsView;
+@property (nonatomic, strong) ASCSearchResultsView *ascView;
 @property CGPoint originalCenter;
+@property UIPanGestureRecognizer *recognizer;
 
 @end
 
 @implementation ASCSearchResultsViewController
 
+@dynamic ascView;
+
 - (void)loadView {    
-    self.view = [[ASCSearchResultsView alloc] init];
-    self.searchResultsView = (ASCSearchResultsView *)self.view;
+    self.view = [[UIView alloc] init];
+    
+    self.ascView = [[ASCSearchResultsView alloc] init];
+    self.ascView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.ascView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    recognizer.minimumNumberOfTouches = 1;
-    recognizer.maximumNumberOfTouches = 1;
-    recognizer.delegate = self;
-    [self.view addGestureRecognizer:recognizer];
+
+    self.recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    self.recognizer.minimumNumberOfTouches = 1;
+    self.recognizer.maximumNumberOfTouches = 1;
+    self.recognizer.delegate = self;
+    [self.ascView addGestureRecognizer:self.recognizer];
     
     self.cachedResultsTableViewCellHeights = [[NSMutableDictionary alloc] init];
     
     self.searchResultsTableViewDD = [[ASCSearchResultsTableViewDelegateAndDatasource alloc] init];
     self.searchResultsTableViewDD.vc = self;
-    self.searchResultsView.searchResultsTableView.delegate = self.searchResultsTableViewDD;
-    self.searchResultsView.searchResultsTableView.dataSource = self.searchResultsTableViewDD;
+    self.ascView.searchResultsTableView.delegate = self.searchResultsTableViewDD;
+    self.ascView.searchResultsTableView.dataSource = self.searchResultsTableViewDD;
 
     self.searchResultsViewModel.delegate = self;
     
-    [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewWebSearchResultCell class] forCellReuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
-    [self.searchResultsView.searchResultsTableView registerClass:[ASCTableViewImageSearchResultCell class] forCellReuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
+    [self.ascView.searchResultsTableView registerClass:[ASCTableViewWebSearchResultCell class] forCellReuseIdentifier:ASCTableViewWebSearchResultCellIdentifier];
+    [self.ascView.searchResultsTableView registerClass:[ASCTableViewImageSearchResultCell class] forCellReuseIdentifier:ASCTableViewImageSearchResultCellIdentifier];
     
-    [self.searchResultsView startLoadingAnimation];
-    [self.searchResultsViewModel loadResultsWithQueryType:ASCQueryTypeWeb];
-    self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
+    [self presentResults];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    if (self.ascView.isFirstLayout) {
+        [self.ascView asc_fillSuperview];
+        
+        CGRect snapshotFrame = self.snapshotView.frame;
+        snapshotFrame.size.width = self.view.frame.size.width / 2;
+        snapshotFrame.size.height = self.view.frame.size.height / 2;
+        snapshotFrame.origin.x = (self.view.frame.size.width - snapshotFrame.size.width) / 2;
+        snapshotFrame.origin.y = (self.view.frame.size.height - snapshotFrame.size.height) / 2;
+        self.snapshotView.frame = snapshotFrame;
+        
+        [self.view insertSubview:self.snapshotView belowSubview:self.ascView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,9 +96,9 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
     [self.cachedResultsTableViewCellHeights removeAllObjects];
 }
 
@@ -92,27 +114,53 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     return UIStatusBarStyleDefault;
 }
 
+- (void)presentViewControllerWithQuery:(NSString *)query {
+    ASCSearchHistoryViewModel *searchHistoryViewModel = [[ASCSearchHistoryViewModel alloc] init];
+    ASCSearchResultsViewModel *searchResultsViewModel = [[ASCSearchResultsViewModel alloc] init];
+    searchResultsViewModel.query = query;
+    searchResultsViewModel.queryType = self.ascView.searchBar.selectedIndex;;
+    
+    ASCSearchResultsViewController *searchResultsViewController = [[ASCSearchResultsViewController alloc] init];
+    searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
+    searchResultsViewController.searchHistoryViewModel = searchHistoryViewModel;
+    searchResultsViewController.snapshotView = self.presentedViewControllerSnapshotView;
+    searchResultsViewController.cachedCollectionViewCellWidths = self.cachedCollectionViewCellWidths;
+    
+    self.ascView.searchBar.textField.text = query;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    __weak ASCSearchResultsViewController *weakSelf = self;
+    [self.ascView hideSearchHistoryTableViewAnimated:YES completion:^{
+        [weakSelf presentViewController:searchResultsViewController animated:NO completion:^{
+            weakSelf.ascView.searchBar.textField.text = weakSelf.searchResultsViewModel.query;
+            weakSelf.ascView.searchResultsTableView.alpha = 1;
+        }];
+    }];
+}
+
 - (void)presentResults {
     __weak ASCSearchResultsViewController *weakSelf = self;
     
     if (self.searchResultsViewModel.queryType == ASCQueryTypeImage) {
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
-            weakSelf.searchResultsView.layer.backgroundColor = [UIColor blackColor].CGColor;
-            weakSelf.searchResultsView.searchResultsTableView.layer.backgroundColor = [UIColor blackColor].CGColor;
+            weakSelf.ascView.layer.backgroundColor = [UIColor blackColor].CGColor;
+            weakSelf.ascView.searchResultsTableView.layer.backgroundColor = [UIColor blackColor].CGColor;
         } completion:nil];
     } else {
         [UIView animateWithDuration:ASCViewAnimationDuration animations:^{
-            weakSelf.searchResultsView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
-            weakSelf.searchResultsView.searchResultsTableView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+            weakSelf.ascView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
+            weakSelf.ascView.searchResultsTableView.layer.backgroundColor = ASCViewBackgroundColor.CGColor;
         } completion:nil];
     }
     
     [self setNeedsStatusBarAppearanceUpdate];
     
-    [self.searchResultsView startLoadingAnimation];
-    self.searchResultsView.searchBar.textField.text = self.searchResultsViewModel.query;
+    [self.ascView startLoadingAnimation];
+    self.ascView.searchBar.textField.text = self.searchResultsViewModel.query;
+    self.ascView.searchBar.selectedIndex = self.searchResultsViewModel.queryType;
     
-    [self.searchResultsView endEditing:YES];
+    [self.ascView endEditing:YES];
     [self.searchResultsViewModel loadResultsWithQueryType:self.searchResultsViewModel.queryType];
 }
 
@@ -125,7 +173,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         UIPanGestureRecognizer *panRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
         
-        if (self.searchResultsView.searchResultsTableView.contentOffset.y == 0 && [panRecognizer velocityInView:panRecognizer.view].y > 0) {
+        if (self.ascView.searchResultsTableView.contentOffset.y == 0 && [panRecognizer velocityInView:panRecognizer.view].y > 0) {
             return YES;
         }
     }
@@ -136,7 +184,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer translationInView:recognizer.view];
     
-    CGRect viewFrame = self.view.frame;
+    CGRect viewFrame = self.ascView.frame;
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.originalCenter = recognizer.view.center;
@@ -146,20 +194,45 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
         }
         
         recognizer.view.center = CGPointMake(recognizer.view.center.x, self.originalCenter.y + translation.y);
+
+        CGFloat percentMoved = recognizer.view.frame.origin.y / recognizer.view.frame.size.height;
+        CGFloat percentageHeight = (self.view.frame.size.height / 2) + (percentMoved * self.view.frame.size.height / 2);
+        CGFloat percentageWidth = (self.view.frame.size.width / 2) + (percentMoved * self.view.frame.size.width / 2);
+        
+        CGRect snapshotFrame = self.snapshotView.frame;
+        snapshotFrame.size.width = percentageWidth;
+        snapshotFrame.size.height = percentageHeight;
+        snapshotFrame.origin.x = (self.view.frame.size.width - snapshotFrame.size.width) / 2;
+        snapshotFrame.origin.y = (self.view.frame.size.height - snapshotFrame.size.height) / 2;
+        self.snapshotView.frame = snapshotFrame;
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         __weak ASCSearchResultsViewController *weakSelf = self;
         
+        CGRect snapshotFrame = self.snapshotView.frame;
+        
         if (viewFrame.origin.y > viewFrame.size.height / 4) {
             viewFrame.origin.y = viewFrame.size.height;
+            
+            snapshotFrame.size.width = self.view.frame.size.width;
+            snapshotFrame.size.height = self.view.frame.size.height;
+            snapshotFrame.origin.x = self.view.frame.origin.x;
+            snapshotFrame.origin.y = self.view.frame.origin.y;
         } else {
             viewFrame.origin.y = 0;
+            
+            snapshotFrame.size.width = self.view.frame.size.width / 2;
+            snapshotFrame.size.height = self.view.frame.size.height / 2;
+            snapshotFrame.origin.x = (self.view.frame.size.width - snapshotFrame.size.width) / 2;
+            snapshotFrame.origin.y = (self.view.frame.size.height - snapshotFrame.size.height) / 2;
         }
         
         [UIView animateWithDuration:0.2 animations:^{
-            weakSelf.view.frame = viewFrame;
+            weakSelf.ascView.frame = viewFrame;
+            weakSelf.snapshotView.frame = snapshotFrame;
         } completion:^(BOOL finished) {
-            if (weakSelf.view.frame.origin.y == weakSelf.view.frame.size.height) {
+            if (weakSelf.ascView.frame.origin.y == weakSelf.ascView.frame.size.height) {
+                [weakSelf.ascView removeFromSuperview];
                 [weakSelf dismissViewControllerAnimated:NO completion:nil];
             }
         }];
@@ -168,8 +241,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 
 #pragma mark - ASCTextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.searchResultsViewModel.query = textField.text;
-    [self presentResults];
+    [self presentViewControllerWithQuery:textField.text];
     
     return YES;
 }
@@ -181,15 +253,18 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 #pragma mark - ASCViewModelDelegate
 - (void)viewModelDidReceiveNewDataSet:(ASCViewModel *)viewModel {
     if ([viewModel isKindOfClass:[ASCSearchHistoryViewModel class]]) {
-        [self.searchResultsView.searchHistoryTableView reloadData];
+        [self.ascView.searchHistoryTableView reloadData];
     } else if ([viewModel isKindOfClass:[ASCSearchResultsViewModel class]]) {
         [self.cachedResultsTableViewCellHeights removeAllObjects];
 
         __weak ASCSearchResultsViewController *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.searchResultsView.searchResultsTableView reloadData];
-            [weakSelf.searchResultsView.searchResultsTableView setContentOffset:CGPointZero];
-            [weakSelf.searchResultsView stopLoadingAnimation];
+            [weakSelf.ascView.searchResultsTableView reloadData];
+            [weakSelf.ascView.searchResultsTableView setContentOffset:CGPointZero];
+            [weakSelf.ascView stopLoadingAnimation];
+            
+            weakSelf.presentedViewControllerSnapshotView = [weakSelf.ascView snapshotViewAfterScreenUpdates:YES];
+            weakSelf.presentedViewControllerSnapshotView.clipsToBounds = YES;
         });
     }
 }
@@ -200,14 +275,14 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     
     __weak ASCSearchResultsViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchResultsView expandToHeight:keyboardSize.height completion:nil];
+        [weakSelf.ascView expandToHeight:keyboardSize.height completion:nil];
     });
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     __weak ASCSearchResultsViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.searchResultsView contract];
+        [weakSelf.ascView contract];
     });
 }
 

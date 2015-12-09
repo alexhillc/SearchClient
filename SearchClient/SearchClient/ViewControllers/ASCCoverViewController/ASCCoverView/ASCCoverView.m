@@ -161,45 +161,14 @@
     return self.searchBarConstraintTop.constant == ASCViewTextFieldExpandedOffsetY;
 }
 
-- (void)updateConstraints {
-    [super updateConstraints];
-    
+- (void)updateLayoutWithOrientation:(CGSize)screenSize {
     if (![self isExpanded]) {
-        self.searchBarConstraintTop.constant = self.bounds.size.height * ASCViewTextFieldContractedMultiplierOffsetY;
-        self.searchBarConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth;
-        self.searchHistoryTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldContractedMultiplierWidth;
+        self.searchBarConstraintTop.constant = screenSize.height * ASCViewTextFieldContractedMultiplierOffsetY;
+        self.searchBarConstraintWidth.constant = screenSize.width * ASCViewTextFieldContractedMultiplierWidth;
+        self.searchHistoryTableViewConstraintWidth.constant = screenSize.width * ASCViewTextFieldContractedMultiplierWidth;
     } else {
-        self.searchBarConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
-        self.searchHistoryTableViewConstraintWidth.constant = self.bounds.size.width * ASCViewTextFieldExpandedMultiplierWidth;
-    }
-}
-
-- (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion {
-    self.searchBar.collectionView.hidden = NO;
-    self.searchBar.dividerView.hidden = NO;
-    self.searchBarConstraintHeight.constant = self.searchBar.intrinsicContentSize.height;
-    self.searchHistoryTableViewConstraintTop.constant = -40.;
-    [self layoutIfNeeded];
-    
-    self.searchHistoryTableViewConstraintHeight.constant = 0;
-
-    __weak ASCView *weakSelf = self;
-    void (^animations)(void) = ^void(void) {
-        [weakSelf layoutIfNeeded];
-    };
-    
-    if (animated) {
-        [UIView animateWithDuration:ASCViewAnimationDuration animations:animations completion:^(BOOL finished) {
-            if (completion) {
-                completion();
-            }
-        }];
-    } else {
-        animations();
-        
-        if (completion) {
-            completion();
-        }
+        self.searchBarConstraintWidth.constant = screenSize.width * ASCViewTextFieldExpandedMultiplierWidth;
+        self.searchHistoryTableViewConstraintWidth.constant = screenSize.width * ASCViewTextFieldExpandedMultiplierWidth;
     }
 }
 

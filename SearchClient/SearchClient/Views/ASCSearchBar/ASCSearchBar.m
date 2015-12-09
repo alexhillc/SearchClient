@@ -15,8 +15,6 @@
 
 @property (nonatomic, assign) BOOL isFirstLayout;
 @property UIView *sliderView;
-@property NSInteger selectedIndex;
-@property NSInteger previouslySelectedIndex;
 
 @end
 
@@ -93,12 +91,13 @@
     return CGSizeMake(self.bounds.size.width, self.collectionView.hidden?50:90.5);
 }
 
-- (void)updateSliderPositionToOffset:(CGFloat)offset withSize:(CGSize)size {
-    self.sliderView.frame = CGRectMake(offset, size.height - 2., size.width, 2.);
+- (void)updateSliderPositionToOffset:(CGFloat)offset withWidth:(CGFloat)width {
+    self.sliderView.frame = CGRectMake(offset, 38., width, 2.);
 }
 
 - (void)updateSliderPositionToOffset:(CGFloat)offset indexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
     ASCCollectionViewCell *cell = (ASCCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    self.selectedIndex = indexPath.row;
     
     __weak ASCSearchBar *weakSelf = self;
     if (animated) {

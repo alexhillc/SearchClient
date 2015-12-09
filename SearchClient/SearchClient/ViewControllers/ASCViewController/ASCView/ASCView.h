@@ -38,7 +38,9 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 @property UIView *shadowSearchHistoryTableView;
 
 - (void)setup;
+- (void)updateLayoutWithOrientation:(CGSize)screenSize;
 
+- (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
 - (void)expandToHeight:(CGFloat)height completion:(void (^)(void))completion;
 - (void)contract;
 - (BOOL)isExpanded;
