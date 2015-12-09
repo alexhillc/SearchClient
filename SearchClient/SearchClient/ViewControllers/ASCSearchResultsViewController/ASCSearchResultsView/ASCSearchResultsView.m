@@ -93,7 +93,8 @@
     
     CGFloat availableSpace = self.bounds.size.height - keyboardHeight - ASCViewTableViewExpandedOffsetY - 10.;
     if (availableSpace > self.searchHistoryTableView.contentSize.height) {
-        self.searchHistoryTableViewConstraintHeight.constant = self.searchHistoryTableView.contentSize.height;
+        self.searchHistoryTableViewConstraintHeight.constant =  self.searchHistoryTableView.contentSize.height < 50
+                                                                ? 50 : self.searchHistoryTableView.contentSize.height;
     } else {
         self.searchHistoryTableViewConstraintHeight.constant = availableSpace;
     }

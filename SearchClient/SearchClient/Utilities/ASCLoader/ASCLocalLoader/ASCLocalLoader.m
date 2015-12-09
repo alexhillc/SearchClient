@@ -50,7 +50,11 @@
     }
     
     [queryArray insertObject:query atIndex:0];
-    queryArray = [[queryArray subarrayWithRange:NSMakeRange(0, 5)] mutableCopy];
+    
+    if (queryArray.count > 5) {
+        queryArray = [[queryArray subarrayWithRange:NSMakeRange(0, 5)] mutableCopy];
+    }
+    
     [defaults setObject:queryArray forKey:@"searchHistory"];
     [defaults synchronize];
 }

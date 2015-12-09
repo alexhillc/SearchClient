@@ -335,12 +335,13 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 - (void)imageViewTapped:(ASCAsyncImageView *)imageView {
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
     imageInfo.imageURL = imageView.largeImageUrl;
+    imageInfo.placeholderImage = imageView.image;
     imageInfo.referenceRect = imageView.frame;
     imageInfo.referenceView = imageView.superview;
     
     JTSImageViewController *imageViewController = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
                                                                                                mode:JTSImageViewControllerMode_Image
-                                                                                    backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+                                                                                    backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred | JTSImageViewControllerBackgroundOption_Scaled];
     [imageViewController showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
