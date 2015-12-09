@@ -113,6 +113,11 @@ NSString * const ASCCollectionViewCachedWidthsStringFormat = @"cachedwidth%ld";
     return 0.;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    ASCCollectionViewCell *cell = (ASCCollectionViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    [cell.textLabel setTextColor:[UIColor redColor]];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     __block CGFloat totalOffset = 0;
     

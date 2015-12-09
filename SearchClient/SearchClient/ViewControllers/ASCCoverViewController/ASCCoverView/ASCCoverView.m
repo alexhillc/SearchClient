@@ -9,6 +9,7 @@
 #import "ASCCoverView.h"
 #import "ASCSearchResultsView.h"
 #import "ASCCollectionView.h"
+#import "ASCTextField.h"
 
 @interface ASCCoverView()
 
@@ -200,6 +201,15 @@
             completion();
         }
     }
+}
+
+- (void)restoreToOriginalState {
+    self.searchBar.collectionView.hidden = YES;
+    self.searchBar.dividerView.hidden = YES;
+    self.searchBar.textField.text = @"";
+    self.searchBarConstraintHeight.constant = self.searchBar.intrinsicContentSize.height;
+    self.searchHistoryTableViewConstraintTop.constant = -(self.searchBarConstraintHeight.constant);
+    [self contract];
 }
 
 @end

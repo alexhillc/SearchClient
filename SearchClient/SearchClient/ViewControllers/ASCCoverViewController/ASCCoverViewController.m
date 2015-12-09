@@ -104,7 +104,9 @@
 
     __weak ASCCoverViewController *weakSelf = self;
     [self.coverView hideSearchHistoryTableViewAnimated:YES completion:^{
-        [weakSelf presentViewController:searchResultsViewController animated:NO completion:nil];
+        [weakSelf presentViewController:searchResultsViewController animated:NO completion:^{
+            [weakSelf.coverView restoreToOriginalState];
+        }];
     }];
 }
 

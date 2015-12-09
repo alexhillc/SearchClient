@@ -48,6 +48,8 @@
         searchResultsVc.searchResultsViewModel.query = [searchResultsVc.searchHistoryViewModel.data objectAtIndex:indexPath.row];
         [searchResultsVc presentResults];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

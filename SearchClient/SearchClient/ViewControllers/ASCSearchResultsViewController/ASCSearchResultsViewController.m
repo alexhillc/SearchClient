@@ -16,13 +16,15 @@
 #import "ASCTableViewSearchResultCell.h"
 #import "ASCTableViewSearchHistoryCell.h"
 #import "JTSImageViewController.h"
+#import "ASCTableView.h"
 #import <SafariServices/SafariServices.h>
 
 NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cachedheight%@";
 
-@interface ASCSearchResultsViewController ()
+@interface ASCSearchResultsViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) ASCSearchResultsView *searchResultsView;
+@property CGPoint originalCenter;
 
 @end
 
@@ -35,6 +37,12 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    recognizer.minimumNumberOfTouches = 1;
+    recognizer.maximumNumberOfTouches = 1;
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
     
     self.cachedResultsTableViewCellHeights = [[NSMutableDictionary alloc] init];
     
@@ -106,6 +114,56 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     
     [self.searchResultsView endEditing:YES];
     [self.searchResultsViewModel loadResultsWithQueryType:self.searchResultsViewModel.queryType];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        UIPanGestureRecognizer *panRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
+        
+        if (self.searchResultsView.searchResultsTableView.contentOffset.y == 0 && [panRecognizer velocityInView:panRecognizer.view].y > 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:recognizer.view];
+    
+    CGRect viewFrame = self.view.frame;
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        self.originalCenter = recognizer.view.center;
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        if (translation.y < 0) {
+            return;
+        }
+        
+        recognizer.view.center = CGPointMake(recognizer.view.center.x, self.originalCenter.y + translation.y);
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        __weak ASCSearchResultsViewController *weakSelf = self;
+        
+        if (viewFrame.origin.y > viewFrame.size.height / 4) {
+            viewFrame.origin.y = viewFrame.size.height;
+        } else {
+            viewFrame.origin.y = 0;
+        }
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            weakSelf.view.frame = viewFrame;
+        } completion:^(BOOL finished) {
+            if (weakSelf.view.frame.origin.y == weakSelf.view.frame.size.height) {
+                [weakSelf dismissViewControllerAnimated:NO completion:nil];
+            }
+        }];
+    }
 }
 
 #pragma mark - ASCTextFieldDelegate

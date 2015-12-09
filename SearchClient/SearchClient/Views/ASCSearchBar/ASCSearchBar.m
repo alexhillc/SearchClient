@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) BOOL isFirstLayout;
 @property UIView *sliderView;
+@property NSInteger selectedIndex;
+@property NSInteger previouslySelectedIndex;
 
 @end
 

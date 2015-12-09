@@ -28,6 +28,7 @@
     self.searchResultsTableView = [[ASCTableView alloc] init];
     self.searchResultsTableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.searchResultsTableView.bounces = NO;
     self.searchResultsTableView.backgroundColor = [UIColor clearColor];
     
     [self addSubview:self.searchResultsTableView];
