@@ -28,6 +28,8 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
             return ASCLoaderTypeNewsSearch;
         } else if ([queryType isEqualToString:@"Video"]) {
             return ASCLoaderTypeVideoSearch;
+        } else if ([queryType isEqualToString:@"RelatedSearch"]) {
+            return ASCLoaderTypeRelatedSearch;
         }
     }
     
@@ -62,6 +64,7 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
 - (void)prepareForLoad {
     [super prepareForLoad];
     
+    // Append Basic authorization key to http header
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.requestUrl];
     NSString *authStr = [@"accountKey:" stringByAppendingString:MSBingAuthKey];
     NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -76,8 +79,14 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:self.responseData
                                                                 options:NSJSONReadingAllowFragments
                                                                   error:&jsonError];
-    if (responseDic) {
+    
+    // Check that we don't have an error and that the dictionary is serialized
+    if (!jsonError && responseDic) {
+        
+        // Get the spelling suggestions dic
         NSArray *spelling = [[[[responseDic valueForKey:@"d"] valueForKey:@"results"] firstObject] valueForKey:@"SpellingSuggestions"];
+        
+        // Get the actual query response
         NSArray *responseObjects = [[[[responseDic valueForKey:@"d"] valueForKey:@"results"] firstObject] valueForKey:[self.requestParameters valueForKey:@"queryType"]];
         
         NSMutableArray *resultsArray = [[NSMutableArray alloc] init];
@@ -88,6 +97,7 @@ NSString * const MSBingAuthKey = @"USflqpM3PEdUe3wTo2wpYxaBctru01LljMwiXuawr6g";
         
         [resultsArray addObjectsFromArray:responseObjects];
         
+        // Parse the models
         NSMutableArray *parsedResultsArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in resultsArray) {
             ASCSearchResultModel *model = [ASCSearchResultModel modelForDictionary:dic];

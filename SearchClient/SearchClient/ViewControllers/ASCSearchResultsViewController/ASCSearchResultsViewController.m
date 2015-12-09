@@ -118,7 +118,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     ASCSearchHistoryViewModel *searchHistoryViewModel = [[ASCSearchHistoryViewModel alloc] init];
     ASCSearchResultsViewModel *searchResultsViewModel = [[ASCSearchResultsViewModel alloc] init];
     searchResultsViewModel.query = query;
-    searchResultsViewModel.queryType = self.ascView.searchBar.selectedIndex;;
+    searchResultsViewModel.queryType = self.ascView.searchBar.selectedIndex;
     
     ASCSearchResultsViewController *searchResultsViewController = [[ASCSearchResultsViewController alloc] init];
     searchResultsViewController.searchResultsViewModel = searchResultsViewModel;
@@ -186,19 +186,23 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     
     CGRect viewFrame = self.ascView.frame;
     
+    // We need the original center to calculate the total translation
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.originalCenter = recognizer.view.center;
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        // Limit the user's actions
         if (translation.y < 0) {
             return;
         }
         
+        // Set the new center based on the translation
         recognizer.view.center = CGPointMake(recognizer.view.center.x, self.originalCenter.y + translation.y);
 
         CGFloat percentMoved = recognizer.view.frame.origin.y / recognizer.view.frame.size.height;
         CGFloat percentageHeight = (self.view.frame.size.height / 2) + (percentMoved * self.view.frame.size.height / 2);
         CGFloat percentageWidth = (self.view.frame.size.width / 2) + (percentMoved * self.view.frame.size.width / 2);
         
+        // Based on the percentage the view moved, move the snapshot view
         CGRect snapshotFrame = self.snapshotView.frame;
         snapshotFrame.size.width = percentageWidth;
         snapshotFrame.size.height = percentageHeight;
@@ -209,8 +213,9 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         __weak ASCSearchResultsViewController *weakSelf = self;
         
+        // Now that the user has stopped moving, we can animate the frame to the location it needs
+        // to be in
         CGRect snapshotFrame = self.snapshotView.frame;
-        
         if (viewFrame.origin.y > viewFrame.size.height / 4) {
             viewFrame.origin.y = viewFrame.size.height;
             
@@ -232,6 +237,7 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
             weakSelf.snapshotView.frame = snapshotFrame;
         } completion:^(BOOL finished) {
             if (weakSelf.ascView.frame.origin.y == weakSelf.ascView.frame.size.height) {
+                // Finally, dismiss the view controller
                 [weakSelf.ascView removeFromSuperview];
                 [weakSelf dismissViewControllerAnimated:NO completion:nil];
             }
@@ -265,6 +271,21 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
             
             weakSelf.presentedViewControllerSnapshotView = [weakSelf.ascView snapshotViewAfterScreenUpdates:YES];
             weakSelf.presentedViewControllerSnapshotView.clipsToBounds = YES;
+        });
+    }
+}
+
+- (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error {
+    if ([viewModel isKindOfClass:[ASCSearchResultsViewModel class]]) {
+        __weak ASCSearchResultsViewController *weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.ascView stopLoadingAnimation];
+            
+            // dispatch ahead another run loop, or else we run the risk of getting a blank snapshot
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.presentedViewControllerSnapshotView = [self.ascView snapshotViewAfterScreenUpdates:YES];
+                weakSelf.presentedViewControllerSnapshotView.clipsToBounds = YES;
+            });
         });
     }
 }

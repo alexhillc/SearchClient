@@ -21,6 +21,10 @@
 @property (nonatomic, strong) NSMutableDictionary *cachedCollectionViewCellWidths;
 @property (nonatomic, strong) UIView *presentedViewControllerSnapshotView;
 
+/**
+ * @brief Presents a new ASCSearchResultsViewController transparently 
+ *        to the user with the specified query
+ */
 - (void)presentViewControllerWithQuery:(NSString *)query;
 
 @end

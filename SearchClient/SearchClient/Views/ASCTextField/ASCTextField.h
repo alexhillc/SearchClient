@@ -10,6 +10,9 @@
 
 @class ASCTextField;
 
+/**
+ * @brief A delegate capable of telling the responder if the cancel button is tapped
+ */
 @protocol ASCTextFieldDelegate <UITextFieldDelegate>
 
 @optional

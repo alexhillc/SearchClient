@@ -55,7 +55,6 @@
 		FACE5AE01C00047600B2C964 /* ASCSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE5ADF1C00047600B2C964 /* ASCSearchResultsViewController.m */; };
 		FAD5C2261C068C900061E13E /* ASCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2251C068C900061E13E /* ASCTextField.m */; };
 		FAD5C22A1C068D880061E13E /* ASCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD5C2291C068D880061E13E /* ASCSearchBar.m */; };
-		FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */; };
 		FAF1E2E21C18A83D00D6AF69 /* ASCLocalLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF1E2E11C18A83D00D6AF69 /* ASCLocalLoader.m */; };
 		FAF6C1591BD41DEF00F966A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C1581BD41DEF00F966A1 /* main.m */; };
 		FAF6C15C1BD41DEF00F966A1 /* ASCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6C15B1BD41DEF00F966A1 /* ASCAppDelegate.m */; };
@@ -173,8 +172,6 @@
 		FAD5C2251C068C900061E13E /* ASCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCTextField.m; path = Views/ASCTextField/ASCTextField.m; sourceTree = "<group>"; };
 		FAD5C2281C068D880061E13E /* ASCSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCSearchBar.h; path = Views/ASCSearchBar/ASCSearchBar.h; sourceTree = "<group>"; };
 		FAD5C2291C068D880061E13E /* ASCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCSearchBar.m; path = Views/ASCSearchBar/ASCSearchBar.m; sourceTree = "<group>"; };
-		FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCDataStore.h; path = Utilities/DataStore/ASCDataStore.h; sourceTree = "<group>"; };
-		FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCDataStore.m; path = Utilities/DataStore/ASCDataStore.m; sourceTree = "<group>"; };
 		FAF1E2E01C18A83D00D6AF69 /* ASCLocalLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASCLocalLoader.h; path = Utilities/ASCLoader/ASCLocalLoader/ASCLocalLoader.h; sourceTree = "<group>"; };
 		FAF1E2E11C18A83D00D6AF69 /* ASCLocalLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASCLocalLoader.m; path = Utilities/ASCLoader/ASCLocalLoader/ASCLocalLoader.m; sourceTree = "<group>"; };
 		FAF6C1541BD41DEF00F966A1 /* SearchClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,7 +396,6 @@
 				FA8442BA1C0EC5F30025795B /* ASCNetwork */,
 				FA1944A41BF2E267000A4712 /* ASCLoader */,
 				FA4B2AA41BF182A700B78CF7 /* Categories */,
-				FAE640DD1BE1639B00EBEFE2 /* DataStore */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -641,15 +637,6 @@
 				FA3B0FE11BDEB9BA0057A1A2 /* Cells */,
 			);
 			name = ASCTableView;
-			sourceTree = "<group>";
-		};
-		FAE640DD1BE1639B00EBEFE2 /* DataStore */ = {
-			isa = PBXGroup;
-			children = (
-				FAE640DE1BE163C000EBEFE2 /* ASCDataStore.h */,
-				FAE640DF1BE163C000EBEFE2 /* ASCDataStore.m */,
-			);
-			name = DataStore;
 			sourceTree = "<group>";
 		};
 		FAEDD4B71BFC22C7005A88B0 /* ASCSearchHistoryViewModel */ = {
@@ -959,7 +946,6 @@
 				FA63E8C31C0BEC7D0081B901 /* ASCSearchHistoryViewModel.m in Sources */,
 				FAF6C1591BD41DEF00F966A1 /* main.m in Sources */,
 				FA4B2AA71BF1831100B78CF7 /* UIView+NSLayoutConstraint.m in Sources */,
-				FAE640E01BE163C000EBEFE2 /* ASCDataStore.m in Sources */,
 				FA1944AA1BF2E2C4000A4712 /* ASCViewController.m in Sources */,
 				FA3C65E41C13FDD9006A62AC /* ASCSpellSearchResultModel.m in Sources */,
 			);

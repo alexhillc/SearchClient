@@ -69,7 +69,7 @@
 }
 
 - (void)viewModelDidFailToLoadDataSet:(ASCViewModel *)viewModel error:(NSError *)error {
-    // error here
+    // error here, we can eat it though since it has no effect on us
 }
 
 #pragma mark - Notifications

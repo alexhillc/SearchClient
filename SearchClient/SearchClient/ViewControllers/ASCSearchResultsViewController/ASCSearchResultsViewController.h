@@ -21,6 +21,9 @@ extern NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat;
 @property (nonatomic, strong) NSMutableDictionary *cachedResultsTableViewCellHeights;
 @property (nonatomic, strong) UIView *snapshotView;
 
+/**
+ * @brief Presents the results of the view model's current query in the current view controller
+ */
 - (void)presentResults;
 
 @end

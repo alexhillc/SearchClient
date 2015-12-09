@@ -12,8 +12,20 @@
 
 @property ASCTableView *searchResultsTableView;
 
+/**
+ * @brief Hide results table view, show loading animation
+ */
 - (void)startLoadingAnimation;
+
+/**
+ * @brief Show results table view, hide loading animation
+ */
 - (void)stopLoadingAnimation;
+
+/**
+ * @brief Boolean that uses values of the table view and loading spinner to decide if the
+ *        view is displaying results
+ */
 - (BOOL)isDisplayingResults;
 
 @end

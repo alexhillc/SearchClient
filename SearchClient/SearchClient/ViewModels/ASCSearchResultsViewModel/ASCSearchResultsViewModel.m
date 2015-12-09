@@ -23,7 +23,7 @@
     ASCSearchLoader *loader = [[ASCSearchLoader alloc] initWithDelegate:self];
     NSString *queryTypeAsString = [self stringForQueryType:queryType];
     loader.requestParameters = [NSDictionary dictionaryWithObjects:@[queryTypeAsString, self.query] forKeys:@[@"queryType", @"queryString"]];
-    
+        
     [loader startLoad];
 }
 
@@ -33,7 +33,9 @@
 }
 
 - (void)loader:(ASCLoader *)loader didFinishWithFailure:(NSError *)error {
-    // do something here
+    if ([self.delegate respondsToSelector:@selector(viewModelDidFailToLoadDataSet:error:)]) {
+        [self.delegate viewModelDidFailToLoadDataSet:self error:error];
+    }
 }
 
 - (void)loaderDidFinishLoadWithSuccess:(ASCLoader *)loader {

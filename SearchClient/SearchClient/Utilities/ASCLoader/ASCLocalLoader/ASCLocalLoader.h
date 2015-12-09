@@ -10,6 +10,9 @@
 
 @interface ASCLocalLoader : ASCLoader
 
+/**
+ * @brief Saves a string to NSUserDefaults
+ */
 - (void)saveToCache:(NSString *)query;
 
 @end

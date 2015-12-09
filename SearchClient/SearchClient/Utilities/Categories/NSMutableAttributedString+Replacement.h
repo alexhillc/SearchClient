@@ -10,6 +10,9 @@
 
 @interface NSMutableAttributedString (Replacement)
 
+/**
+ * @brief Replaces the range of characters between the beginning and ending tag with the supplied attributes
+ */
 - (void)replaceOccurancesOfBeginningTag:(NSString *)beginningTag endingTag:(NSString *)endingTag withAttributes:(NSDictionary*)attributes;
 
 @end

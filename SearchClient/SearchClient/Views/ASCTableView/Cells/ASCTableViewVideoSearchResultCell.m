@@ -80,6 +80,7 @@ NSString * const ASCTableViewVideoSearchResultCellIdentifier = @"ASCTableViewVid
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
     static ASCTableViewVideoSearchResultCell *sizingCell;
     
+    // we have to make a sizing cell to get the intrinsic size.
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sizingCell = [[ASCTableViewVideoSearchResultCell alloc] init];

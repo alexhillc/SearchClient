@@ -17,6 +17,9 @@
 @property (nonatomic, copy) NSString *displayUrl;
 @property (nonatomic, strong) NSURL *url;
 
+/**
+ * @brief Gives an abstract model given a valid dictionary
+ */
 + (ASCSearchResultModel *)modelForDictionary:(NSDictionary *)dic;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic;

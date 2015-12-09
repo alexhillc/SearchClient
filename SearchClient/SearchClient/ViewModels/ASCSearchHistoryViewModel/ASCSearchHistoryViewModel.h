@@ -11,6 +11,9 @@
 
 @interface ASCSearchHistoryViewModel : ASCViewModel
 
+/**
+ * @brief Load search history from system cache
+ */
 - (void)loadSearchHistory;
 
 @end

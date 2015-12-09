@@ -10,6 +10,9 @@
 
 @interface ASCSearchLoader : ASCLoader
 
+/**
+ * @brief Bing's base search url
+ */
 + (NSString *)baseSearchUrl;
 
 @end

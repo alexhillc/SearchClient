@@ -15,6 +15,9 @@
 @property (nonatomic) UILabel *titleLabelPrimary;
 @property (nonatomic) UILabel *titleLabelSecondary;
 
+/**
+ * @brief Contracts the view, resets the textfield text. Not animated.
+ */
 - (void)restoreToOriginalState;
 
 @end

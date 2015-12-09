@@ -52,12 +52,14 @@
 - (void)loaderDidFinishLoadWithSuccess:(ASCLoader *)loader {
     UIImage *result = (UIImage *)self.imageLoader.parsedResult;
     
+    // dispatch to a background thread
     __weak ASCAsyncImageView *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIGraphicsBeginImageContext(CGSizeMake(100, 100));
         [result drawAtPoint:CGPointZero];
         UIGraphicsEndImageContext();
         
+        // we've rendered the image, dispatch to the main thread and display it to the user
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView transitionWithView:self duration:0.15 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 weakSelf.image = (UIImage *)weakSelf.imageLoader.parsedResult;

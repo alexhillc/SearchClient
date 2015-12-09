@@ -25,7 +25,14 @@
 @property ASCCollectionView *collectionView;
 @property NSInteger selectedIndex;
 
+/**
+ * @brief Updates the search bar's slider position to the offset with a given width
+ */
 - (void)updateSliderPositionToOffset:(CGFloat)offset withWidth:(CGFloat)size;
+
+/**
+ * @brief Updates the search bar's slider position to the offset with a given index path. Can be animated.
+ */
 - (void)updateSliderPositionToOffset:(CGFloat)offset indexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 
 @end

@@ -24,6 +24,9 @@ typedef NS_ENUM(NSInteger, ASCQueryType) {
 @property (nonatomic, copy) NSString *query;
 @property (nonatomic) ASCQueryType queryType;
 
+/**
+ * @brief Load results for a given queryType
+ */
 - (void)loadResultsWithQueryType:(ASCQueryType)queryType;
 
 @end

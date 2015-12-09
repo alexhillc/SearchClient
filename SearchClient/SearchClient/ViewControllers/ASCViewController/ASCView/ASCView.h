@@ -40,9 +40,25 @@ extern NSTimeInterval const ASCViewAnimationDuration;
 - (void)setup;
 - (void)updateLayoutWithOrientation:(CGSize)screenSize;
 
+/**
+ * @brief Hides the search history table view, adjusts constraints so that the searchbar's collection view
+ *        is shown transparently to the user
+ */
 - (void)hideSearchHistoryTableViewAnimated:(BOOL)animated completion:(void (^)(void))completion;
+
+/**
+ * @brief Expands the search bar and search history table view to a height specified by the height
+ */
 - (void)expandToHeight:(CGFloat)height completion:(void (^)(void))completion;
+
+/**
+ * @brief Contracts the search bar and search history table view to the default value
+ */
 - (void)contract;
+
+/**
+ * @brief Uses values specific to the view to determine if the view is expanded or not
+ */
 - (BOOL)isExpanded;
 
 @end

@@ -44,6 +44,7 @@ NSString * const ASCTableViewSpellSearchResultCellIdentifier = @"ASCTableViewSpe
 - (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
     static ASCTableViewSpellSearchResultCell *sizingCell;
     
+    // we have to make a sizing cell to get the intrinsic size.
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sizingCell = [[ASCTableViewSpellSearchResultCell alloc] init];

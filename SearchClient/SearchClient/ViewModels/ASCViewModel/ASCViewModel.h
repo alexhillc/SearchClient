@@ -10,6 +10,10 @@
 
 @class ASCViewModel;
 
+/**
+ * @brief A delegate capable of notifying the responder if the viewModel received a new data set
+ *        or if it failed to load a data set
+ */
 @protocol ASCViewModelDelegate <NSObject>
 
 @optional

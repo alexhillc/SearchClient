@@ -10,6 +10,9 @@
 
 @class ASCAsyncImageView;
 
+/**
+ * @brief A delegate that is capable of telling the responder if the view is tapped
+ */
 @protocol ASCAsyncImageViewDelegate <NSObject>
 
 @optional
