@@ -41,6 +41,12 @@
     [self bringSubviewToFront:self.searchBar];
     [self bringSubviewToFront:self.shadowSearchHistoryTableView];
     [self bringSubviewToFront:self.searchHistoryTableView];
+    
+    self.clipsToBounds = NO;
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0, -3.5);
+    self.layer.shadowRadius = 2.;
+    self.layer.shadowOpacity = 0.15;
 }
 
 - (void)layoutSubviews {

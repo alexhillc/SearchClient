@@ -73,8 +73,8 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
         [self.ascView asc_fillSuperview];
         
         CGRect snapshotFrame = self.snapshotView.frame;
-        snapshotFrame.size.width = self.view.frame.size.width / 2;
-        snapshotFrame.size.height = self.view.frame.size.height / 2;
+        snapshotFrame.size.width = self.view.frame.size.width / 1.15;
+        snapshotFrame.size.height = self.view.frame.size.height / 1.15;
         snapshotFrame.origin.x = (self.view.frame.size.width - snapshotFrame.size.width) / 2;
         snapshotFrame.origin.y = (self.view.frame.size.height - snapshotFrame.size.height) / 2;
         self.snapshotView.frame = snapshotFrame;
@@ -199,8 +199,8 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
         recognizer.view.center = CGPointMake(recognizer.view.center.x, self.originalCenter.y + translation.y);
 
         CGFloat percentMoved = recognizer.view.frame.origin.y / recognizer.view.frame.size.height;
-        CGFloat percentageHeight = (self.view.frame.size.height / 2) + (percentMoved * self.view.frame.size.height / 2);
-        CGFloat percentageWidth = (self.view.frame.size.width / 2) + (percentMoved * self.view.frame.size.width / 2);
+        CGFloat percentageHeight = percentMoved * (self.view.frame.size.height - (self.view.frame.size.height / 1.15)) + (self.view.frame.size.height / 1.15);
+        CGFloat percentageWidth = percentMoved * (self.view.frame.size.width - (self.view.frame.size.width / 1.15)) + (self.view.frame.size.width / 1.15);
         
         // Based on the percentage the view moved, move the snapshot view
         CGRect snapshotFrame = self.snapshotView.frame;
@@ -226,8 +226,8 @@ NSString * const ASCSearchResultsTableViewCachedCellHeightsStringFormat = @"cach
         } else {
             viewFrame.origin.y = 0;
             
-            snapshotFrame.size.width = self.view.frame.size.width / 2;
-            snapshotFrame.size.height = self.view.frame.size.height / 2;
+            snapshotFrame.size.width = self.view.frame.size.width / 1.15;
+            snapshotFrame.size.height = self.view.frame.size.height / 1.15;
             snapshotFrame.origin.x = (self.view.frame.size.width - snapshotFrame.size.width) / 2;
             snapshotFrame.origin.y = (self.view.frame.size.height - snapshotFrame.size.height) / 2;
         }
