@@ -41,7 +41,7 @@ NSString * const ASCTableViewSpellSearchResultCellIdentifier = @"ASCTableViewSpe
     self.suggestedSpellingLabel.attributedText = string;
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewSpellSearchResultCell *sizingCell;
     
     // we have to make a sizing cell to get the intrinsic size.
@@ -51,7 +51,7 @@ NSString * const ASCTableViewSpellSearchResultCellIdentifier = @"ASCTableViewSpe
     });
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
-    sizingCell.cellModel = self.cellModel;
+    sizingCell.cellModel = (ASCTableViewSpellSearchResultCellModel *)cellModel;
     [sizingCell layoutSubviews];
     
     CGFloat height = sizingCell.suggestedSpellingLabel.frame.size.height + (2 * ASCTableViewCellContentPadding);

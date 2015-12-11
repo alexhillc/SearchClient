@@ -109,8 +109,8 @@
     CGFloat cachedCellHeight = [[self.vc.cachedResultsTableViewCellHeights objectForKey:
                                 [NSString stringWithFormat:ASCSearchResultsTableViewCachedCellHeightsStringFormat, indexPath]] floatValue];
     if (!cachedCellHeight) {
-        ASCTableViewSearchResultCell *cell = (ASCTableViewSearchResultCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        cachedCellHeight = [cell intrinsicHeightForWidth:tableView.frame.size.width];
+        ASCTableViewSearchResultCellModel *cellModel = [self.vc.searchResultsViewModel.data objectAtIndex:indexPath.section];
+        cachedCellHeight = [ASCTableViewSearchResultCell intrinsicHeightForWidth:tableView.frame.size.width cellModel:cellModel];
         [self.vc.cachedResultsTableViewCellHeights setObject:@(cachedCellHeight)
                                                       forKey:[NSString stringWithFormat:ASCSearchResultsTableViewCachedCellHeightsStringFormat,
                                                               indexPath]];

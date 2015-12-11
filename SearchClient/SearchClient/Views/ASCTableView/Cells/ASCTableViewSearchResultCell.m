@@ -7,6 +7,11 @@
 //
 
 #import "ASCTableViewSearchResultCell.h"
+#import "ASCTableViewWebSearchResultCell.h"
+#import "ASCTableViewImageSearchResultCell.h"
+#import "ASCTableViewNewsSearchResultCell.h"
+#import "ASCTableViewVideoSearchResultCell.h"
+#import "ASCTableViewRelatedSearchResultCell.h"
 
 CGFloat const ASCTableViewCellContentPadding = 10.;
 
@@ -30,17 +35,26 @@ CGFloat const ASCTableViewCellContentPadding = 10.;
     self.layer.shadowOpacity = 0.08;
 }
 
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
+    if ([cellModel isKindOfClass:[ASCTableViewWebSearchResultCellModel class]]) {
+        return [ASCTableViewWebSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    } else if ([cellModel isKindOfClass:[ASCTableViewImageSearchResultCellModel class]]) {
+        return [ASCTableViewImageSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    } else if ([cellModel isKindOfClass:[ASCTableViewNewsSearchResultCellModel class]]) {
+        return [ASCTableViewNewsSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    } else if ([cellModel isKindOfClass:[ASCTableViewVideoSearchResultCellModel class]]) {
+        return [ASCTableViewVideoSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    } else if ([cellModel isKindOfClass:[ASCTableViewRelatedSearchResultCellModel class]]) {
+        return [ASCTableViewRelatedSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    }
+    
+    return 0;
+}
+
 - (void)parseCellAttributes {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
     
-}
-
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-    
-    return 0;
 }
 
 @end

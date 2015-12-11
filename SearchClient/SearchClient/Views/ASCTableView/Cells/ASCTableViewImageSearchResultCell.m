@@ -80,7 +80,7 @@ NSString * const ASCTableViewImageSearchResultCellIdentifier = @"ASCTableViewIma
     [self.asyncImageViewThird setLargeImageUrl:self.cellModel.imgUrlThird];
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewImageSearchResultCell *sizingCell;
     
     // we have to make a sizing cell to get the intrinsic size.
@@ -89,16 +89,17 @@ NSString * const ASCTableViewImageSearchResultCellIdentifier = @"ASCTableViewIma
         sizingCell = [[ASCTableViewImageSearchResultCell alloc] init];
     });
     
+    ASCTableViewImageSearchResultCellModel *imageCellModel = (ASCTableViewImageSearchResultCellModel *)cellModel;
     ASCTableViewImageSearchResultCellModel *model = [[ASCTableViewImageSearchResultCellModel alloc] init];
-    model.imgSizeFirst = self.cellModel.imgSizeFirst;
-    model.imgSizeSecond = self.cellModel.imgSizeSecond;
-    model.imgSizeThird = self.cellModel.imgSizeThird;
-    model.thumbSizeFirst = self.cellModel.thumbSizeFirst;
-    model.thumbSizeSecond = self.cellModel.thumbSizeSecond;
-    model.thumbSizeThird = self.cellModel.thumbSizeThird;
+    model.imgSizeFirst = imageCellModel.imgSizeFirst;
+    model.imgSizeSecond = imageCellModel.imgSizeSecond;
+    model.imgSizeThird = imageCellModel.imgSizeThird;
+    model.thumbSizeFirst = imageCellModel.thumbSizeFirst;
+    model.thumbSizeSecond = imageCellModel.thumbSizeSecond;
+    model.thumbSizeThird = imageCellModel.thumbSizeThird;
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
-    sizingCell.cellModel = model;
+    sizingCell.cellModel = imageCellModel;
     [sizingCell layoutSubviews];
     
     CGFloat height = sizingCell.asyncImageViewFirst.frame.size.height;

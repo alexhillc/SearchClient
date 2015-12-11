@@ -89,7 +89,7 @@ NSString * const ASCTableViewNewsSearchResultCellIdentifier = @"ASCTableViewNews
     self.publishedDateLabel.text = [[@" \u00B7 " stringByAppendingString:cellModel.publishedDateLabelText] stringByAppendingString:@" ago"];
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewNewsSearchResultCell *sizingCell;
     
     // we have to make a sizing cell to get the intrinsic size.
@@ -99,7 +99,7 @@ NSString * const ASCTableViewNewsSearchResultCellIdentifier = @"ASCTableViewNews
     });
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
-    sizingCell.cellModel = self.cellModel;
+    sizingCell.cellModel = (ASCTableViewNewsSearchResultCellModel *)cellModel;
     [sizingCell layoutSubviews];
     
     CGFloat height = sizingCell.titleLabel.frame.size.height + sizingCell.contentLabel.frame.size.height + sizingCell.publisherLabel.frame.size.height +

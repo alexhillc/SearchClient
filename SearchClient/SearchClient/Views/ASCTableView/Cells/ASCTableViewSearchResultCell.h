@@ -25,7 +25,8 @@ extern CGFloat const ASCTableViewCellContentPadding;
 @property ASCAsyncImageView *asyncImageViewSecond;
 @property ASCAsyncImageView *asyncImageViewThird;
 
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel;
+
 - (void)setup;
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width;
 
 @end

@@ -56,7 +56,7 @@ NSString * const ASCTableViewRelatedSearchResultCellIdentifier = @"ASCTableViewR
     self.urlLabel.text = self.cellModel.urlLabelText;
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewRelatedSearchResultCell *sizingCell;
     
     // we have to make a sizing cell to get the intrinsic size.
@@ -66,7 +66,7 @@ NSString * const ASCTableViewRelatedSearchResultCellIdentifier = @"ASCTableViewR
     });
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
-    sizingCell.cellModel = self.cellModel;
+    sizingCell.cellModel = (ASCTableViewRelatedSearchResultCellModel *)cellModel;
     [sizingCell layoutSubviews];
     
     CGFloat height = sizingCell.titleLabel.frame.size.height + 2. + sizingCell.urlLabel.frame.size.height + (2 * ASCTableViewCellContentPadding);

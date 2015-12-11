@@ -77,7 +77,7 @@ NSString * const ASCTableViewVideoSearchResultCellIdentifier = @"ASCTableViewVid
     [self.asyncImageViewFirst setImageSize:self.cellModel.thumbSize];
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewVideoSearchResultCell *sizingCell;
     
     // we have to make a sizing cell to get the intrinsic size.
@@ -86,12 +86,13 @@ NSString * const ASCTableViewVideoSearchResultCellIdentifier = @"ASCTableViewVid
         sizingCell = [[ASCTableViewVideoSearchResultCell alloc] init];
     });
     
+    ASCTableViewVideoSearchResultCellModel *videoCellModel = (ASCTableViewVideoSearchResultCellModel *)cellModel;
     ASCTableViewVideoSearchResultCellModel *model = [[ASCTableViewVideoSearchResultCellModel alloc] init];
-    model.thumbSize = self.cellModel.thumbSize;
-    model.titleLabelText = self.cellModel.titleLabelText;
-    model.url = self.cellModel.url;
-    model.runtimeLabelText = self.cellModel.runtimeLabelText;
-    model.urlLabelText = self.cellModel.urlLabelText;
+    model.thumbSize = videoCellModel.thumbSize;
+    model.titleLabelText = videoCellModel.titleLabelText;
+    model.url = videoCellModel.url;
+    model.runtimeLabelText = videoCellModel.runtimeLabelText;
+    model.urlLabelText = videoCellModel.urlLabelText;
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
     sizingCell.cellModel = model;

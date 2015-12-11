@@ -73,9 +73,8 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     self.urlLabel.text = [self.cellModel.url absoluteString];
 }
 
-- (CGFloat)intrinsicHeightForWidth:(CGFloat)width {
++ (CGFloat)intrinsicHeightForWidth:(CGFloat)width cellModel:(ASCTableViewSearchResultCellModel *)cellModel {
     static ASCTableViewWebSearchResultCell *sizingCell;
-    
     
     // we have to make a sizing cell to get the intrinsic size.
     static dispatch_once_t onceToken;
@@ -84,7 +83,7 @@ NSString * const ASCTableViewWebSearchResultCellIdentifier = @"ASCTableViewWebSe
     });
     
     sizingCell.bounds = CGRectMake(0, 0, width, 0);
-    sizingCell.cellModel = self.cellModel;
+    sizingCell.cellModel = (ASCTableViewWebSearchResultCellModel *)cellModel;
     [sizingCell layoutSubviews];
     
     CGFloat height = sizingCell.titleLabel.frame.size.height + sizingCell.contentLabel.frame.size.height + sizingCell.urlLabel.frame.size.height + sizingCell.dividerView.frame.size.height + 2. + (4 * ASCTableViewCellContentPadding);
