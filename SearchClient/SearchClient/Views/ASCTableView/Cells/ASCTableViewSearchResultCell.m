@@ -12,6 +12,7 @@
 #import "ASCTableViewNewsSearchResultCell.h"
 #import "ASCTableViewVideoSearchResultCell.h"
 #import "ASCTableViewRelatedSearchResultCell.h"
+#import "ASCTableViewSpellSearchResultCell.h"
 
 CGFloat const ASCTableViewCellContentPadding = 10.;
 
@@ -45,6 +46,8 @@ CGFloat const ASCTableViewCellContentPadding = 10.;
     } else if ([cellModel isKindOfClass:[ASCTableViewVideoSearchResultCellModel class]]) {
         return [ASCTableViewVideoSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
     } else if ([cellModel isKindOfClass:[ASCTableViewRelatedSearchResultCellModel class]]) {
+        return [ASCTableViewRelatedSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
+    } else if ([cellModel isKindOfClass:[ASCTableViewSpellSearchResultCellModel class]]) {
         return [ASCTableViewRelatedSearchResultCell intrinsicHeightForWidth:width cellModel:cellModel];
     }
     
