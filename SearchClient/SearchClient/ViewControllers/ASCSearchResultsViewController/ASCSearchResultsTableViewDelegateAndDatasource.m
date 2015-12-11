@@ -72,6 +72,8 @@
         }
     }
     
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     cell.titleLabel.delegate = self.vc;
     cell.cellModel = cellModel;
     
